@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson 1: Diagnostic and System Map</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="stylesheet" href="../assets/course.css">
+  <script src="../assets/lesson.js" defer></script>
+</head>
+<body>
+  <header class="masthead">
+    <div class="shell">
+      <div>
+        <p class="eyebrow">Lesson 01 / 30-45 minutes</p>
+        <h1>See the whole AI system</h1>
+        <p class="lede">Before memorizing terms, learn to place each decision in the lifecycle. Then use the diagnostic to choose the right pace.</p>
+      </div>
+      <div class="badge-mark" aria-label="Lesson 1">01</div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <nav class="nav" aria-label="Course navigation">
+      <a href="../README.md">Course home</a>
+      <a href="../reference/exam-blueprint.html">Blueprint</a>
+      <a href="../reference/twelve-week-roadmap.html">Roadmap</a>
+      <a href="../reference/ai-engineering-glossary.html">Glossary</a>
+    </nav>
+
+    <section class="panel">
+      <span class="kicker">The win</span>
+      <h2>Turn a vague AI question into a map</h2>
+      <p>Exam scenarios become easier when you stop treating "AI" as one component. Frame the outcome, learn from data, expose a boundary, operate the service, and keep risk and accountability visible throughout.</p>
+      <div class="lifecycle" aria-label="AI engineering lifecycle">
+        <div class="step"><strong>01 / frame</strong><p>Outcome, users, constraints, and success measures.</p></div>
+        <div class="step"><strong>02 / learn</strong><p>Data, model choice, training, and evaluation.</p></div>
+        <div class="step"><strong>03 / integrate</strong><p>Interfaces, tests, release, and product behavior.</p></div>
+        <div class="step"><strong>04 / operate</strong><p>Scale, reliability, security, governance, and learning.</p></div>
+      </div>
+      <div class="callout">
+        <strong>Retrieval prompt:</strong> without looking back, name one failure that could happen at each stage. Write your answers before opening the domain cards below.
+      </div>
+    </section>
+
+    <section class="panel" id="domain-lenses">
+      <span class="kicker">Seven lenses</span>
+      <h2>What each domain asks</h2>
+      <div class="card-grid">
+        <article class="card"><span class="kicker">17.3%</span><h3>Data and evaluation</h3><p>Can the evidence support the claim? Think leakage, sampling, validation, metrics, and error analysis.</p><p class="quiet"><a href="https://scikit-learn.org/stable/modules/model_evaluation.html">Evaluation reference</a></p></article>
+        <article class="card"><span class="kicker">16.7%</span><h3>Core AI and GenAI</h3><p>What representation and learning strategy fit the problem? Think optimization, neural models, Transformers, retrieval, and generation.</p><p class="quiet"><a href="https://huggingface.co/learn/nlp-course/chapter1/1">GenAI reference</a></p></article>
+        <article class="card"><span class="kicker">14.0%</span><h3>Software integration</h3><p>Can the AI behavior be used safely? Think contracts, validation, tests, versions, and failure boundaries.</p><p class="quiet"><a href="https://fastapi.tiangolo.com/">Integration reference</a></p></article>
+        <article class="card"><span class="kicker">18.0%</span><h3>MLOps and LLMOps</h3><p>Can the system be released and operated? Think lineage, monitoring, quality, latency, cost, rollback, and incidents.</p><p class="quiet"><a href="https://mlflow.org/docs/latest/ml/tracking/">MLOps reference</a> / <a href="https://sre.google/sre-book/table-of-contents/">SRE reference</a></p></article>
+        <article class="card"><span class="kicker">12.6%</span><h3>Architecture and scale</h3><p>Will the design survive real load and failure? Think resources, bottlenecks, capacity, isolation, and graceful degradation.</p><p class="quiet"><a href="https://kubernetes.io/docs/concepts/">Infrastructure reference</a></p></article>
+        <article class="card"><span class="kicker">14.7%</span><h3>Responsible AI and security</h3><p>Who can be harmed and who is accountable? Think privacy, bias, misuse, threat models, controls, and evidence.</p><p class="quiet"><a href="https://www.nist.gov/itl/ai-risk-management-framework">Risk reference</a> / <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/">LLM security</a></p></article>
+        <article class="card"><span class="kicker">6.7%</span><h3>Business and collaboration</h3><p>Why should this exist and how will people decide? Think outcomes, uncertainty, stakeholders, communication, and trade-offs.</p><p class="quiet"><a href="https://sdaia.gov.sa/en/Research/Pages/NOSF.aspx">Practice reference</a></p></article>
+      </div>
+    </section>
+
+    <section class="panel" id="diagnostic">
+      <span class="kicker">Route selection</span>
+      <h2>Diagnose before you schedule</h2>
+      <p>Answer each prompt from memory, reveal the reference answer, then rate your current confidence. This tool chooses a study pace; it does not estimate the official exam result.</p>
+
+      <form data-diagnostic>
+        <article class="question">
+          <h3>1. Data, ML foundations, and evaluation</h3>
+          <p>Why should the test set remain untouched until model choices are finished?</p>
+          <label for="q1">Rate your answer</label>
+          <select id="q1" data-score required>
+            <option value="" selected disabled>Choose a rating</option>
+            <option value="0">0 - Need a first explanation</option>
+            <option value="1">1 - Can explain the basic reason</option>
+            <option value="2">2 - Can defend the trade-off</option>
+          </select>
+          <details><summary>Reveal a reference answer</summary><p>It should estimate performance on relevant unseen data. Tuning against it makes the estimate optimistic because the test set has influenced decisions.</p></details>
+        </article>
+
+        <article class="question">
+          <h3>2. Core AI, deep learning, and generative AI</h3>
+          <p>When would retrieval-augmented generation be preferable to fine-tuning?</p>
+          <label for="q2">Rate your answer</label>
+          <select id="q2" data-score required>
+            <option value="" selected disabled>Choose a rating</option>
+            <option value="0">0 - Need a first explanation</option>
+            <option value="1">1 - Can explain the basic reason</option>
+            <option value="2">2 - Can defend the trade-off</option>
+          </select>
+          <details><summary>Reveal a reference answer</summary><p>Prefer retrieval when knowledge changes, is private, needs source grounding, or should be updated without changing model weights. Fine-tuning solves a different class of adaptation problem.</p></details>
+        </article>
+
+        <article class="question">
+          <h3>3. AI software engineering and integration</h3>
+          <p>What boundary keeps model behavior from leaking unpredictably into product code?</p>
+          <label for="q3">Rate your answer</label>
+          <select id="q3" data-score required>
+            <option value="" selected disabled>Choose a rating</option>
+            <option value="0">0 - Need a first explanation</option>
+            <option value="1">1 - Can explain the basic reason</option>
+            <option value="2">2 - Can defend the trade-off</option>
+          </select>
+          <details><summary>Reveal a reference answer</summary><p>Use an explicit, versioned interface with input validation, output schemas, timeouts, and defined failure behavior. The boundary makes the AI component replaceable and testable.</p></details>
+        </article>
+
+        <article class="question">
+          <h3>4. MLOps, LLMOps, deployment, and reliability</h3>
+          <p>What should be monitored after deployment beyond uptime?</p>
+          <label for="q4">Rate your answer</label>
+          <select id="q4" data-score required>
+            <option value="" selected disabled>Choose a rating</option>
+            <option value="0">0 - Need a first explanation</option>
+            <option value="1">1 - Can explain the basic reason</option>
+            <option value="2">2 - Can defend the trade-off</option>
+          </select>
+          <details><summary>Reveal a reference answer</summary><p>Monitor quality, drift, latency, cost, safety signals, and meaningful user outcomes. An available service can still be producing harmful or useless answers.</p></details>
+        </article>
+
+        <article class="question">
+          <h3>5. Architecture, infrastructure, performance, and scalability</h3>
+          <p>What information do you need before deciding whether to batch, cache, or scale a model service?</p>
+          <label for="q5">Rate your answer</label>
+          <select id="q5" data-score required>
+            <option value="" selected disabled>Choose a rating</option>
+            <option value="0">0 - Need a first explanation</option>
+            <option value="1">1 - Can explain the basic reason</option>
+            <option value="2">2 - Can defend the trade-off</option>
+          </select>
+          <details><summary>Reveal a reference answer</summary><p>Start with workload shape, latency and throughput targets, request sizes, cost limits, dependency behavior, and quality constraints. The bottleneck and SLO determine the right lever.</p></details>
+        </article>
+
+        <article class="question">
+          <h3>6. Responsible AI, security, and governance</h3>
+          <p>A model is accurate overall but poor for a protected subgroup. Is it ready?</p>
+          <label for="q6">Rate your answer</label>
+          <select id="q6" data-score required>
+            <option value="" selected disabled>Choose a rating</option>
+            <option value="0">0 - Need a first explanation</option>
+            <option value="1">1 - Can explain the basic reason</option>
+            <option value="2">2 - Can defend the trade-off</option>
+          </select>
+          <details><summary>Reveal a reference answer</summary><p>Not automatically. Investigate subgroup performance, context, possible harm, data limitations, mitigation options, and the accountable approval process before release.</p></details>
+        </article>
+
+        <article class="question">
+          <h3>7. Business, professional practice, and collaboration</h3>
+          <p>What makes an AI recommendation useful to a decision-maker who is not an ML specialist?</p>
+          <label for="q7">Rate your answer</label>
+          <select id="q7" data-score required>
+            <option value="" selected disabled>Choose a rating</option>
+            <option value="0">0 - Need a first explanation</option>
+            <option value="1">1 - Can explain the basic reason</option>
+            <option value="2">2 - Can defend the trade-off</option>
+          </select>
+          <details><summary>Reveal a reference answer</summary><p>Connect the recommendation to an outcome, constraints, uncertainty, alternatives, risks, and an explicit decision request. Technical accuracy alone does not create organizational value.</p></details>
+        </article>
+
+        <button type="submit">Calculate my study route</button>
+        <div class="result" data-result hidden aria-live="polite">
+          <strong data-route></strong>
+          <p>Diagnostic score: <strong data-score-value></strong></p>
+          <p data-message></p>
+          <p>Write the route and the lowest-rated domain in your notes. Ask the teacher about anything you could not explain in your own words.</p>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel">
+      <span class="kicker">Close the loop</span>
+      <h2>Produce one artifact</h2>
+      <p>Draw a one-page map of a document-intelligence/RAG service. Label where data enters, where retrieval happens, where the model is evaluated, where the service is exposed, what is monitored, which risks exist, and who owns the decision.</p>
+      <ul class="checklist">
+        <li>Circle the domain you understand least.</li>
+        <li>Write one question you want answered in Week 1.</li>
+        <li>Keep the map; you will revise it after the capstone.</li>
+      </ul>
+      <div class="callout"><strong>Ask for help:</strong> if a distinction in this lesson is unclear, ask a follow-up question before moving on. Confusion found early is useful diagnostic evidence.</div>
+    </section>
+
+    <div class="source-line">
+      <span>Primary source: <a href="https://athkax.sdaia.gov.sa/badges/61af22d9-2e3e-4412-9675-e8b4504a7d20">AthkaX AI Engineer badge record</a>.</span>
+      <span>Next: <a href="../reference/twelve-week-roadmap.html">open the roadmap</a>.</span>
+    </div>
+  </main>
+
+  <footer class="shell">AI Engineer Expert Exam Guide / Lesson 01</footer>
+</body>
+</html>

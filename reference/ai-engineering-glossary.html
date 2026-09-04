@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Glossary | AI Engineer Expert</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+  <header class="masthead">
+    <div class="shell">
+      <div>
+        <p class="eyebrow">Reference 03 / shared language</p>
+        <h1>Say the exact thing</h1>
+        <p class="lede">A quick reference for terms that often collapse into one another during exam scenarios.</p>
+      </div>
+      <div class="badge-mark" aria-label="AI glossary">A-Z</div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <nav class="nav" aria-label="Course navigation">
+      <a href="../README.md">Course home</a>
+      <a href="../lessons/0001-diagnostic-and-system-map.html">Lesson 1</a>
+      <a href="./exam-blueprint.html">Blueprint</a>
+      <a href="./twelve-week-roadmap.html">Roadmap</a>
+    </nav>
+
+    <section class="panel">
+      <div class="card-grid">
+        <article class="card"><span class="kicker">Assessment</span><h3>Exam blueprint</h3><p>The seven domains and weights shown in the supplied badge image.</p></article>
+        <article class="card"><span class="kicker">Learning</span><h3>Diagnostic</h3><p>An evidence-gathering activity that selects a study route; it is not a pass prediction.</p></article>
+        <article class="card"><span class="kicker">Readiness</span><h3>Preparation standard</h3><p>An internal target: 80% in every domain, 85% on two full mocks, and defensible trade-offs.</p></article>
+      </div>
+
+      <h2>System language</h2>
+      <table>
+        <thead><tr><th scope="col">Term</th><th scope="col">Use it to mean</th></tr></thead>
+        <tbody>
+          <tr><td class="domain-name">Data contract</td><td>The explicit agreement about inputs, schemas, provenance, quality, ownership, and allowed use.</td></tr>
+          <tr><td class="domain-name">Data leakage</td><td>Information crossing into training or model selection from a source that would not be available at prediction time.</td></tr>
+          <tr><td class="domain-name">Generalization</td><td>Performance on relevant unseen examples, not merely fit on the training data.</td></tr>
+          <tr><td class="domain-name">Error analysis</td><td>Structured examination of failures to discover patterns, risks, and the next improvement.</td></tr>
+          <tr><td class="domain-name">Retrieval-augmented generation</td><td>A generation pattern that fetches relevant external context at query time and supplies it to a generative model.</td></tr>
+          <tr><td class="domain-name">LLMOps</td><td>The practices for releasing and operating systems that use large language models, including prompt, context, quality, cost, and safety management.</td></tr>
+          <tr><td class="domain-name">Model serving</td><td>Making a model available for prediction through a controlled runtime boundary.</td></tr>
+          <tr><td class="domain-name">Drift</td><td>A change in data, relationships, or behavior that can make a previously acceptable system less reliable.</td></tr>
+          <tr><td class="domain-name">SLO</td><td>A target for a service-level indicator, such as latency or availability, that guides operational decisions.</td></tr>
+          <tr><td class="domain-name">Threat model</td><td>A structured account of assets, actors, attack paths, impacts, and controls for a system.</td></tr>
+          <tr><td class="domain-name">Governance</td><td>The roles, policies, evidence, review points, and decisions that make accountable AI use possible.</td></tr>
+          <tr><td class="domain-name">Graceful degradation</td><td>A planned reduction in capability that preserves safety or core service when resources or dependencies fail.</td></tr>
+          <tr><td class="domain-name">Integrated capstone</td><td>The small document-intelligence/RAG service used to connect the seven domains during study.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>How to use the glossary</h2>
+      <p>When answering a scenario, name the domain decision first, then name the evidence that would change it. For example: "This is a validation problem; I need a time-aware split before comparing metrics." Precise nouns make hidden assumptions visible.</p>
+    </section>
+
+    <div class="source-line">
+      <span>Definitions are course vocabulary, not official exam wording.</span>
+      <span>Return to the <a href="../README.md">course home</a>.</span>
+    </div>
+  </main>
+
+  <footer class="shell">AI Engineer Expert Exam Guide / Reference 03</footer>
+</body>
+</html>
