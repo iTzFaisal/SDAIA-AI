@@ -5,16 +5,17 @@ Independent English, concept-focused preparation for the learner's **confirmed 5
 ## Available now
 
 - Seven-domain curriculum outline and an eight-week, 10–14-hour/week plan.
-- Beginner foundation primer and thirty lessons: six each in Domains 1–5.
+- Beginner foundation primer and thirty-six lessons: six each in Domains 1–6.
 - Domain 2 covers AI approaches, neural networks, model families and transfer learning, tokens and embeddings, prompting/RAG/fine-tuning, generative evaluation, and bounded agents. No coding exercises.
 - Domain 3 covers APIs and data contracts, asynchronous jobs/events, timeouts and duplicate-safe retries, testing and reproducibility, safe retrieval/tools, adapters, compatibility, and maintainable handoffs. No coding exercises.
 - Domain 4 covers experiment tracking, whole-system versioning, pipeline gates, batch/online serving, shadow/canary/blue-green rollouts, drift and delayed outcomes, reliability targets, LLM observability, fallbacks, rollback, and incidents. No coding exercises.
 - Domain 5 covers architecture and storage, CPU/GPU and memory, quantization/distillation, performance benchmarks, batching/caching, queues and scaling, placement, total cost, and tested recovery objectives. No coding exercises.
-- 90 lesson questions and **five separate 24-question domain papers**, all with explanations for every option. Domain papers never combine question pools or reuse lesson checks.
+- Domain 6 covers fairness, explanations and oversight, privacy and Saudi PDPL context, threat modeling and supply chains, prompt injection and tool abuse, impact assessments, auditability, and conditional breach notification. English explanations and paper examples only; no coding exercises or legal advice.
+- 108 lesson questions and **six separate 24-question domain papers**, all with explanations for every option. Domain papers never combine question pools or reuse lesson checks.
 - Untimed learning and timed paper modes, shuffled question/option order, saved attempts, lesson bookmarks, reading progress, mistake review, and glossary search.
 - Downloadable Markdown notes, separate practice paper and answer key, and printable HTML documents that can be saved as PDF.
 
-**Domains 6–7 and three full weighted mocks are planned, not available.** No single-domain paper is a full seven-domain mock. Topic coverage is our interpretation of the broad supplied domains, not a verified exhaustive expert-level syllabus. No passing score or official badge cutoff is invented.
+**Domain 7 and three full weighted mocks are planned, not available.** No single-domain paper is a full seven-domain mock. Topic coverage is our interpretation of the broad supplied domains, not a verified exhaustive expert-level syllabus. No passing score or official badge cutoff is invented.
 
 ## Open it
 
@@ -44,6 +45,8 @@ Domain 4 starts at `index.html#domain/d4`; its paper is at `index.html#practice/
 
 Domain 5 starts at `index.html#domain/d5`; its paper is at `index.html#practice/d5`. Downloads are `notes/domain-5-study-notes.md`, `notes/domain-5-practice-paper.md`, and `notes/domain-5-answer-key.md`. Printable versions are `notes/domain-5-printable-workbook.html`, `notes/domain-5-printable-practice-paper.html`, and `notes/domain-5-printable-answer-key.html`. Read Domains 1–4 first and keep the key separate until you finish the paper.
 
+Domain 6 starts at `index.html#domain/d6`; its paper is at `index.html#practice/d6`. Downloads are `notes/domain-6-study-notes.md`, `notes/domain-6-practice-paper.md`, and `notes/domain-6-answer-key.md`. Printable versions are `notes/domain-6-printable-workbook.html`, `notes/domain-6-printable-practice-paper.html`, and `notes/domain-6-printable-answer-key.html`. Read Domains 1–5 first and keep the key separate until you finish the paper.
+
 ## Content maintenance
 
 - `content/kit.js`: curriculum, schedule, lessons, glossary, and provenance.
@@ -59,10 +62,12 @@ npm run build
 npm test
 ```
 
-The notes build uses the website's shared content, preventing manual divergence. The 32 generated documents are deliberately included so recipients do not need Node.js. Study progress is saved only under `ai-engineer-study-kit-v1`; reset does not clear other sites' storage. Existing Domain 1–4 IDs, saved attempts, and download URLs remain valid. A timed attempt uses an absolute deadline; reloads do not restart the timer. If the page is closed, expiry is processed when it is reopened. Only the latest attempt has detailed results, with the latest 30 score summaries retained.
+The notes build uses the website's shared content, preventing manual divergence. The 38 generated documents are deliberately included so recipients do not need Node.js. Study progress is saved only under `ai-engineer-study-kit-v1`; reset does not clear other sites' storage. Existing Domain 1–5 IDs, saved attempts, and download URLs remain valid. A timed attempt uses an absolute deadline; reloads do not restart the timer. If the page is closed, expiry is processed when it is reopened. Only the latest attempt has detailed results, with the latest 30 score summaries retained.
 
 ## Source and assessment boundaries
 
 The local `AI Engineer Badge.png` supplied by the learner gives domain names and weights. The public [Athka X page](https://athkax.sdaia.gov.sa/badges/61af22d9-2e3e-4412-9675-e8b4504a7d20), read on 11 October 2026, describes in-person assessment and performance-based Assistant/Associate/Expert awards, considering overall score and thresholds at question levels. Numerical cutoffs, question count, duration, and detailed official objectives were not verified. Our practice difficulty labels are not those official levels.
 
 General learning references are documented in `notes/sources-and-exam-facts.md`. Lessons and questions are original instructional material, not actual exam questions. The badge image is kept as supplied evidence, not used as the site's branding. This kit is not affiliated with or endorsed by SDAIA. Follow your appointment's official instructions.
+
+Domain 6 separates the published SDAIA September 2023 ethics framework, English instructional summaries of official Arabic PDPL texts reviewed on 12 October 2026, and general NIST/OWASP guidance. The summaries are not authoritative translations, exhaustive legal advice, or project-specific compliance decisions. No adequacy-country list or complete transfer amendment history was verified; recheck current official instruments, applicable sector rules, and qualified advice before real processing or transfers. Conditional authority breach notification, separate subject notification, and operational recovery targets must not be conflated.

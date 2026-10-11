@@ -1266,6 +1266,260 @@
       ["Select it solely from the lowest processor price", "A component price can conceal larger operating and dependency costs."],
       ["Ignore recovery because an SLA guarantees no outages", "Agreements can have consequences for failure but do not eliminate outages or the need for recovery."],
       ["Declare compliance from its cloud or on-premises label", "Placement labels do not establish current legal obligations or actual controls."]
+    ]),
+    // Domain 6 lesson checks; separate from its reserved paper below.
+    q("d6-l1-q1", "d6-l1", "quiz", "Foundation", "A hiring model removes a demographic field but retains a strongly related location field. Which concern remains?", 2, [
+      ["Every location must cause a hiring decision", "Association with a group does not establish a causal relationship."],
+      ["Removing one field proves all outcomes are fair", "Other features and historical labels can still carry unfair influence."],
+      ["Proxy features can preserve group-related influence", "Location can reflect a group characteristic even without its explicit field."],
+      ["Fairness can only be checked on training accuracy", "Fairness needs representative outcomes, slices, and workflow evidence."]
+    ]),
+    q("d6-l1-q2", "d6-l1", "quiz", "Applied", "Group A has 24 correctly selected of 30 eligible people; Group B has 15 of 30. What are their recalls and gap?", 0, [
+      ["A 80%; B 50%; gap 30 percentage points", "Recall uses actual eligible counts: 24/30 = 80% and 15/30 = 50%, a 30-point gap."],
+      ["A 50%; B 80%; gap 30 percentage points", "This swaps the groups' true-positive rates."],
+      ["Both 65% because their average is 65%", "An average does not make the two group rates equal."],
+      ["A 80%; B 50%; this proves the cause of unfairness", "The rates flag different performance but do not identify its cause or settle fairness."]
+    ]),
+    q("d6-l1-q3", "d6-l1", "quiz", "Applied", "Which action best operationalizes SDAIA's accountability principle?", 3, [
+      ["Use the seven principle names as a safety badge", "Naming principles supplies no implementation evidence or official certification."],
+      ["Assign all responsibility to the model", "People and organizations need identifiable responsibility and intervention mechanisms."],
+      ["Stop monitoring after a high overall score", "Lifecycle accountability continues through deployment and changes."],
+      ["Name owners, document evidence, and define intervention and review duties", "Concrete responsibilities and traceable decisions put accountability into practice."]
+    ]),
+    q("d6-l2-q1", "d6-l2", "quiz", "Foundation", "An assistant gives a fluent explanation of its eligibility recommendation. What should establish confidence in that explanation?", 1, [
+      ["Its length and polished tone", "Persuasive language does not establish fidelity to the actual decision evidence."],
+      ["Verified inputs, applied rules, versions, and tested explanation fidelity", "Evidence linked to the actual process is more defensible than a generated rationale alone."],
+      ["The claim that feature importance proves causation", "Feature contributions do not by themselves establish causal effects."],
+      ["Publishing all users' private records", "Transparency should protect privacy and respect audience authorization."]
+    ]),
+    q("d6-l2-q2", "d6-l2", "quiz", "Applied", "A mandatory review queue receives 90 cases/hour. Each review needs 4 minutes; four reviewers work at that ideal rate. What happens?", 2, [
+      ["All 90 are reviewed with spare capacity", "Four reviewers complete only 4 × 15 = 60 cases per hour under these assumptions."],
+      ["Capacity is 360 cases/hour", "This multiplies minutes incorrectly instead of converting review time to a rate."],
+      ["Capacity 60 cases/hour; backlog grows 30 cases/hour", "Each reviewer completes 60/4 = 15 per hour; total 60 leaves 90 − 60 = 30 waiting."],
+      ["Unreviewed decisions can be labeled human-approved", "A queue does not establish that the required review occurred."]
+    ]),
+    q("d6-l2-q3", "d6-l2", "quiz", "Applied", "Which oversight design is strongest for a consequential recommendation?", 0, [
+      ["A qualified reviewer with source evidence, time, authority to refuse, and an escalation route", "These conditions make oversight capable of changing an unsafe outcome."],
+      ["A required approval click with no evidence view", "A click can become a rubber stamp without meaningful investigation."],
+      ["A reviewer allowed only to repeat the model's wording", "Oversight requires independent judgment and ability to intervene."],
+      ["Review only when an unvalidated confidence score is low", "An unvalidated score can miss confident errors and out-of-scope cases."]
+    ]),
+    q("d6-l3-q1", "d6-l3", "quiz", "Foundation", "Customer names become codes, but a separately protected mapping can reconnect them. What is this?", 3, [
+      ["Guaranteed anonymization", "Reconnection remains possible, so identifiability has not been removed permanently."],
+      ["Proof that no privacy rules apply", "Coded personal data can remain within applicable personal-data obligations."],
+      ["A data transfer approval", "Identifier replacement does not establish a permitted transfer route."],
+      ["Pseudonymization", "Replacing identifiers with linkable codes reduces exposure but does not make the data anonymous."]
+    ]),
+    q("d6-l3-q2", "d6-l3", "quiz", "Applied", "A controller cites the PDPL Implementing Regulation's five-year processing-record rule to keep every raw prompt. What is the error?", 1, [
+      ["The PDPL requires deleting all records instantly", "Retention and destruction depend on purpose and applicable requirements and exceptions."],
+      ["Processing-activity metadata records and raw prompt payloads are different categories", "Article 33's rule concerns processing-activity records, not a universal minimum for all personal-data payloads."],
+      ["Every encrypted prompt is automatically anonymous", "Authorized decryption or indirect linkage can still identify individuals."],
+      ["Only GPU memory can contain personal data", "Prompts, storage, logs, histories, and derived copies can contain personal information."]
+    ]),
+    q("d6-l3-q3", "d6-l3", "quiz", "Applied", "A supplier proposes using billing-support transcripts for its own unrelated model training. What should happen first?", 2, [
+      ["Assume the original support purpose covers all future training", "Secondary use requires its own justified purpose and legal review."],
+      ["Approve because the supplier calls itself a processor", "Actual purposes and uses determine responsibilities; the label alone is insufficient."],
+      ["Review the new purpose, lawful basis, roles, necessary data, and applicable disclosures/transfers", "Existing access does not establish permission for a different processing purpose."],
+      ["Keep all health and identity details to maximize data volume", "Minimum necessary processing avoids irrelevant sensitive exposure."]
+    ]),
+    q("d6-l4-q1", "d6-l4", "quiz", "Foundation", "Which threat most directly concerns integrity?", 0, [
+      ["An unauthorized edit changes approved policy evidence", "Integrity protects data and artifacts against unauthorized alteration."],
+      ["A power outage prevents useful access", "This most directly concerns availability."],
+      ["A private file is disclosed to a stranger", "This most directly concerns confidentiality."],
+      ["A model's median latency improves", "A latency improvement is not by itself an integrity attack."]
+    ]),
+    q("d6-l4-q2", "d6-l4", "quiz", "Applied", "A downloaded model matches a hash from a trusted release record. What has that most directly established?", 3, [
+      ["The model has no targeted backdoor", "Identical bytes can still contain malicious or unsafe behavior."],
+      ["Every use is legally licensed", "Licensing must be reviewed separately from file identity."],
+      ["It is fair for every future population", "Population suitability and fairness require actual task evidence."],
+      ["The artifact's bytes match that recorded identity", "A hash comparison verifies identity relative to the expected value, not behavioral safety."]
+    ]),
+    q("d6-l4-q3", "d6-l4", "quiz", "Applied", "A production credential accidentally appears in an AI trace. Which response is best?", 1, [
+      ["Delete the visible trace and assume the credential is safe", "Previously exposed copies and possible use remain; deletion alone does not revoke access."],
+      ["Restrict the exposure, revoke/rotate the credential, investigate use, and fix logging", "Containment must address the credential's authority and the disclosure path."],
+      ["Put the secret in the system prompt instead", "A prompt is not an appropriate secret store or an enforced confidentiality boundary."],
+      ["Wait for model retraining to invalidate the secret", "Credential validity is enforced by the issuing service, not the model's learned weights."]
+    ]),
+    q("d6-l5-q1", "d6-l5", "quiz", "Foundation", "A retrieved webpage instructs a summarizer to send private context elsewhere. What is the entry path?", 2, [
+      ["Ordinary weight quantization", "Numerical compression does not describe hostile external instructions."],
+      ["Only harmless content because retrieval found it", "Relevance does not make external instructions trusted authority."],
+      ["Indirect prompt injection", "Instructions arrive through external content rather than an authorized application instruction."],
+      ["A guaranteed user approval", "The webpage cannot approve a new disclosure on the user's behalf."]
+    ]),
+    q("d6-l5-q2", "d6-l5", "quiz", "Applied", "In 60 authorized attack tests, 9 cause the defined unauthorized action. What is attack success rate?", 0, [
+      ["15% on this test set", "The denominator is attempts: 9/60 × 100 = 15%, not a universal future risk estimate."],
+      ["85% on this test set", "That is the fraction without the defined success, not the attack success rate."],
+      ["9% for all possible attacks", "Nine is a count, and the finite test set does not establish all possible attacks."],
+      ["100% because one test failed", "One or more violations matter, but the stated rate still uses all attempted tests."]
+    ]),
+    q("d6-l5-q3", "d6-l5", "quiz", "Stretch", "A model emits valid JSON asking to email a private report to a new external address. Which check is still essential?", 3, [
+      ["Only JSON syntax, since valid structure proves permission", "Syntax does not establish recipient approval or data access rights."],
+      ["Whether the model included a polite disclaimer", "A disclaimer does not prevent actual unauthorized disclosure."],
+      ["Whether the tool is read-only", "Reading can still disclose information, and sending requires its own authorization."],
+      ["Enforced user/resource/destination authorization and required exact-action approval", "The application must validate the permitted action independently of the generated structure."]
+    ]),
+    q("d6-l6-q1", "d6-l6", "quiz", "Foundation", "How should NIST AI RMF's Govern, Map, Measure, and Manage functions be used in a Saudi project?", 1, [
+      ["As a replacement for PDPL and sector requirements", "Voluntary risk guidance does not replace applicable law."],
+      ["As adaptable risk-management guidance alongside separately verified obligations", "The published Playbook is voluntary and contextual, not a Saudi legal checklist."],
+      ["As proof that every launch is compliant", "Using function names establishes no project-specific compliance evidence."],
+      ["As official SDAIA badge score levels", "These are framework functions, not assessment awards or thresholds."]
+    ]),
+    q("d6-l6-q2", "d6-l6", "quiz", "Applied", "Assume Article 24's authority-notification condition applies. Awareness is Tuesday 10:00; it is now Thursday 16:00. How much of the 72-hour outer limit remains?", 2, [
+      ["72 hours from recovery", "The stated authority limit runs from controller awareness, not service restoration."],
+      ["54 hours", "54 hours have elapsed; that is not the remaining time."],
+      ["18 hours; containment and escalation must not wait", "Tuesday 10:00 to Thursday 16:00 is 54 hours; 72 − 54 = 18 remain under the stated assumptions."],
+      ["No notification is needed if software was rolled back", "Rollback does not erase a disclosure or an applicable notification duty."]
+    ]),
+    q("d6-l6-q3", "d6-l6", "quiz", "Applied", "An impact assessment identifies harm that violates applicable obligations, but a manager accepts the risk. What is the sound conclusion?", 0, [
+      ["Management acceptance cannot waive legal obligations; redesign or stop and reassess", "Risk acceptance is limited to permitted residual risk and cannot authorize a legal violation."],
+      ["The manager's signature automatically makes the processing lawful", "A signature cannot replace compliance with applicable requirements."],
+      ["Keep the assessment unchanged and hide it from owners", "Assessment findings need transparent owned actions and evidence of mitigation."],
+      ["A higher average accuracy cancels the obligation", "Performance does not override legal requirements or the identified harm."]
+    ]),
+    // Reserved Domain 6 paper: original scenarios, never reused as lesson checks.
+    q("d6-e01", "d6-l1", "exam", "Foundation", "Which statement best connects SDAIA's published ethics principles to AI development?", 3, [
+      ["They matter only after a public complaint", "The framework connects ethical controls to the entire system lifecycle."],
+      ["Fairness alone replaces privacy and safety", "The principles address multiple distinct interacting concerns."],
+      ["Listing them certifies official exam readiness", "They are an ethics framework, not badge thresholds or a readiness guarantee."],
+      ["They guide concrete controls from planning through deployment and monitoring", "Lifecycle decisions, owners, and evidence operationalize the published principles."]
+    ]),
+    q("d6-e02", "d6-l1", "exam", "Applied", "A model is trained to predict past loan approval, and historical approvals excluded qualified applicants from one region. What should be investigated first?", 1, [
+      ["Whether deeper layers can copy approval history more accurately", "Better reproduction of a biased decision label may preserve the original harm."],
+      ["Whether the label represents a defensible desired outcome and whether coverage is adequate", "Label meaning and historical exclusion can create unfairness before algorithm choice."],
+      ["Whether more duplicate approval records will guarantee fairness", "More copies do not repair a biased target or missing populations."],
+      ["Whether deleting the region name alone eliminates all related influence", "Other inputs can remain proxies and the label can still encode exclusion."]
+    ]),
+    q("d6-e03", "d6-l1", "exam", "Applied", "In a fictional screen, Group A has 12 false positives among 60 actual negatives; Group B has 12 among 30. What are their false-positive rates?", 0, [
+      ["A 20%; B 40%", "False-positive rates use actual negatives: 12/60 = 20% and 12/30 = 40%."],
+      ["Both 12% because counts match", "Equal counts can correspond to different rates when denominators differ."],
+      ["A 40%; B 20%", "This reverses the correct group denominators."],
+      ["A 80%; B 60%", "Those are the complementary true-negative fractions, not false-positive rates."]
+    ]),
+    q("d6-e04", "d6-l1", "exam", "Stretch", "Two groups have equal selection rates but different recall, prevalence, and error consequences. What is the most defensible fairness conclusion?", 2, [
+      ["Equal selection proves every aspect of fairness", "One parity measure does not settle error behavior, consequences, or justified treatment."],
+      ["One threshold must make every fairness metric equal", "Fairness goals can conflict under imperfect prediction and differing prevalence."],
+      ["Inspect valid labels, counts, uncertainty, consequences, and contextual tradeoffs", "A defensible assessment relates multiple measures and evidence to affected people."],
+      ["Tune repeatedly on the reserved test until every rate matches", "Test-driven tuning contaminates evaluation and may not resolve the underlying problem."]
+    ]),
+    q("d6-e05", "d6-l2", "exam", "Foundation", "What is the best distinction between a model card and a system-level record?", 2, [
+      ["Both guarantee legal compliance regardless of application", "Documentation supplies evidence and limits, not a universal compliance guarantee."],
+      ["A model card must reveal all production secrets", "Useful transparency does not require unauthorized disclosure of secrets or private data."],
+      ["The system record also covers the model's retrieval, tools, users, oversight, and downstream use", "A complete application introduces responsibilities and risks beyond the model artifact."],
+      ["Neither needs to match the deployed version", "Stale documentation can misrepresent the process actually producing decisions."]
+    ]),
+    q("d6-e06", "d6-l2", "exam", "Applied", "A feature-contribution report says commuting distance influenced a hiring prediction. What must not be inferred from that alone?", 0, [
+      ["Moving closer will causally guarantee hiring", "A post-hoc contribution is not proof of a causal, feasible, or guaranteed intervention."],
+      ["The explanation concerns a model result", "That is its intended subject, though fidelity still needs evaluation."],
+      ["The actual input and model version should be checked", "Versioned evidence helps validate the explanation and decision."],
+      ["The audience needs an understandable account", "Audience-appropriate communication is part of meaningful transparency."]
+    ]),
+    q("d6-e07", "d6-l2", "exam", "Applied", "A team must review 160 decisions/hour. Each takes 2 minutes and four reviewers work at the ideal rate. What is the capacity gap?", 3, [
+      ["No gap; four reviewers complete 240/hour", "Each reviewer completes 30/hour, not 60 under a two-minute review time."],
+      ["Only 4 decisions/hour can be reviewed", "Reviewer count is not the completion rate."],
+      ["80 decisions/hour of spare capacity", "The required rate exceeds the ideal 120/hour capacity rather than falling below it."],
+      ["Capacity 120/hour; backlog grows 40/hour before other overhead", "4 × (60/2) = 120, leaving 160 − 120 = 40 per hour under the stated assumptions."]
+    ]),
+    q("d6-e08", "d6-l2", "exam", "Stretch", "An appeal button asks the same unchecked model to repeat its original recommendation. What is the strongest improvement?", 1, [
+      ["Generate a longer rationale without changing the process", "More persuasive wording does not create independent reconsideration."],
+      ["Route to qualified review with source evidence and authority to correct or reverse the decision", "A meaningful challenge route must be able to investigate and change the outcome."],
+      ["Hide disagreement so users cannot be confused", "Concealing uncertainty and challenge outcomes undermines transparency and redress."],
+      ["Publish other applicants' records to explain the ranking", "Redress must still protect other people's privacy and authorization boundaries."]
+    ]),
+    q("d6-e09", "d6-l3", "exam", "Foundation", "A document has no names but a unique location, role, and event date identify its subject. How should it be treated?", 1, [
+      ["Anonymous solely because names were removed", "Indirect identifiers can still make an individual identifiable."],
+      ["As potentially personal data because indirect identification remains possible", "PDPL's personal-data definition is broader than explicit names."],
+      ["As automatically exempt because it is converted to an embedding", "A derived representation can preserve or reveal identifying information."],
+      ["As a secret-free artifact requiring no controls", "Identifiability and confidentiality need actual assessment, not format assumptions."]
+    ]),
+    q("d6-e10", "d6-l3", "exam", "Applied", "A retailer determines why and how customer messages are classified, using a contracted supplier solely on its behalf. Which role description fits those stated facts?", 3, [
+      ["The retailer becomes only a processor by outsourcing", "Outsourcing does not change who determines processing purposes and methods."],
+      ["No party has privacy responsibility if an API is used", "An API changes the workflow, not the existence of responsibilities."],
+      ["The supplier's marketing label overrides its actual conduct", "Roles depend on actual processing purposes and arrangements."],
+      ["The retailer is the controller; the supplier acts as its processor for this use", "The stated purpose-setting and on-behalf-of processing align with those roles, while controller duties remain."]
+    ]),
+    q("d6-e11", "d6-l3", "exam", "Applied", "A verified destruction request applies, but an older recovery copy still contains the personal data. What is the best plan?", 2, [
+      ["Delete only the search result and declare all copies destroyed", "A derived index is not the complete source, supplier, cache, and backup copy map."],
+      ["Ignore backups because restoration is an operational matter", "Destruction requirements address copies including backups subject to applicable requirements."],
+      ["Coordinate applicable destruction and exceptions across copies and prevent unsafe reintroduction on restore", "Privacy and recovery owners must handle the complete data lifecycle rather than just the visible entry."],
+      ["Keep every copy forever because processing records have a retention rule", "Processing-activity metadata retention does not justify indefinite retention of every payload."]
+    ]),
+    q("d6-e12", "d6-l3", "exam", "Stretch", "A hosted-model provider offers encryption and a chosen region, but support access, logging locations, and onward providers are unknown. Which conclusion is justified?", 0, [
+      ["The full processing/transfer map and applicable current protection route still need qualified review", "Encryption and one location setting do not establish all destinations, access, or legal conditions."],
+      ["All cross-border personal-data transfers are always prohibited", "Saudi law provides conditional transfer rules rather than that universal summary."],
+      ["Encryption alone permits any destination", "Encryption is a safeguard, not a complete legal authorization."],
+      ["A region label guarantees every obligation is satisfied", "Local placement does not establish purposes, basis, rights handling, or supplier practices."]
+    ]),
+    q("d6-e13", "d6-l4", "exam", "Foundation", "Which entry is most useful in an AI assistant's threat model?", 0, [
+      ["Public upload → internal retrieval boundary → possible private-data disclosure → enforced controls and owner", "This connects an entry path and trust boundary to a concrete consequence and mitigation responsibility."],
+      ["A list of GPU brands without data paths", "Hardware names alone do not identify adversaries, authority, or disclosure paths."],
+      ["The statement that high accuracy prevents all attacks", "Prediction quality is not an enforced security boundary."],
+      ["Only the final user-visible answer", "Ingestion, model context, tools, network destinations, and logs also matter."]
+    ]),
+    q("d6-e14", "d6-l4", "exam", "Applied", "An attacker can submit ratings that are automatically promoted into training labels. Which safeguard best addresses this poisoning path?", 2, [
+      ["Increase automatic ingestion speed", "Faster ingestion can promote hostile feedback more quickly."],
+      ["Treat every submitted rating as verified truth", "User-controlled feedback is not automatically defensible outcome evidence."],
+      ["Validate feedback origin and meaning, control promotion, and evaluate against independent evidence", "These controls protect the learning inputs and detect harmful candidate behavior."],
+      ["Keep only a public-average accuracy chart", "An aggregate can hide targeted corruption and does not protect data promotion."]
+    ]),
+    q("d6-e15", "d6-l4", "exam", "Applied", "An application authenticates a user, then lets the model request any tenant's file ID. What is missing?", 1, [
+      ["A stronger statement that the model should be polite", "Prompt wording does not enforce resource-specific permissions."],
+      ["Authorization binding each requested resource to the current user's allowed scope", "Identity alone does not permit access to every tenant's records."],
+      ["A requirement to hide the file ID after retrieval", "Hiding output does not undo unauthorized input access or later disclosure paths."],
+      ["A faster accelerator to reduce decision latency", "Compute speed does not establish data-access permission."]
+    ]),
+    q("d6-e16", "d6-l4", "exam", "Stretch", "A popular third-party model has high average quality but unknown provenance and loading code. What is the sound selection process?", 3, [
+      ["Load it on the production secret-bearing host immediately", "Unknown artifacts and associated loading code can create a compromise path."],
+      ["Assume popularity resolves licensing and security", "Popularity is not evidence of authorized use or harmless behavior."],
+      ["Evaluate only whether its file is smaller", "Size does not establish origin, safety, rights, or task suitability."],
+      ["Verify trusted origin, terms/licenses, integrity, isolated loading risks, and task/security evidence", "Supply-chain diligence must cover more than an aggregate benchmark and repository reputation."]
+    ]),
+    q("d6-e17", "d6-l5", "exam", "Foundation", "A legitimate user asks for a summary; a retrieved attachment says it has administrative authority to change recipients. Which treatment is correct?", 3, [
+      ["Accept its role claim because the file was retrieved", "Retrieval does not grant application authority to content."],
+      ["Treat the role claim as real approval for any tool", "External text cannot bind authorized approval of a consequential action."],
+      ["Assume RAG eliminated injection before the model saw it", "RAG can itself supply hostile content and does not guarantee prevention."],
+      ["Treat the claim as untrusted content and enforce real permissions outside the model", "A source can provide task evidence without controlling the application's authority."]
+    ]),
+    q("d6-e18", "d6-l5", "exam", "Applied", "A security test reports 0 successful violations in 100 known attacks but rejects 70 of 100 legitimate tasks. What is the best interpretation?", 1, [
+      ["Universal immunity with perfect usefulness", "The limited set cannot prove immunity, and most legitimate tasks failed."],
+      ["Limited security evidence and a substantial utility problem requiring further evaluation", "Both actual violations and beneficial-task completion matter; known tests do not cover all threats."],
+      ["Exactly 70% attack success", "Legitimate-task rejection is a different measure from attack success."],
+      ["Permission controls can now be removed", "Passing a finite test set cannot justify removing the enforced boundaries."]
+    ]),
+    q("d6-e19", "d6-l5", "exam", "Applied", "An assistant displays a generated remote image whose address contains private context. Why can a text-only output filter be insufficient?", 0, [
+      ["Rendering can initiate an unauthorized outbound request that leaks information", "Disclosure paths include generated links/media and network requests, not only visible prose."],
+      ["Images automatically anonymize every address", "A URL can carry identifying or confidential information regardless of displayed media."],
+      ["A read-only viewer cannot disclose any data", "Reading and rendering can still expose information to outside destinations."],
+      ["Valid Markdown establishes destination authorization", "Format validity does not establish that a network destination is permitted."]
+    ]),
+    q("d6-e20", "d6-l5", "exam", "Stretch", "A user approves sending a specific invoice to Supplier A. Before execution, the model changes the recipient to Supplier B. What is required?", 2, [
+      ["Reuse approval because the tool name is unchanged", "Approval must bind the material action arguments, not just a generic tool."],
+      ["Accept a retrieved note claiming the user agreed", "External content cannot replace authorized user approval."],
+      ["Reject the changed operation until permission checks and fresh exact-action approval pass", "A changed recipient is a materially different operation and must not inherit the earlier approval."],
+      ["Send first and hide the change in the final answer", "Concealment neither authorizes the action nor prevents its consequences."]
+    ]),
+    q("d6-e21", "d6-l6", "exam", "Foundation", "Which record most directly tracks a risk scenario, controls, residual risk, owner, and review action?", 2, [
+      ["Only a model-weight file", "Weights do not document the owned risk decision and mitigation plan."],
+      ["An unrestricted archive of every conversation", "Raw payload accumulation is not a structured risk record and creates privacy exposure."],
+      ["A risk register", "This record links identified scenarios to mitigation evidence, owners, and follow-up."],
+      ["A processor's compute invoice", "Billing data does not establish the risk scenario or its controls."]
+    ]),
+    q("d6-e22", "d6-l6", "exam", "Applied", "A proposed AI service processes sensitive personal data, and an assessment finds harmful privacy effects. Which response aligns with the reviewed Saudi implementing rules?", 0, [
+      ["Address the causes, change the processing as needed, and repeat the documented assessment", "Article 25 specifies assessment cases and requires addressing privacy-harming findings and reassessing."],
+      ["File the assessment but launch unchanged because it exists", "Documentation alone does not mitigate the harm identified by the assessment."],
+      ["Replace the assessment with a model's training loss", "A predictive loss does not assess purposes, personal-data effects, and protective measures."],
+      ["Assume the Responsible AI Officer title always replaces PDPL roles", "Ethics-framework and legal privacy roles have distinct conditions and duties."]
+    ]),
+    q("d6-e23", "d6-l6", "exam", "Applied", "Assume Article 24's authority-notification condition applies. Controller awareness is Friday 08:00; it is Sunday 20:00. What remains of the 72-hour outer limit?", 3, [
+      ["72 hours beginning when the final report is complete", "The limit runs from controller awareness, not perfect forensic completion."],
+      ["60 hours", "60 hours have elapsed; the remaining interval is smaller."],
+      ["No duty because weekends reset the clock", "The stated 72-hour rule is not presented as a business-day clock or a weekend reset."],
+      ["12 hours; other communication and response duties remain separate", "Friday 08:00 to Sunday 20:00 is 60 hours, leaving 12 under the stated assumptions; this does not justify waiting."]
+    ]),
+    q("d6-e24", "d6-l6", "exam", "Stretch", "An engineer says every outage has the same 72-hour notification deadline for authorities and affected people. What is the best correction?", 1, [
+      ["No incidents ever require external notification", "Some personal-data breaches trigger legal notification and other duties can apply."],
+      ["Article 24's authority rule is conditional, subject notification is separately without undue delay, and other duties may apply", "Operational outages, conditional breach notifications, and subject communication must not be collapsed into one clock."],
+      ["A two-hour RTO cancels every legal notification requirement", "Service recovery objectives cannot waive applicable legal reporting duties."],
+      ["Wait exactly 72 hours before involving privacy owners", "The outer authority limit is not a waiting period; containment and internal escalation should be prompt."]
     ])
   ];
 })();
