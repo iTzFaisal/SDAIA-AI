@@ -401,7 +401,7 @@ Inspect whether the assistant abstained on the 10 unanswerable questions, missed
 - **ROC-AUC:** Area under the receiver operating characteristic curve: a ranking-discrimination measure across thresholds.
 - **Calibration:** Agreement between predicted probabilities and observed outcome frequencies.
 - **Slice:** A meaningful subset of evaluation examples, such as a region or device category.
-- **MLOps / LLMOps:** Operational practices for ML systems / large-language-model systems; covered in the planned Domain 4.
+- **MLOps / LLMOps:** Lifecycle practices for operating ML systems / language-model applications, including versioning, evaluation, release, monitoring, and recovery.
 - **RAG:** Retrieval-augmented generation: supplying retrieved evidence to support an answer; does not guarantee correctness.
 - **Heuristic:** An estimate used to guide search; a useful estimate does not automatically satisfy optimality conditions.
 - **Policy (reinforcement learning):** A rule for selecting actions from observations or states; distinct from an organizational policy document.
@@ -447,6 +447,22 @@ Inspect whether the assistant abstained on the 10 unanswerable questions, missed
 - **Lockfile:** A record of resolved package versions that helps reproduce dependencies, not remote-service behavior.
 - **Refactoring:** Changing internal structure while aiming to preserve externally required behavior.
 - **Decision record / runbook:** Context, choice, alternatives, and consequences / practical diagnosis and recovery instructions.
+- **Artifact / lineage:** A saved output such as weights or an evaluation report / its origin and transformation history.
+- **Model registry / release manifest:** An artifact catalog with metadata / the identified compatible components and evidence selected for a release.
+- **CI / continuous delivery:** Frequent integration with automated feedback / keeping tested releases ready for deployment, possibly with human approval.
+- **Continuous deployment / training:** Automatic release of gated changes / creation of new model candidates from updated data; not the same process.
+- **Batch / online inference:** Compute predictions as grouped work for later use / compute them for arriving requests; neither necessarily updates weights.
+- **Shadow / canary:** Observe candidate results without choosing the live action / expose a limited live population before further rollout.
+- **Blue-green / rollback:** Switch between prepared serving environments / restore an approved compatible earlier release, not undo external actions.
+- **Data drift / concept drift:** A changed input distribution / a changed relationship between inputs and outcomes; input drift alone does not prove harm.
+- **Training-serving skew:** A discrepancy between training and serving inputs or preparation; investigate the concrete mismatch.
+- **Mature cohort:** Predictions grouped by event time with enough follow-up for delayed outcomes; missing labels are not negative labels.
+- **SLI / SLO / SLA:** A defined service measurement / its target and window / an agreement with consequences for missing commitments.
+- **Error budget:** The allowed bad fraction under a defined reliability objective; not permission to violate safety or access rules.
+- **p95 latency:** A latency percentile within which roughly 95% of measured requests finish; not a mean or quality score.
+- **Trace:** Linked stages of one interaction with minimized metadata such as versions, durations, and outcomes.
+- **Circuit breaker / kill switch:** Temporarily stop calls to a failing dependency with controlled recovery / disable a risky capability through enforced controls.
+- **Incident / post-incident review:** An event needing coordinated response / an impact and contributing-factor review with owned corrective actions.
 
 ## Lesson checks — questions
 
@@ -864,3 +880,17 @@ D. Use temperature zero without changing permissions
   Reviewed 12 October 2026: narrow tools, least privilege, user-context authorization, and approval for high-impact actions. Security guidance, not Saudi law or official exam objectives.
 - **Google Engineering Practices — What to look for in a code review** (Learning reference): https://google.github.io/eng-practices/review/reviewer/looking-for.html
   Reviewed 12 October 2026: design, functionality, complexity, useful tests, naming, comments, and documentation. Applied here as no-coding design-review concepts.
+- **Google — Rules of Machine Learning** (Learning reference): https://developers.google.com/machine-learning/guides/rules-of-ml
+  Reviewed 12 October 2026: pipeline integrity, freshness, release checks, silent failures, training-serving skew, and feedback loops. General engineering guidance, not official SDAIA objectives.
+- **Google ML Crash Course — Monitoring pipelines** (Learning reference): https://developers.google.com/machine-learning/crash-course/production-ml-systems/monitoring
+  Reviewed 12 October 2026: raw and transformed data checks, slices, skew, model age, real-world outcomes, and quality checks when labels are unavailable. Example checks must be adapted to the actual task.
+- **Google SRE — Release Engineering** (Learning reference): https://sre.google/sre-book/release-engineering/
+  Reviewed 12 October 2026: repeatable artifacts, versioned configuration, approval, staged rollout, and release records. Our model-registry examples apply these concepts without prescribing Google's tools.
+- **Google SRE Workbook — Canarying Releases** (Learning reference): https://sre.google/workbook/canarying-releases/
+  Reviewed 12 October 2026: partial rollouts, comparison by version, representative exposure, shared dependencies, blue-green deployment, and traffic teeing. No universal traffic percentage or duration is prescribed here.
+- **Google SRE — Service Level Objectives** (Learning reference): https://sre.google/sre-book/service-level-objectives/
+  Reviewed 12 October 2026: indicators, objectives, agreements, measurement windows, latency distributions, and error budgets. All numerical targets in our lessons are illustrative product choices.
+- **Google SRE — Monitoring Distributed Systems** (Learning reference): https://sre.google/sre-book/monitoring-distributed-systems/
+  Reviewed 12 October 2026: latency, traffic, errors, saturation, user-visible symptoms, and actionable alerts. AI quality requires additional task-specific evidence.
+- **Google SRE — Managing Incidents** (Learning reference): https://sre.google/sre-book/managing-incidents/
+  Reviewed 12 October 2026: coordinated roles, mitigation, live incident records, communication, evidence preservation, and explicit handoffs. Operational guidance, not Saudi incident-reporting law.

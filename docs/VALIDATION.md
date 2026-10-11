@@ -1,5 +1,15 @@
 # Validation
 
+## Domain 4 expansion — 12 October 2026
+
+- `npm run build`: 26 downloadable documents generated from shared content. Domain 4 adds Markdown notes, a separate 24-question paper/key, and three printable HTML equivalents. Existing download URLs remain stable; printable prerequisite links now derive from earlier available domains.
+- `npm test`: all 12 unit tests passed. Coverage includes 24 substantial lessons, 168 unique questions, 18 quiz and 24 reserved paper questions per available domain, every option's explanation, original-index grading, absolute deadlines, valid Domain 4 attempts, mixed-domain rejection against each prior domain, legacy Domain 1 attempts, per-version error rates, mature-label coverage, request error budgets, answer-rate denominators, generated paper/key separation, prerequisites, learning sources, and classic offline script wiring.
+- Attached Chrome smoke suite: 231 checks passed over local HTTP with no JavaScript page errors. It exercises all six Domain 4 lesson routes, domain-local navigation and rail selection, prerequisites, continued planned status for Domain 5, Domain 4 quiz/bookmark persistence, earlier-domain progress, legacy attempt resumption, isolated timed papers for all four available domains, reload-preserved deadlines/answers/flags, Domain 4 expiry, all 26 downloads, mobile routes at 390px, and printable controls. Prior kit progress was restored.
+- Domain 4 desktop/mobile overview and a desktop lesson view were visually reviewed. The full desktop capture had a stitching artifact; a viewport capture and DOM counts confirmed one heading and one study rail. No layout redesign, dependencies, remote assets, runtime imports, or runtime requests were introduced.
+- A comparison against the pre-expansion Git content confirmed all 18 Domain 1–3 lessons and all 126 prior questions are unchanged, including IDs, original answer indexes, and explanations. Prior papers and keys remain unchanged; shared glossary/source/release copy regenerated their workbooks.
+- General ML operations and SRE references were reviewed on 12 October 2026. The new lessons remain English-only, beginner-oriented, and concept-focused with worked paper examples and no programming exercises. The 45-minute paper default and reliability targets are illustrative choices, not official SDAIA requirements. Official assessment facts were not newly verified; Domains 5–7 and full weighted mocks remain planned.
+- The temporary test server was stopped afterward. Changes were not committed, pushed, or deployed as part of this request; use `npm start` for manual review at `http://127.0.0.1:4173/#domain/d4`.
+
 ## Domain 3 expansion — 12 October 2026
 
 - `npm run build`: 20 downloadable documents generated from shared content. Domain 3 adds Markdown notes, a separate paper/key, and three printable HTML equivalents. Domain 1–2 download URLs remain stable.

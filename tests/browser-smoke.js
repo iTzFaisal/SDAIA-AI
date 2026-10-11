@@ -21,13 +21,13 @@ async page => {
     await page.keyboard.press("Enter");
     ensure(await page.evaluate(() => location.hash) === initialHash, "Skip link preserves the current route");
     ensure(await page.evaluate(() => document.activeElement.id) === "main", "Skip link focuses the main content");
-    for (const route of ["home", "curriculum", "foundation", "domain/d1", "lesson/d1-l1", ...["d2", "d3"].flatMap(domain => [`domain/${domain}`, ...Array.from({ length: 6 }, (_, i) => `lesson/${domain}-l${i + 1}`)]), "domain/d4", "practice", "practice/d1", "practice/d2", "practice/d3", "review", "glossary", "downloads", "sources"]) {
+    for (const route of ["home", "curriculum", "foundation", "domain/d1", "lesson/d1-l1", ...["d2", "d3", "d4"].flatMap(domain => [`domain/${domain}`, ...Array.from({ length: 6 }, (_, i) => `lesson/${domain}-l${i + 1}`)]), "domain/d5", "practice", "practice/d1", "practice/d2", "practice/d3", "practice/d4", "review", "glossary", "downloads", "sources"]) {
       await page.goto(base + "#" + route);
       await page.locator("main h1").waitFor();
       ensure(await page.locator("main h1").count() === 1, `Route renders: ${route}`);
       ensure(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), `No desktop overflow: ${route}`);
     }
-    for (const domain of ["d2", "d3"]) {
+    for (const domain of ["d2", "d3", "d4"]) {
       const number = domain.slice(1);
       await page.goto(base + `#lesson/${domain}-l1`);
       ensure((await page.locator(".breadcrumb").textContent()).includes(`Domain ${number} / Lesson 1 of 6`), `${domain} uses domain-local lesson numbering`);
@@ -40,7 +40,10 @@ async page => {
     ensure((await page.locator("main .notice").first().textContent()).includes("Domains 1–2"), "Domain 3 states its prerequisites");
     ensure(await page.locator('main .lesson-list a[href^="#lesson/d3-"]').count() === 6, "Domain 3 overview lists six lessons");
     await page.goto(base + "#domain/d4");
-    ensure((await page.locator("main").textContent()).includes("outline only"), "Domain 4 remains clearly planned");
+    ensure((await page.locator("main .notice").first().textContent()).includes("Domains 1–3"), "Domain 4 states its prerequisites");
+    ensure(await page.locator('main .lesson-list a[href^="#lesson/d4-"]').count() === 6, "Domain 4 overview lists six lessons");
+    await page.goto(base + "#domain/d5");
+    ensure((await page.locator("main").textContent()).includes("outline only"), "Domain 5 remains clearly planned");
     await page.goto(base + "#glossary");
     await page.getByRole("searchbox").fill("recall");
     ensure((await page.locator("#glossary-count").textContent()).includes("terms shown"), "Glossary search updates count");
@@ -74,7 +77,7 @@ async page => {
     await page.goto(base + "#review");
     ensure((await page.locator("main").textContent()).includes("1 question needs another look"), "Mistake queue records incorrect question");
 
-    for (const domain of ["d2", "d3"]) {
+    for (const domain of ["d2", "d3", "d4"]) {
     await page.goto(base + `#lesson/${domain}-l5`);
     await page.getByRole("button", { name: "Bookmark lesson", exact: true }).click();
     await page.getByRole("button", { name: "Mark lesson read", exact: true }).click();
@@ -82,7 +85,7 @@ async page => {
     ensure(await page.getByRole("button", { name: "Remove bookmark", exact: true }).count() === 1, `${domain} bookmark persists`);
     ensure(await page.evaluate(({ key, domain }) => {
       const completed = JSON.parse(localStorage.getItem(key)).completed;
-      return completed.includes("d1-l1") && completed.includes(`${domain}-l5`) && (domain !== "d3" || completed.includes("d2-l5"));
+      return completed.includes("d1-l1") && Array.from({ length: Number(domain.slice(1)) - 1 }, (_, i) => `d${i + 2}-l5`).every(id => completed.includes(id));
     }, { key, domain }), `Adding ${domain} progress preserves earlier domains' progress`);
     await page.getByRole("button", { name: "Start lesson quiz", exact: true }).click();
     await page.waitForURL("**/#attempt");
@@ -124,7 +127,7 @@ async page => {
     await page.evaluate(() => { window.confirm = () => true; });
     await page.getByRole("button", { name: "Discard saved attempt", exact: true }).click();
 
-    for (const domain of ["d1", "d2", "d3"]) {
+    for (const domain of ["d1", "d2", "d3", "d4"]) {
     await page.goto(base + `#practice/${domain}`);
     ensure(await page.getByRole("button", { name: "Start timed paper", exact: true }).count() === 1, `Focused practice shows only ${domain} paper`);
     await page.getByRole("button", { name: "Start timed paper", exact: true }).click();
@@ -157,7 +160,7 @@ async page => {
     ensure(await page.locator("main details").count() === 24, `Result contains all 24 ${domain} answer reviews`);
     }
 
-    await page.goto(base + "#practice/d3");
+    await page.goto(base + "#practice/d4");
     await page.getByRole("button", { name: "Start timed paper", exact: true }).click();
     await page.waitForURL("**/#attempt");
     await page.evaluate(key => { const state = JSON.parse(localStorage.getItem(key)); state.active.deadline = Date.now() - 10; localStorage.setItem(key, JSON.stringify(state)); }, key);
@@ -172,7 +175,7 @@ async page => {
     const downloadable = page.getByRole("link", { name: "Curriculum & study schedule Markdown", exact: false });
     ensure(await downloadable.getAttribute("download") !== null, "Markdown link requests a download rather than navigation");
 
-    for (const route of ["home", "curriculum", "lesson/d1-l5", "domain/d2", "lesson/d2-l4", "lesson/d2-l6", "domain/d3", ...Array.from({ length: 6 }, (_, i) => `lesson/d3-l${i + 1}`), "practice", "practice/d2", "practice/d3", "glossary", "downloads"]) {
+    for (const route of ["home", "curriculum", "lesson/d1-l5", "domain/d2", "lesson/d2-l4", "lesson/d2-l6", ...["d3", "d4"].flatMap(domain => [`domain/${domain}`, ...Array.from({ length: 6 }, (_, i) => `lesson/${domain}-l${i + 1}`)]), "practice", "practice/d2", "practice/d3", "practice/d4", "glossary", "downloads"]) {
       await page.setViewportSize({ width: 390, height: 844 });
       await page.goto(base + "#" + route);
       await page.locator("main h1").waitFor();
@@ -185,17 +188,17 @@ async page => {
     await page.emulateMedia({ media: "print" });
     ensure(await page.locator(".print-tools").isHidden(), "Print stylesheet removes controls");
     await page.emulateMedia({ media: "screen" });
-    for (const number of [2, 3]) {
+    for (const number of [2, 3, 4]) {
       await page.goto(base + `notes/domain-${number}-printable-workbook.html`);
       ensure(await page.locator("article").count() === 6, `Domain ${number} printable workbook contains all six lessons`);
       await page.emulateMedia({ media: "print" });
       ensure(await page.locator(".print-tools").isHidden(), `Domain ${number} print stylesheet removes controls`);
       await page.emulateMedia({ media: "screen" });
     }
-    await page.goto(base + "#domain/d3");
-    await page.screenshot({ path: "/private/var/folders/4s/2grtwc3j2rvf0gkv9l7s3xp80000gn/T/opencode/domain-3-desktop.png", fullPage: true });
+    await page.goto(base + "#domain/d4");
+    await page.screenshot({ path: "/private/var/folders/4s/2grtwc3j2rvf0gkv9l7s3xp80000gn/T/opencode/domain-4-desktop.png", fullPage: true });
     await page.setViewportSize({ width: 390, height: 844 });
-    await page.screenshot({ path: "/private/var/folders/4s/2grtwc3j2rvf0gkv9l7s3xp80000gn/T/opencode/domain-3-mobile.png", fullPage: true });
+    await page.screenshot({ path: "/private/var/folders/4s/2grtwc3j2rvf0gkv9l7s3xp80000gn/T/opencode/domain-4-mobile.png", fullPage: true });
 
     await page.goto(base);
     await page.evaluate(key => localStorage.setItem(key, JSON.stringify({ active: { questions: [{ id: "bad" }] }, completed: ["bad"], bookmarks: ["bad"] })), key);

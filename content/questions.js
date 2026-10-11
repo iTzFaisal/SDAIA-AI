@@ -762,6 +762,258 @@
       ["Only that fewer files exist", "File count is not a measure of contract or behavior preservation."],
       ["Relevant behavior and contract tests still pass, with review of risk-bearing changes", "Refactoring should preserve required external behavior, supported by tests and substantive review."],
       ["Deleting failure-path tests so the change passes", "Removing checks conceals regressions rather than showing preservation."]
+    ]),
+    q("d4-l1-q1", "d4-l1", "quiz", "Foundation", "What does registering a trained artifact most directly establish?", 1, [
+      ["It is approved for every production task", "Registration records an artifact; task-specific approval requires evidence and gates."],
+      ["It is cataloged with an identity and associated metadata", "A registry connects an artifact to lineage, owners, reports, and lifecycle information."],
+      ["Its remote dependencies can never change", "A local catalog cannot freeze or preserve access to a remote service."],
+      ["Its validation score applies to every future population", "Recorded evaluation does not guarantee future quality after data or task changes."]
+    ]),
+    q("d4-l1-q2", "d4-l1", "quiz", "Applied", "An assistant's weights stay fixed while its prompt and document index change. What should the release record capture?", 3, [
+      ["Only the model's friendly name", "The same weights can produce different behavior under changed prompts and retrieved evidence."],
+      ["Only the newest average score, without evaluation versions", "A score without case and evaluator versions is insufficient comparison evidence."],
+      ["Every private prompt in an unrestricted shared log", "Indiscriminate sensitive-content retention is unnecessary and creates exposure risk."],
+      ["The compatible model, prompt, index, application, settings, and evaluation identities", "A whole-system identity links changed behavior to the actual evaluated configuration."]
+    ]),
+    q("d4-l1-q3", "d4-l1", "quiz", "Applied", "A production alias now points to M9 instead of M8. What best preserves the identity of yesterday's prediction?", 0, [
+      ["Record the immutable model and release identities resolved when it was served", "Resolved historical identities remain meaningful when a mutable alias moves."],
+      ["Look up today's alias and assume it also served yesterday", "The alias has changed and no longer establishes the historical target."],
+      ["Overwrite all older experiment records with M9", "Overwriting destroys the evidence needed to explain prior behavior."],
+      ["Record a random seed instead of the model version", "A seed does not identify the artifact or freeze remote-provider behavior."]
+    ]),
+    q("d4-l2-q1", "d4-l2", "quiz", "Foundation", "Tested releases are kept ready, but a reviewer approves the production step. Which term most precisely describes this?", 2, [
+      ["Continuous training", "Training creates model candidates from data; it does not describe deployment approval."],
+      ["Automatic continuous deployment", "A required human approval means production release is not fully automatic."],
+      ["Continuous delivery with an approval gate", "Delivery keeps releases deployable without requiring automatic production promotion."],
+      ["Online inference", "Inference handles prediction requests, not the release process."]
+    ]),
+    q("d4-l2-q2", "d4-l2", "quiz", "Applied", "A retraining run finds invalid units in its input data while the current production release is healthy. What is the best immediate response?", 0, [
+      ["Block the candidate pipeline, preserve evidence, and investigate the input", "Failed data checks should stop dependent promotion without automatically replacing healthy production."],
+      ["Deploy the candidate because its training completed", "Completion of training cannot compensate for failed input validity."],
+      ["Disable every healthy production function without assessing impact", "A failed development candidate alone does not establish that current production is unsafe."],
+      ["Delete the gate and relabel the units without checking values", "Removing or cosmetically changing checks conceals the defect rather than repairing it."]
+    ]),
+    q("d4-l2-q3", "d4-l2", "quiz", "Applied", "Artifact A31 passes all release gates. The team retrains and gets A32 with no new evaluation. Which artifact has the recorded release evidence?", 1, [
+      ["A32, because it is newer", "Recency does not transfer A31's evidence to a different artifact."],
+      ["A31 and its tested compatible configuration", "Promotion should use the exact candidate and bundle that the gates evaluated."],
+      ["Either, if both share a display name", "A friendly name cannot establish identical artifacts or behavior."],
+      ["Neither, because no trained model can be versioned", "Model artifacts and their supporting configurations can have stable identities."]
+    ]),
+    q("d4-l3-q1", "d4-l3", "quiz", "Foundation", "A candidate receives copied requests, but the established model alone supplies users' decisions. Which rollout pattern is this?", 3, [
+      ["A live canary", "A canary exposes some users to the candidate's actual outputs."],
+      ["A full blue-green switch", "A full switch changes which environment supplies live decisions."],
+      ["Continuous training", "The scenario concerns serving comparison, not updating learned weights."],
+      ["Shadow deployment", "Shadowing observes candidate behavior without choosing its live user-visible decision."]
+    ]),
+    q("d4-l3-q2", "d4-l3", "quiz", "Applied", "A candidate fails 20 of its 200 requests; the control fails none of 1,800. Which report exposes the canary risk?", 2, [
+      ["Only the overall 1% error rate", "Twenty divided by 2,000 hides the candidate's much higher failure rate."],
+      ["A candidate rate of 1%, using all service requests", "A candidate rate must use candidate requests as its denominator."],
+      ["Candidate 10% errors versus control 0%, plus overall 1%", "Per-version denominators reveal the concentrated candidate failure while retaining overall impact."],
+      ["Control 10%, because it handled most requests", "The control had zero failures; volume alone does not create an error rate."]
+    ]),
+    q("d4-l3-q3", "d4-l3", "quiz", "Applied", "A warehouse needs all next-day forecasts before 06:00, and overnight inputs are acceptable. Which is a defensible serving choice?", 1, [
+      ["Online inference solely because any stored result is invalid", "Stored predictions can be useful when they satisfy the actual freshness requirement."],
+      ["Scheduled batch inference with freshness and completion-deadline checks", "The required decision time and acceptable input age fit a monitored scheduled workflow."],
+      ["Use last month's predictions without an age check", "Batch serving does not excuse stale outputs that violate the planning requirement."],
+      ["Update weights on every forecast lookup", "The task requires predictions, not automatic online learning."]
+    ]),
+    q("d4-l4-q1", "d4-l4", "quiz", "Foundation", "More customers now submit long-distance trips, but current quality has not yet been measured. What has been observed?", 0, [
+      ["Input drift, which warrants investigation but does not prove quality loss", "A changed input distribution is evidence of a shift, not by itself a performance verdict."],
+      ["Proven concept drift for every route", "The input-outcome relationship has not been assessed in this scenario."],
+      ["A guaranteed need to replace the model immediately", "First check validity, representative outcomes, and actual task consequences."],
+      ["A failed HTTP service", "Changing input proportions does not establish protocol or dependency failure."]
+    ]),
+    q("d4-l4-q2", "d4-l4", "quiz", "Applied", "Of 600 recent predictions, only 150 have outcomes mature enough to evaluate. What is the outcome coverage?", 3, [
+      ["100%, by counting unobserved outcomes as correct", "Missing outcomes cannot be counted as confirmed correct predictions."],
+      ["75%, because 450 outcomes are still missing", "Seventy-five percent is the missing fraction, not the observed mature fraction."],
+      ["150%, because the outcome count is the numerator", "Coverage divides mature outcomes by total predictions before expressing a percentage."],
+      ["25%, with quality reported for the eligible cohort and its limitations", "150/600 = 25%; delayed and potentially selected outcomes limit wider quality claims."]
+    ]),
+    q("d4-l4-q3", "d4-l4", "quiz", "Applied", "Production uses a zero-fill rule while training used a fitted median for missing distance. Which first action is strongest?", 2, [
+      ["Declare concept drift without checking the preparation", "The observed concrete fault is different handling of the same missing input."],
+      ["Train immediately on the accidental zeros", "Retraining may normalize a broken integration rather than repair it."],
+      ["Investigate and align the serving preparation with the approved contract", "The training-serving mismatch should be corrected and tested before considering learning changes."],
+      ["Ignore it while the endpoint returns 200", "Protocol success does not establish that features or predictions are meaningful."]
+    ]),
+    q("d4-l5-q1", "d4-l5", "quiz", "Foundation", "A team targets 99% acceptable operational responses over a defined month. What is this target?", 1, [
+      ["The SLI alone", "The SLI is the defined measurement; the desired value and window make an objective."],
+      ["An SLO, not automatically an SLA", "An objective specifies a target; an agreement adds commitments and consequences."],
+      ["An official SDAIA passing score", "The scenario describes a product reliability choice, not verified exam thresholds."],
+      ["A guarantee that 99% of AI claims are true", "An operational-response target does not automatically measure factual answer quality."]
+    ]),
+    q("d4-l5-q2", "d4-l5", "quiz", "Applied", "For a fixed total of 10,000 eligible requests, a 99% good-response SLO allows how many bad requests?", 0, [
+      ["100", "The allowed fraction is 1%; 10,000 × 0.01 = 100 bad requests under this counting basis."],
+      ["99", "Ninety-nine is the target percentage, not 1% of the request count."],
+      ["9,900", "This is the minimum good count, not the allowed bad count."],
+      ["Unlimited if all bad requests return valid JSON", "Syntax alone does not satisfy the defined reliability objective."]
+    ]),
+    q("d4-l5-q3", "d4-l5", "quiz", "Applied", "A policy assistant is fast but cites obsolete documents. Which additional monitoring is most relevant?", 3, [
+      ["Only average CPU use", "Resource use does not establish the effective dates or support of cited policies."],
+      ["Only HTTP success rate with more decimal places", "A more precise protocol rate still misses stale but successfully delivered evidence."],
+      ["Only time to first token", "Fast streaming says little about whether the completed advice uses current policy."],
+      ["Corpus/index freshness, source effective dates, and reviewed answer support", "These signals address outdated retrieval and the correctness of advice derived from it."]
+    ]),
+    q("d4-l6-q1", "d4-l6", "quiz", "Foundation", "What is the main purpose of a circuit breaker in a failing dependency path?", 2, [
+      ["Guarantee all earlier requests had no side effects", "Stopping new calls cannot establish the outcomes of earlier operations."],
+      ["Train a replacement model on every failed request", "A breaker controls dependency calls rather than model training."],
+      ["Temporarily stop eligible calls and use controlled probes or an approved fallback", "This limits repeated pressure on a failing path while testing recovery deliberately."],
+      ["Retry every request forever", "Unbounded retries can amplify an outage and are contrary to limiting failed-path pressure."]
+    ]),
+    q("d4-l6-q2", "d4-l6", "quiz", "Applied", "A rollback stops a new assistant from submitting further refunds. What must still be addressed?", 1, [
+      ["Nothing; rollback reverses all external payments", "Restoring serving configuration does not undo previously executed refunds."],
+      ["Previously submitted or uncertain refunds, reconciled through authoritative records", "Past effects and unknown outcomes remain separate from stopping new candidate actions."],
+      ["Repeat all timed-out refunds with new operation identities", "A timeout can hide a completed refund; new identities risk duplicate effects."],
+      ["Remove all incident records immediately", "Necessary minimized evidence supports impact assessment, recovery, and follow-up."]
+    ]),
+    q("d4-l6-q3", "d4-l6", "quiz", "Applied", "Users receive unsafe advice during an incident, but the precise cause is still uncertain. What should come first?", 0, [
+      ["Coordinate containment through an enforced switch or evaluated safe path", "Stopping ongoing harm need not wait for the complete causal explanation."],
+      ["Wait for a perfect root-cause report before changing anything", "Delaying mitigation prolongs active harm when a safe containment option exists."],
+      ["Ask several engineers to make independent unrecorded changes", "Uncoordinated changes can worsen the event and destroy useful cause-and-effect evidence."],
+      ["Promise a restoration time without evidence", "Communication should state confirmed facts, uncertainty, and a next update rather than invent certainty."]
+    ]),
+    q("d4-e01", "d4-l1", "exam", "Foundation", "Which record most directly links a served prediction to the components and approval evidence used for its release?", 2, [
+      ["A screenshot of the largest training score", "A single score does not identify the served bundle, evaluation basis, or approval."],
+      ["An unversioned folder called final", "A mutable folder name does not preserve a stable component identity."],
+      ["A release manifest referencing compatible versions and evaluation records", "The manifest ties the actual serving configuration to identifiable evidence and artifacts."],
+      ["The current production alias without historical resolution", "Today's alias may refer to a different model from the one that served the prediction."]
+    ]),
+    q("d4-e02", "d4-l1", "exam", "Applied", "An evaluation score rises after the model judge and rubric change, while the assistant itself is unchanged. Which conclusion is best supported?", 0, [
+      ["The measurement basis changed; compare on a controlled common rubric before claiming improvement", "A changed evaluator can change scores without any change to the assistant's answers."],
+      ["The assistant necessarily learned new weights", "No assistant change is described; a score is not evidence of parameter updating."],
+      ["The new score can replace all old records without qualification", "Removing the evaluator distinction makes historical comparisons misleading."],
+      ["A larger judge makes human calibration unnecessary", "Judge size does not eliminate bias or the need to validate the evaluation process."]
+    ]),
+    q("d4-e03", "d4-l1", "exam", "Applied", "A retrieval complaint traces to index I14. What additional lineage evidence is most useful for finding a bad source?", 3, [
+      ["Only the support agent's display name", "A person's name does not identify documents or transformations used to build the index."],
+      ["Only the total number of model parameters", "Parameter count cannot identify the wrong corpus version or source transformation."],
+      ["Every user's full conversation history with unrestricted access", "Broad private histories are unnecessary and introduce exposure without precise source lineage."],
+      ["Corpus snapshot, document versions/effective dates, chunking, and embedding/index build records", "These links establish which evidence entered I14 and how it was transformed."]
+    ]),
+    q("d4-e04", "d4-l1", "exam", "Stretch", "A hosted model has been retired despite an exact local record of its prior version and seed. What should the team acknowledge?", 1, [
+      ["The seed can recreate the hosted service without its artifacts", "A random seed does not recreate inaccessible weights, infrastructure, or provider behavior."],
+      ["Records preserve identity, not guaranteed remote availability; use an evaluated continuity plan", "Reproducibility documentation cannot force a provider to keep a retired model accessible."],
+      ["Any replacement with the same output schema is automatically equivalent", "Task behavior, refusals, quality, timing, and cost can differ despite shared structure."],
+      ["Erase the old release identity so users cannot notice a change", "Deleting records conceals the dependency change and harms diagnosis and accountability."]
+    ]),
+    q("d4-e05", "d4-l2", "exam", "Foundation", "Which statement correctly relates retraining to deployment?", 1, [
+      ["New data must automatically replace the production model", "Updated data can be invalid or unrepresentative; candidates need release evidence."],
+      ["Retraining creates a candidate that still needs quality and release checks", "Training and promotion are distinct decisions, even when both have automated stages."],
+      ["Deployment always requires learning new parameters", "Prompt, index, configuration, or software releases may involve no training."],
+      ["A training pipeline cannot fail if it is automated", "Automation repeats defined behavior; it does not guarantee valid inputs or successful stages."]
+    ]),
+    q("d4-e06", "d4-l2", "exam", "Applied", "A candidate reduces overall error but violates a predeclared minimum for an important small region. What is the most defensible gate decision?", 3, [
+      ["Approve because the region contributes few requests", "Low volume does not override a stated critical requirement for that region."],
+      ["Lower the region's minimum after seeing the failure and call the original gate passed", "Changing the criterion to fit a result undermines the claimed approval evidence."],
+      ["Deploy first and evaluate the region only if users complain", "The known failing gate warrants repair before broader exposure."],
+      ["Block promotion, inspect representative slice evidence, and repair or reject the candidate", "Release gates must enforce the actual constraints, not only the favorable overall average."]
+    ]),
+    q("d4-e07", "d4-l2", "exam", "Applied", "A prompt and tool-policy update bypasses the release pipeline because application code did not change. What is the strongest concern?", 0, [
+      ["Behavior and permissions can change without code changes and need risk-bearing gates", "Prompts and tool policies are release components that can affect correctness and authority."],
+      ["Only trained weight files can change an AI application's behavior", "Retrieval, prompts, settings, and tool constraints also shape outputs and actions."],
+      ["A prompt edit is always safer than a code edit", "Safety depends on consequences and controls, not the file category alone."],
+      ["The update requires changing the official domain weights", "Engineering changes do not alter the supplied assessment blueprint."]
+    ]),
+    q("d4-e08", "d4-l2", "exam", "Stretch", "A staging test passes using one scaler, but production packaging silently includes another fitted scaler. What should a release check establish?", 2, [
+      ["Only that both files have similar names", "Similar names do not establish identical learned preparation or compatibility."],
+      ["Only that training loss is low", "Training fit does not exercise the wrongly packaged serving configuration."],
+      ["The actual promoted bundle has the tested model, preparation, contract, and environment", "Testing the real identified artifact bundle catches packaging divergence from approved evidence."],
+      ["That production can fit a new scaler on each request", "Refitting on requests changes preparation and does not restore the approved trained process."]
+    ]),
+    q("d4-e09", "d4-l3", "exam", "Foundation", "Which statement correctly distinguishes online inference from online learning?", 3, [
+      ["Both must update model weights for every request", "Serving predictions does not inherently perform parameter updates."],
+      ["Online inference can only use last month's stored outputs", "It computes outputs for arriving requests rather than requiring old precomputed predictions."],
+      ["Online learning means the response contains a hyperlink", "The term concerns learning updates, not browser navigation or links."],
+      ["Online inference serves arriving requests; online learning updates the learned model incrementally", "Prediction-time computation and parameter adaptation are different operations."]
+    ]),
+    q("d4-e10", "d4-l3", "exam", "Applied", "A shadow test copies refund requests to a candidate with access to the live payment tool. Which control is essential?", 1, [
+      ["Allow payments because candidate answers are not shown to users", "Hidden outputs do not prevent real external effects from tool execution."],
+      ["Block or simulate consequential execution outside the model and protect copied data", "Shadow comparison must not duplicate refunds or bypass data-handling restrictions."],
+      ["Use only a prompt asking the candidate to avoid payments", "Prompt instructions cannot replace enforced control of payment authority."],
+      ["Give copied refunds new identities to avoid sharing results", "New identities can create separate duplicate payments rather than prevent them."]
+    ]),
+    q("d4-e11", "d4-l3", "exam", "Applied", "A canary receives 1,000 of 20,000 requests and fails 80; the control fails none. What are candidate and overall error rates?", 2, [
+      ["Candidate 0.4%; overall 8%", "This reverses the denominators: the candidate uses 1,000 requests and overall uses 20,000."],
+      ["Candidate 4%; overall 4%", "Neither stated fraction equals 80/1,000 or 80/20,000."],
+      ["Candidate 8%; overall 0.4%", "80/1,000 = 8%; 80/20,000 = 0.4%, showing why per-version monitoring matters."],
+      ["Both 0%, because the control succeeded", "A healthy control does not erase failures experienced by the candidate's users."]
+    ]),
+    q("d4-e12", "d4-l3", "exam", "Stretch", "A new blue-green environment changed shared persistent data in a form the old application cannot read. Is routing traffic back sufficient recovery?", 0, [
+      ["No; recovery needs a safe data-compatibility plan as well as routing", "A traffic switch cannot repair state that the previous version no longer understands."],
+      ["Yes; blue-green guarantees all state changes are reversible", "Prepared environments do not automatically isolate or reverse shared data migrations."],
+      ["Yes; the old model's validation score proves it can read any schema", "Model quality evidence does not establish application compatibility with changed data."],
+      ["No; permanently disabling every unrelated service is always necessary", "The response should address affected scope and safe recovery, not indiscriminate shutdown."]
+    ]),
+    q("d4-e13", "d4-l4", "exam", "Foundation", "Similar parcel features now imply longer arrival times after a road-access change. Which change does this most directly illustrate?", 0, [
+      ["Concept drift", "The relationship between available inputs and the target duration has changed."],
+      ["A necessarily malformed JSON response", "A changed real-world relationship can occur while syntax and schema remain valid."],
+      ["Only a larger fraction of long-distance inputs", "Input proportions alone are different from changed outcomes for similar features."],
+      ["Proof of a credential expiry", "The described outcome shift does not establish an authentication failure."]
+    ]),
+    q("d4-e14", "d4-l4", "exam", "Applied", "Confirmed fraud labels can take 30 days. The team labels yesterday's unconfirmed transactions as legitimate to report recall. What is the best correction?", 2, [
+      ["Keep the report because no complaint means no fraud", "Absence of an early complaint is not a confirmed negative outcome."],
+      ["Report training recall as yesterday's live recall", "Training performance is not evidence about yesterday's operational cohort."],
+      ["Use adequately mature event-time cohorts and report label delay, coverage, and selection", "Delayed outcomes require appropriate follow-up and qualified performance claims."],
+      ["Remove all positive labels so the metric becomes stable", "Discarding outcomes changes and biases the evidence rather than correcting its timing."]
+    ]),
+    q("d4-e15", "d4-l4", "exam", "Applied", "A feature table stopped updating last week and predictions deteriorate. Which first response is best supported?", 1, [
+      ["Immediately replace the model with a larger neural network", "Model capacity does not repair stale feature data."],
+      ["Investigate and repair the freshness fault, then verify predictions and pipeline health", "The concrete stale-input fault should be corrected before assuming retraining is the remedy."],
+      ["Classify every future alarm as harmless seasonality", "A known broken update path is not evidence that later changes are benign seasonal effects."],
+      ["Hide the freshness metric to reduce alert volume", "Concealing the signal does not restore current inputs or task quality."]
+    ]),
+    q("d4-e16", "d4-l4", "exam", "Stretch", "A recommendation model is retrained only on clicks from items it previously chose to display. What risk should be assessed?", 3, [
+      ["Click feedback is always independent of the model's decisions", "The model influences exposure, which influences which clicks can be observed."],
+      ["More epochs necessarily remove missing-item coverage", "Repeated fitting does not create observations about items that were never displayed."],
+      ["Every clicked item is guaranteed to satisfy the user's true need", "Clicks are a proxy influenced by position, curiosity, and exposure, not unquestionable task truth."],
+      ["A feedback loop can reinforce selected exposure and hide useful unshown items", "Evidence collection must account for model-induced selection rather than treating observed clicks as neutral coverage."]
+    ]),
+    q("d4-e17", "d4-l5", "exam", "Foundation", "A p95 latency is 1.5 seconds for a defined request set. What does that measurement most directly describe?", 2, [
+      ["Every request completes within 1.5 seconds", "A percentile leaves a tail of slower requests and is not a universal maximum."],
+      ["The mean response time is exactly 1.5 seconds", "A percentile is a distribution position rather than an arithmetic average."],
+      ["Roughly 95% of measured requests complete within that value", "The percentile describes latency distribution under the stated measurement basis, not quality."],
+      ["95% of generated facts are correct", "Response time cannot establish factual correctness."]
+    ]),
+    q("d4-e18", "d4-l5", "exam", "Applied", "A fixed-count window has 40,000 eligible requests and a 99.5% good-response objective. With 150 bad requests, what remains in the request error budget?", 0, [
+      ["50 bad requests", "The allowance is 40,000 × 0.005 = 200; subtracting 150 leaves 50 under this fixed counting basis."],
+      ["200 bad requests", "Two hundred is the full allowance before the 150 observed bad requests are deducted."],
+      ["39,800 bad requests", "That is the required good count, not the remaining bad allowance."],
+      ["50 unauthorized disclosures", "A reliability error budget is not permission to violate authorization or privacy rules."]
+    ]),
+    q("d4-e19", "d4-l5", "exam", "Applied", "A support assistant receives 200 requests, answers 120, and 90 answers pass its quality rubric. Which summary uses the correct denominators?", 3, [
+      ["75% coverage; 60% of answers pass", "This swaps 120/200 coverage with 90/120 quality among answers."],
+      ["90% coverage; 120% of answers pass", "Raw counts are not percentages, and neither figure uses the required denominator."],
+      ["75% of all requests produced passing answers", "90/200 = 45% of all requests produced a passing answer, not 75%."],
+      ["60% answer coverage; 75% of answers pass", "120/200 = 60% coverage and 90/120 = 75% pass rate among answered requests."]
+    ]),
+    q("d4-e20", "d4-l5", "exam", "Stretch", "Latency and token cost rise after an agent update despite unchanged request volume. Which evidence is most useful and proportionate?", 1, [
+      ["Only the request count, because cost must track it exactly", "More calls, longer context, or retries per request can change cost independently of volume."],
+      ["Minimized traces of stages, attempts, tool loops, versions, durations, and token accounting", "Linked stage metadata can distinguish retrieval delay, repeated calls, and prompt growth without indiscriminate content retention."],
+      ["Unrestricted logs of every prompt, credential, and tool reply", "Raw sensitive logging is disproportionate and can expose secrets and private records."],
+      ["Only model-judge answer scores", "Answer ratings do not identify where operational latency or repeated token usage arises."]
+    ]),
+    q("d4-e21", "d4-l6", "exam", "Foundation", "Which statement best describes a post-incident review that can reduce recurrence?", 1, [
+      ["Identify one person to blame and close every follow-up", "Blame alone does not repair contributing conditions or verify preventive changes."],
+      ["Document impact, timeline, contributing conditions, and corrective actions with owners and checks", "Owned, verifiable changes turn incident learning into improvements in gates, monitoring, and recovery."],
+      ["Declare prevention complete as soon as a report is written", "A document without implemented and verified actions does not reduce recurrence."],
+      ["Delete the timeline so future teams cannot repeat the investigation", "Necessary minimized records support learning and clear operational handoffs."]
+    ]),
+    q("d4-e22", "d4-l6", "exam", "Applied", "The normal provider fails and a backup has never been tested for this application's contracts or quality. Which response is safest?", 3, [
+      ["Switch silently because any provider is equivalent", "Contract, task quality, permission handling, and failure behavior can differ across providers."],
+      ["Disable output checks so backup responses always count as success", "Bypassing validation hides errors and can introduce unsafe downstream actions."],
+      ["Return invented successful answers until the provider recovers", "Fabricating success conceals the outage and misleads users."],
+      ["Use an already evaluated safe degradation or an honest unavailable/manual path", "An unverified substitute is not a recovery guarantee; approved alternatives preserve the task's constraints."]
+    ]),
+    q("d4-e23", "d4-l6", "exam", "Applied", "A deployment command succeeds after an outage, but queued jobs and user-facing quality have not been checked. What is still required?", 0, [
+      ["Verify user-visible recovery, permissions, quality, and outstanding work", "Deployment success is an intermediate event, not proof that the full service and affected operations recovered."],
+      ["Close the incident solely because the command exited successfully", "A successful command does not establish downstream results or user experience."],
+      ["Treat every queued consequential action as never executed", "Some outcomes may be uncertain and require authoritative reconciliation before replay."],
+      ["Replace the SLO with the deployment exit code", "An internal command result is not a meaningful substitute for the user's defined service outcome."]
+    ]),
+    q("d4-e24", "d4-l6", "exam", "Stretch", "A prior release would restore fast answers but would also restore a revoked document-access rule. What is the strongest recovery decision?", 2, [
+      ["Restore it because availability overrides all access constraints", "Reliability goals cannot authorize access that has been revoked."],
+      ["Keep the new unsafe answers active until the full root cause is proven", "Ongoing harm can be contained without waiting for complete causal certainty."],
+      ["Preserve current authorization, contain the affected feature, and use a verified compatible repair or fallback", "Recovery must remain safe under current access rules; an old bundle is not automatically an acceptable rollback target."],
+      ["Ask the model to hide any newly exposed documents in its final prose", "Prompt-based concealment does not enforce access boundaries before protected retrieval."]
     ])
   ];
 })();

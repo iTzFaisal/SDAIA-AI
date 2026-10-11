@@ -6,7 +6,7 @@ Reviewed: 2026-10-12. Confirmed exam booking: 5 December 2026 (provided by learn
 
 ## Release status
 
-Available: the foundation primer, 18 lessons across Domains 1, 2, 3, 54 lesson questions, and a separate 24-question paper for each available domain. Domains 4, 5, 6, 7 and all full weighted mocks are planned. Detailed topic lists are inferred curriculum choices, not a verified official syllabus.
+Available: the foundation primer, 24 lessons across Domains 1, 2, 3, 4, 72 lesson questions, and a separate 24-question paper for each available domain. Domains 5, 6, 7 and all full weighted mocks are planned. Detailed topic lists are inferred curriculum choices, not a verified official syllabus.
 
 ## Learning path
 
@@ -79,7 +79,7 @@ Make AI a reliable part of a larger application.
 
 ### Domain 4: MLOps, LLMOps, Deployment & Reliability (18.0%)
 
-Status: Outline only; planned.
+Status: Lessons and paper available.
 
 Keep models useful and dependable after launch.
 
@@ -195,7 +195,7 @@ Target: 10–14 hours.
 
 ### 9–15 Nov: MLOps, LLMOps & reliability
 
-Planned: versioning, pipelines, deployment strategies, monitoring, drift, rollback, and incident response.
+Study Domain 4: reproducible releases, pipeline gates, serving and rollout strategies, drift and delayed labels, reliability targets, LLM tracing, rollback, and incidents. Complete its separate paper and explain missed decisions. Domain 5 infrastructure and scaling remain planned.
 
 Target: 10–14 hours.
 
@@ -269,3 +269,17 @@ Target: 10–14 hours.
   Reviewed 12 October 2026: narrow tools, least privilege, user-context authorization, and approval for high-impact actions. Security guidance, not Saudi law or official exam objectives.
 - **Google Engineering Practices — What to look for in a code review** (Learning reference): https://google.github.io/eng-practices/review/reviewer/looking-for.html
   Reviewed 12 October 2026: design, functionality, complexity, useful tests, naming, comments, and documentation. Applied here as no-coding design-review concepts.
+- **Google — Rules of Machine Learning** (Learning reference): https://developers.google.com/machine-learning/guides/rules-of-ml
+  Reviewed 12 October 2026: pipeline integrity, freshness, release checks, silent failures, training-serving skew, and feedback loops. General engineering guidance, not official SDAIA objectives.
+- **Google ML Crash Course — Monitoring pipelines** (Learning reference): https://developers.google.com/machine-learning/crash-course/production-ml-systems/monitoring
+  Reviewed 12 October 2026: raw and transformed data checks, slices, skew, model age, real-world outcomes, and quality checks when labels are unavailable. Example checks must be adapted to the actual task.
+- **Google SRE — Release Engineering** (Learning reference): https://sre.google/sre-book/release-engineering/
+  Reviewed 12 October 2026: repeatable artifacts, versioned configuration, approval, staged rollout, and release records. Our model-registry examples apply these concepts without prescribing Google's tools.
+- **Google SRE Workbook — Canarying Releases** (Learning reference): https://sre.google/workbook/canarying-releases/
+  Reviewed 12 October 2026: partial rollouts, comparison by version, representative exposure, shared dependencies, blue-green deployment, and traffic teeing. No universal traffic percentage or duration is prescribed here.
+- **Google SRE — Service Level Objectives** (Learning reference): https://sre.google/sre-book/service-level-objectives/
+  Reviewed 12 October 2026: indicators, objectives, agreements, measurement windows, latency distributions, and error budgets. All numerical targets in our lessons are illustrative product choices.
+- **Google SRE — Monitoring Distributed Systems** (Learning reference): https://sre.google/sre-book/monitoring-distributed-systems/
+  Reviewed 12 October 2026: latency, traffic, errors, saturation, user-visible symptoms, and actionable alerts. AI quality requires additional task-specific evidence.
+- **Google SRE — Managing Incidents** (Learning reference): https://sre.google/sre-book/managing-incidents/
+  Reviewed 12 October 2026: coordinated roles, mitigation, live incident records, communication, evidence preservation, and explicit handoffs. Operational guidance, not Saudi incident-reporting law.

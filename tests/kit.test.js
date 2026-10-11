@@ -13,13 +13,13 @@ test("seven exact blueprint weights total 100; release availability is honest", 
   assert.equal(kit.domains.length, 7);
   assert.deepEqual(kit.domains.map(d => d.weight), [17.3, 16.7, 14, 18, 12.6, 14.7, 6.7]);
   assert.equal(Math.round(kit.domains.reduce((sum, d) => sum + d.weight, 0) * 10), 1000);
-  assert.deepEqual(kit.domains.filter(d => d.status === "available").map(d => d.id), ["d1", "d2", "d3"]);
-  assert.ok(kit.domains.slice(3).every(d => d.status === "planned"));
+  assert.deepEqual(kit.domains.filter(d => d.status === "available").map(d => d.id), ["d1", "d2", "d3", "d4"]);
+  assert.ok(kit.domains.slice(4).every(d => d.status === "planned"));
   assert.equal(kit.examDate, "2026-12-05");
 });
-test("all eighteen lessons have objectives, substantial content, references, and separate question coverage", () => {
-  assert.equal(kit.lessons.length, 18);
-  assert.equal(new Set(kit.lessons.map(l => l.id)).size, 18);
+test("all twenty-four lessons have objectives, substantial content, references, and separate question coverage", () => {
+  assert.equal(kit.lessons.length, 24);
+  assert.equal(new Set(kit.lessons.map(l => l.id)).size, 24);
   for (const d of kit.domains.filter(d => d.status === "available")) {
     assert.equal(kit.lessons.filter(l => l.domain === d.id).length, 6);
     assert.ok(kit.revisions[d.id].length >= 12);
@@ -36,11 +36,11 @@ test("all eighteen lessons have objectives, substantial content, references, and
     assert.equal(kit.questions.filter(q => q.lesson === l.id && q.pool === "exam").length, 4);
   }
 });
-test("126 unique original question entries have valid answers and explanations for every option", () => {
-  assert.equal(kit.questions.length, 126);
-  assert.equal(new Set(kit.questions.map(q => q.id)).size, 126);
-  assert.equal(new Set(kit.questions.map(q => q.stem)).size, 126);
-  for (const domain of ["d1", "d2", "d3"]) {
+test("168 unique original question entries have valid answers and explanations for every option", () => {
+  assert.equal(kit.questions.length, 168);
+  assert.equal(new Set(kit.questions.map(q => q.id)).size, 168);
+  assert.equal(new Set(kit.questions.map(q => q.stem)).size, 168);
+  for (const domain of ["d1", "d2", "d3", "d4"]) {
     assert.equal(kit.questions.filter(q => q.domain === domain && q.pool === "quiz").length, 18);
     assert.equal(core.paperQuestions(kit.questions, domain).length, 24);
   }
@@ -63,11 +63,11 @@ test("grading uses original option indexes, not shuffled display letters", () =>
   const questions = core.prepare(kit.questions, () => 0);
   const answers = Object.fromEntries(questions.map(q => [q.id, q.answer]));
   const result = core.score(questions, answers);
-  assert.equal(result.correct, 126);
+  assert.equal(result.correct, 168);
   assert.equal(result.percent, 100);
-  assert.equal(result.answered, 126);
-  assert.equal(Object.keys(result.byLesson).length, 18);
-  assert.equal(Object.values(result.byDifficulty).reduce((sum, b) => sum + b.total, 0), 126);
+  assert.equal(result.answered, 168);
+  assert.equal(Object.keys(result.byLesson).length, 24);
+  assert.equal(Object.values(result.byDifficulty).reduce((sum, b) => sum + b.total, 0), 168);
 });
 test("unanswered and invalid responses count as incorrect", () => {
   const q = kit.questions.slice(0, 3);
@@ -118,7 +118,18 @@ test("papers remain domain-isolated and legacy Domain 1 attempts still resume", 
   delete mixedD3.domain;
   assert.equal(core.validAttempt(mixedD3, kit.questions), false);
   assert.equal(core.validAttempt({ ...d3, domain: "d2" }, kit.questions), false);
-  assert.deepEqual(core.paperQuestions(kit.questions, "d4"), []);
+  const d4 = { ...attempt("d4"), domain: "d4" };
+  assert.ok(core.validAttempt(d4, kit.questions));
+  assert.ok(core.paperQuestions(kit.questions, "d4").every(q => q.domain === "d4" && q.pool === "exam"));
+  for (const previous of [legacy, d2, d3]) {
+    const mixedD4 = structuredClone(d4);
+    mixedD4.questions[0] = previous.questions[0];
+    assert.equal(core.validAttempt(mixedD4, kit.questions), false);
+    delete mixedD4.domain;
+    assert.equal(core.validAttempt(mixedD4, kit.questions), false);
+  }
+  assert.equal(core.validAttempt({ ...d4, domain: "d3" }, kit.questions), false);
+  assert.deepEqual(core.paperQuestions(kit.questions, "d5"), []);
   assert.deepEqual(core.paperQuestions(kit.questions, undefined), []);
   assert.equal(core.validAttempt({ ...d2, domain: "d1" }, kit.questions), false);
   const mixed = structuredClone(d2);
@@ -148,6 +159,13 @@ test("question calculations and denominators match worked cases", () => {
   assert.equal(amplification.options[amplification.answer].text, String(3 * 3));
   const deadline = kit.questions.find(q => q.id === "d3-e10");
   assert.equal(deadline.options[deadline.answer].text, `${8 - 3 - 2} seconds total`);
+  const answerText = id => { const q = kit.questions.find(q => q.id === id); return q.options[q.answer].text; };
+  assert.equal(answerText("d4-l3-q2"), `Candidate ${20 / 200 * 100}% errors versus control 0%, plus overall ${20 / 2000 * 100}%`);
+  assert.equal(answerText("d4-l4-q2"), `${150 / 600 * 100}%, with quality reported for the eligible cohort and its limitations`);
+  assert.equal(answerText("d4-l5-q2"), String(10000 * .01));
+  assert.equal(answerText("d4-e11"), `Candidate ${80 / 1000 * 100}%; overall ${80 / 20000 * 100}%`);
+  assert.equal(answerText("d4-e18"), `${40000 * .005 - 150} bad requests`);
+  assert.equal(answerText("d4-e19"), `${120 / 200 * 100}% answer coverage; ${90 / 120 * 100}% of answers pass`);
 });
 test("generated documents exist and the reserved practice paper contains no answer key", async () => {
   for (const name of ["curriculum.md", "domain-1-study-notes.md", "domain-1-practice-paper.md", "domain-1-answer-key.md", "sources-and-exam-facts.md", "printable-workbook.html", "printable-practice-paper.html", "printable-answer-key.html"]) {
@@ -185,21 +203,25 @@ test("generated documents exist and the reserved practice paper contains no answ
     }
     for (const [term, text] of kit.revisions[d.id]) assert.ok(notes.includes(text) && workbook.includes(term));
     if (d.prerequisite) assert.ok(notes.includes(d.prerequisite) && workbook.includes(d.prerequisite));
+    for (const prior of kit.domains.filter(prior => prior.status === "available" && prior.number < d.number)) {
+      const priorPrefix = prior.number === 1 ? "printable" : `domain-${prior.number}-printable`;
+      assert.ok(workbook.includes(`href="${priorPrefix}-workbook.html"`));
+    }
   }
 });
-test("release copy and classic offline script wiring include Domain 3 without presenting future domains as available", async () => {
+test("release copy and classic offline script wiring include Domain 4 without presenting future domains as available", async () => {
   const read = name => readFile(new URL(`../${name}`, import.meta.url), "utf8");
   const index = await read("index.html");
   assert.deepEqual([...index.matchAll(/<script defer src="([^"]+)"><\/script>/g)].map(m => m[1]), ["content/kit.js", "content/questions.js", "assets/core.js", "assets/app.js"]);
-  assert.ok(index.includes('href="#domain/d3"') && index.includes("Available: Domains 1–3"));
+  assert.ok(index.includes('href="#domain/d4"') && index.includes("Available: Domains 1–4"));
   for (const file of ["content/kit.js", "content/questions.js", "assets/core.js", "assets/app.js"]) {
     assert.ok(!/^\s*import\b|\bimport\s*\(|\bfetch\s*\(/m.test(await read(file)), file);
   }
   const curriculum = await read("notes/curriculum.md");
-  assert.ok(curriculum.includes("18 lessons") && curriculum.includes("54 lesson questions"));
-  assert.ok(curriculum.includes("Domains 4, 5, 6, 7 and all full weighted mocks are planned"));
+  assert.ok(curriculum.includes("24 lessons") && curriculum.includes("72 lesson questions"));
+  assert.ok(curriculum.includes("Domains 5, 6, 7 and all full weighted mocks are planned"));
   const sources = await read("notes/sources-and-exam-facts.md");
-  for (const id of ["http", "schema", "retries", "testing", "agency", "review"]) {
+  for (const id of ["http", "schema", "retries", "testing", "agency", "review", "ml-rules", "ml-monitoring", "release", "canary", "slo", "observability", "incidents"]) {
     assert.ok(sources.includes(kit.sources.find(s => s.id === id).url));
   }
 });
