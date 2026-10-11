@@ -1014,6 +1014,258 @@
       ["Keep the new unsafe answers active until the full root cause is proven", "Ongoing harm can be contained without waiting for complete causal certainty."],
       ["Preserve current authorization, contain the affected feature, and use a verified compatible repair or fallback", "Recovery must remain safe under current access rules; an old bundle is not automatically an acceptable rollback target."],
       ["Ask the model to hide any newly exposed documents in its final prose", "Prompt-based concealment does not enforce access boundaries before protected retrieval."]
+    ]),
+    q("d5-l1-q1", "d5-l1", "quiz", "Foundation", "Which component should establish whether a refund has already been executed?", 2, [
+      ["The nearest embedding in a vector index", "Similarity helps retrieval but cannot establish authoritative transaction status."],
+      ["A generated summary of last week's refunds", "A generated summary may be incomplete or wrong and is not the action ledger."],
+      ["The authoritative transaction service and its records", "Consequential operation status must come from the system that owns the transaction truth."],
+      ["A cached answer from a different customer", "Another customer's answer is neither authoritative nor necessarily permitted for this caller."]
+    ]),
+    q("d5-l1-q2", "d5-l1", "quiz", "Applied", "An assistant's search index updates hourly. Access to one document is revoked now. What should the live path do?", 0, [
+      ["Enforce current access before returning evidence, despite index lag", "Derived-index lag must not permit retrieval or disclosure of material the caller can no longer access."],
+      ["Continue returning it until the next hourly refresh", "The index schedule is not permission to ignore current authorization."],
+      ["Let the model decide whether the revocation matters", "Access must be enforced by the application, not discretionary model text."],
+      ["Delete every source document to remove the index", "A scoped access change does not justify destroying unrelated authoritative documents."]
+    ]),
+    q("d5-l1-q3", "d5-l1", "quiz", "Foundation", "What does a stateless application replica mean in a job-processing system?", 1, [
+      ["The entire system has no persistent records", "Job status, identity, and other dependencies can remain stateful even when application instances are replaceable."],
+      ["Required durable job progress does not depend on unique local replica memory", "Appropriate shared durable state allows another eligible instance to continue without losing required progress."],
+      ["Every replica independently invents its own job status", "Uncoordinated local truth can disagree when requests move between replicas."],
+      ["The model never uses RAM", "Statelessness concerns durable application state, not an absence of computation memory."]
+    ]),
+    q("d5-l2-q1", "d5-l2", "quiz", "Applied", "A GPU is mostly idle while requests spend most of their time downloading documents. What is the strongest next investigation?", 3, [
+      ["Buy more GPUs before inspecting the request path", "Additional idle accelerators do not directly repair slow data supply."],
+      ["Remove document authorization checks to save time", "Performance improvements cannot bypass required access enforcement."],
+      ["Retrain the model because idle hardware proves concept drift", "Resource waiting is not evidence of a changed input-outcome relationship."],
+      ["Trace storage, networking, and preparation delays supplying the GPU", "Input supply and data movement can limit performance even when accelerator compute has spare capacity."]
+    ]),
+    q("d5-l2-q2", "d5-l2", "quiz", "Applied", "Ignoring metadata and using decimal units, how much raw storage do 3 billion 16-bit weights require?", 1, [
+      ["3 GB of guaranteed total serving memory", "Sixteen bits is two bytes per weight, and raw weights are not total serving memory."],
+      ["6 GB for weights alone", "3 billion × 16/8 = 6 billion bytes; runtime buffers and request state need additional memory."],
+      ["48 GB for weights alone", "This treats bits as bytes rather than dividing by eight."],
+      ["6 GB including every possible concurrent request", "The arithmetic excludes activations, buffers, and concurrent sequence state."]
+    ]),
+    q("d5-l2-q3", "d5-l2", "quiz", "Foundation", "Which comparison between quantization and distillation is correct?", 0, [
+      ["Quantization reduces numerical precision; distillation trains a student using teacher information", "They change representation and learned model behavior through different mechanisms, both requiring evaluation."],
+      ["Both only route traffic to another identical replica", "Routing requests is not reduced precision or teacher/student training."],
+      ["Quantization guarantees identical answers; distillation guarantees better answers", "Neither method guarantees preserved or improved quality on the intended task."],
+      ["Distillation merely converts unchanged weights from 16 bits to 8 bits", "That describes a precision change, not training a student using a teacher."]
+    ]),
+    q("d5-l3-q1", "d5-l3", "quiz", "Foundation", "Which statement distinguishes throughput from concurrency?", 2, [
+      ["Both measure only elapsed time for one request", "Elapsed operation time is latency, not completed rate or in-flight count."],
+      ["Throughput counts submitted requests; concurrency counts only completed ones", "Submission is not completion, and concurrency concerns work still in flight."],
+      ["Throughput is completed work per time; concurrency is work in flight", "The completion rate and the number of waiting or executing requests are distinct measurements."],
+      ["Doubling concurrency always doubles throughput", "After saturation, more in-flight work can mainly increase waiting, errors, and memory pressure."]
+    ]),
+    q("d5-l3-q2", "d5-l3", "quiz", "Applied", "A sequential request spends 800 ms outside the model and 200 ms in it. Halving only model time gives what total?", 3, [
+      ["500 ms", "Only the 200 ms model stage is halved, not the whole 1,000 ms journey."],
+      ["100 ms", "This is the new model time alone and omits the unchanged 800 ms."],
+      ["800 ms", "This would require eliminating model time entirely rather than halving it."],
+      ["900 ms", "The unchanged 800 ms plus 100 ms model time gives 900 ms under the stated assumptions."]
+    ]),
+    q("d5-l3-q3", "d5-l3", "quiz", "Applied", "Two replicas report their own p95 latency. How should the team obtain the service's p95?", 1, [
+      ["Take the arithmetic mean of the two p95 numbers", "Percentiles cannot generally be averaged to recover the combined distribution's percentile."],
+      ["Use combined observations or suitable distribution aggregation for the defined population", "The service percentile depends on the distribution of service requests, including how many each replica served."],
+      ["Choose the faster replica's p95", "Selecting the better subset hides users experiencing the other replica."],
+      ["Add both p95 numbers because requests use one replica", "Adding percentiles does not describe the distribution of requests routed to one replica."]
+    ]),
+    q("d5-l4-q1", "d5-l4", "quiz", "Foundation", "At low traffic, dynamic batching waits for more requests before inference. What tradeoff should be checked?", 0, [
+      ["Collection waiting may worsen request latency despite potential throughput gains", "Grouping work can improve utilization while adding delay before any inference starts."],
+      ["Waiting automatically improves every user's complete-response time", "Low traffic may make batch formation dominate waiting rather than speed up the journey."],
+      ["Serving batches automatically update learned weights", "Inference batching does not itself perform training updates."],
+      ["Any batch size always fits available memory", "Batch size and sequence lengths affect working memory and need explicit limits."]
+    ]),
+    q("d5-l4-q2", "d5-l4", "quiz", "Applied", "Of 800 eligible cache lookups, 600 are hits. What is the hit rate, without claiming correctness?", 2, [
+      ["25%", "200/800 describes misses, not the 600 hits."],
+      ["133%", "800/600 reverses the hit-rate denominator and cannot represent this fraction."],
+      ["75%", "600/800 = 75%; this rate alone says nothing about authorization, freshness, or answer quality."],
+      ["600%", "The hit count is not a percentage; divide it by eligible lookups."]
+    ]),
+    q("d5-l4-q3", "d5-l4", "quiz", "Applied", "Two employees ask identical text about their personal salary. What is the safest cache design?", 3, [
+      ["Share one final answer using only the question text as its key", "Identical wording does not make personalized private answers equivalent or mutually authorized."],
+      ["Share answers if the cache TTL has not expired", "Expiration does not establish caller scope or current authorization."],
+      ["Ask the model not to mention the other employee's name", "Text instructions do not prevent exposing another person's underlying private information."],
+      ["Isolate the relevant caller scope and enforce current access and validity", "Private cache reuse requires appropriate scope, business facts, versions, and current authorization."]
+    ]),
+    q("d5-l5-q1", "d5-l5", "quiz", "Foundation", "What happens if arrivals stay above worker completion capacity indefinitely?", 1, [
+      ["A queue automatically makes workers faster", "A queue stores waiting work; it does not create compute capacity."],
+      ["Backlog grows unless work is limited or sustainable capacity increases", "Persistent positive arrivals minus completions accumulates waiting work and threatens deadlines."],
+      ["Oldest-job age must remain zero", "Growing backlog generally increases how long jobs wait."],
+      ["Acknowledging job intake proves every job meets its deadline", "Accepted work is not completed work, and intake health can conceal a delayed backlog."]
+    ]),
+    q("d5-l5-q2", "d5-l5", "quiz", "Applied", "With no initial backlog, 60 jobs/s arrive and workers finish 45 jobs/s for 20 seconds. How many jobs accumulate?", 0, [
+      ["300 jobs", "The excess is 15 jobs/s for 20 seconds, giving 300 waiting jobs under the stated assumptions."],
+      ["1,200 jobs", "This counts all arrivals and ignores 900 completions during the interval."],
+      ["900 jobs", "This counts completed work rather than the unprocessed excess."],
+      ["15 jobs", "Fifteen is the excess rate per second; multiply by the 20-second duration."]
+    ]),
+    q("d5-l5-q3", "d5-l5", "quiz", "Applied", "A new inference replica accepts connections but is still loading its model. What should routing do?", 2, [
+      ["Send full traffic because listening proves readiness", "The process can listen without being ready to perform promised inference."],
+      ["Prefer it because its early errors return quickly", "Fast failures are not successful low-latency work and can sinkhole traffic."],
+      ["Wait for defined serving readiness before adding normal traffic", "Readiness must establish the appropriate model and required configuration can handle work."],
+      ["Delete the existing healthy replicas immediately", "Removing ready capacity while the replacement loads can create an avoidable outage."]
+    ]),
+    q("d5-l6-q1", "d5-l6", "quiz", "Foundation", "Which mapping of recovery objectives is correct?", 3, [
+      ["RTO is data loss; RPO is GPU utilization", "RTO concerns service interruption and RPO concerns the recovered-data gap."],
+      ["Both are official SDAIA practice pass scores", "Recovery objectives are business engineering targets, not badge thresholds."],
+      ["RTO is backup file size; RPO is restoration price", "Neither target is defined by file size or monetary price."],
+      ["RTO targets maximum service interruption; RPO targets maximum recovered-data gap in time", "They address how quickly useful service returns and how far back recovered data may be."]
+    ]),
+    q("d5-l6-q2", "d5-l6", "quiz", "Applied", "An accidental deletion immediately propagates to all live database replicas. What was missing from a replicas-only recovery plan?", 1, [
+      ["A claim that all copies are automatically independent", "Replication can deliberately copy the same destructive update, so independence cannot be assumed."],
+      ["Recoverable earlier state and a tested restore process", "Backups or suitable protected recovery points address corruption and deletion that replication can spread."],
+      ["A larger prompt asking the model to remember the records", "Generated memory is not an authoritative replacement for lost records."],
+      ["More live copies receiving the same deletion", "Additional synchronized replicas can propagate the same failure rather than preserve an earlier state."]
+    ]),
+    q("d5-l6-q3", "d5-l6", "quiz", "Applied", "A hybrid assistant's local network fails. Its private inputs are not approved for an external provider. What is the best response?", 0, [
+      ["Use an evaluated permitted local/manual path or honestly report unavailability", "Recovery must preserve data movement permissions, even when an external service is available."],
+      ["Send every private input externally to meet a latency target", "A performance target does not authorize an unapproved transfer."],
+      ["Assume hybrid means every cloud service is approved", "The placement label does not establish permissions for each service and data flow."],
+      ["Remove credentials from the request but send all private records", "Removing a credential does not make sensitive record transfer authorized."]
+    ]),
+    q("d5-e01", "d5-l1", "exam", "Foundation", "A team needs to store versioned image datasets and model artifacts as individually addressed items. Which storage abstraction most directly fits?", 1, [
+      ["A semantic answer cache as the only persistent store", "Temporary answer reuse is not a durable source for datasets and release artifacts."],
+      ["Object storage with appropriate version, access, and recovery controls", "Individually addressed objects suit these artifacts, while actual durability and access requirements still need verification."],
+      ["Only each application replica's temporary memory", "Temporary local memory loses required artifacts when the instance disappears."],
+      ["A transaction status inferred from embeddings", "Similarity results do not provide the artifact storage or authoritative status required."]
+    ]),
+    q("d5-e02", "d5-l1", "exam", "Applied", "A routing service adds replicas, but job status is saved only in the replica that accepted the job. What is the main design risk?", 3, [
+      ["The model automatically becomes better calibrated", "Application state placement does not establish probability calibration."],
+      ["The vector dimension must increase", "Embedding dimensionality is unrelated to preserving job state across replicas."],
+      ["The system can no longer use object storage", "Adding application replicas does not prohibit appropriate artifact storage."],
+      ["Rerouting or instance loss can lose or contradict required job progress", "Unique local durable truth makes replaceability unsafe unless progress is preserved in an appropriate shared system."]
+    ]),
+    q("d5-e03", "d5-l1", "exam", "Applied", "A lost vector index must be rebuilt. Which evidence is most important for a compatible, safe reconstruction?", 0, [
+      ["Authorized source versions, transformation/embedding configuration, and current access/deletion state", "Rebuilding requires lineage and compatibility, while current access and legitimate deletion requirements must survive recovery."],
+      ["Only the application's color scheme", "Visual settings do not reproduce searchable representations or permission behavior."],
+      ["Any embedding model with the same vector length", "Equal dimensionality does not guarantee query and document vectors inhabit compatible learned spaces."],
+      ["Old final answers copied back as authoritative documents", "Generated outputs are not a trustworthy substitute for approved source material."]
+    ]),
+    q("d5-e04", "d5-l1", "exam", "Stretch", "A team proposes separate services for every small transformation despite low traffic and no need to scale them independently. What is the strongest architecture review?", 2, [
+      ["Approve because more network boundaries always improve reliability", "Every boundary adds dependencies and possible failures rather than automatically improving reliability."],
+      ["Reject all service boundaries in every future system", "Some boundaries earn their place through isolation, ownership, or independently constrained workloads."],
+      ["Compare with a simpler design using requirements, ownership, latency, and failure costs", "Complexity should be justified by the constraints and operational tradeoffs, not component count."],
+      ["Choose whichever design uses the most expensive hardware", "Price is not evidence that the architecture meets task and operating requirements."]
+    ]),
+    q("d5-e05", "d5-l2", "exam", "Foundation", "A small CPU-served classifier already meets quality and response targets at low volume. What evidence is needed before moving it to a GPU?", 2, [
+      ["Only the word accelerator in a product description", "A hardware category does not establish actual workload benefit."],
+      ["A claim that GPUs make predictions more correct", "Hardware does not automatically improve the learned decision's task quality."],
+      ["Comparable end-to-end workload measurements including transfer overhead and total cost", "The intended journey and demand determine whether GPU execution provides a justified benefit."],
+      ["The official badge level the GPU will award", "Infrastructure purchases do not confer exam awards or official readiness."]
+    ]),
+    q("d5-e06", "d5-l2", "exam", "Applied", "Ignoring metadata, 4 billion weights move from 16-bit to 8-bit representation. Using decimal units, what happens to raw weight storage?", 0, [
+      ["8 GB becomes 4 GB; total serving memory still needs measurement", "Each weight changes from two bytes to one, while non-weight allocations are excluded."],
+      ["8 GB becomes 4 GB, guaranteeing twice the end-to-end speed", "The storage arithmetic is right, but runtime operations, transfers, and other stages determine speed."],
+      ["4 GB becomes 8 GB", "This reverses the effect of reducing bits per weight."],
+      ["The model uses no memory because all weights are integers", "Integer representations still consume storage and working memory."]
+    ]),
+    q("d5-e07", "d5-l2", "exam", "Applied", "Weights fit in accelerator memory, but long prompts and many simultaneous generations cause allocation failures. Which diagnosis is best supported?", 3, [
+      ["The weight-size estimate must include every possible request automatically", "Raw weight storage deliberately excludes request-dependent state and working allocations."],
+      ["Current access checks can be removed to make the model fit", "Permissions must remain enforced and are not a remedy for serving memory pressure."],
+      ["The model has proven concept drift", "Memory exhaustion is an operational capacity symptom, not proof of a changed input-outcome relationship."],
+      ["Working buffers and concurrent sequence state, including KV cache, exceed remaining memory", "Context lengths and simultaneous sequences can make total serving memory much larger than weights alone."]
+    ]),
+    q("d5-e08", "d5-l2", "exam", "Stretch", "One model is divided across two devices to fit. A manager expects exactly twice the throughput. What is the strongest correction?", 1, [
+      ["Model parallelism is always the same as two independent serving replicas", "A divided model can require both devices for each request rather than independently handling two requests."],
+      ["Fitting and speedup are different goals; communication and the workload must be measured", "Splitting computation helps capacity but introduces inter-device work and does not guarantee linear throughput gains."],
+      ["Every extra device necessarily halves task accuracy", "There is no universal accuracy-halving rule for distributing computation."],
+      ["Data parallelism means storing half of each model on each device", "That describes model partitioning, whereas data parallelism distributes examples across model copies."]
+    ]),
+    q("d5-e09", "d5-l3", "exam", "Foundation", "A streaming assistant emits a first token in 100 ms but completes validation in 5 seconds. Which claim is defensible?", 0, [
+      ["Time to first token is 100 ms; complete validated-response time is 5 seconds", "These measurements describe different milestones and neither alone certifies answer correctness."],
+      ["The full validated answer took 100 ms", "The first emitted token precedes final output completion and validation."],
+      ["The answer is correct because the first token was quick", "Emission speed is not evidence of task correctness or grounding."],
+      ["The model trained for 5 seconds on this request", "Inference completion time does not establish that weights were updated."]
+    ]),
+    q("d5-e10", "d5-l3", "exam", "Applied", "A request runs two required independent checks in parallel, taking 300 ms and 500 ms, then performs 200 ms of validation. Ignoring other overhead, what is its latency?", 2, [
+      ["1,000 ms", "Adding both independent branches overcounts their overlapping execution."],
+      ["500 ms", "The slower parallel branch completes at 500 ms, but subsequent validation still takes 200 ms."],
+      ["700 ms", "Both branches must finish, so max(300, 500) + 200 = 700 ms under these assumptions."],
+      ["200 ms", "Validation cannot replace the required preceding checks."]
+    ]),
+    q("d5-e11", "d5-l3", "exam", "Applied", "A controlled test costs 18 units, including failed attempts, and produces 300 confirmed acceptable results in 60 seconds. Which summary is correct?", 1, [
+      ["300 results/s and 18 units/result", "The counts must be divided by their respective time and successful-result denominators."],
+      ["5 acceptable results/s and 0.06 units/acceptable result", "300/60 = 5 and 18/300 = 0.06; the quality claim is limited to the stated confirmed results."],
+      ["60 acceptable results/s and 5 units/acceptable result", "This confuses the test duration and derived throughput with cost per result."],
+      ["0.06 results/s and 5 units/acceptable result", "This reverses the correctly calculated useful rate and cost."]
+    ]),
+    q("d5-e12", "d5-l3", "exam", "Stretch", "A load test waits for each answer before sending the next request, uses only warm-cache short prompts, and reports a good p50. What is missing before a busy launch?", 3, [
+      ["Nothing; the test proves all traffic patterns meet p99 requirements", "One favorable median under serialized warm requests cannot establish production tails."],
+      ["Only a higher official practice badge score", "Exam classifications do not establish system capacity or benchmark representativeness."],
+      ["A rule that all model stages must run on the same GPU", "Hardware co-location is not a universal remedy for an unrepresentative benchmark."],
+      ["Realistic independent arrivals, bursts, lengths, misses, cold starts, failures, and tail/quality measures", "These conditions reveal queues and resource limits hidden by the favorable serialized test."]
+    ]),
+    q("d5-e13", "d5-l4", "exam", "Foundation", "What does language-model prefix caching most directly reuse?", 3, [
+      ["A guaranteed factually correct final answer", "Computation reuse does not verify facts or return an independently validated answer."],
+      ["A previous user's approval for a new payment", "Approval is bound to its operation and current conditions, not reusable model calculation state."],
+      ["A training label that automatically updates weights", "Prefix caching concerns inference calculations, not supervised learning updates."],
+      ["Compatible calculations for a matching token prefix", "Reusing earlier computation can save work but requires matching configuration and safe scope."]
+    ]),
+    q("d5-e14", "d5-l4", "exam", "Applied", "A compatible inference batch of 6 takes 120 ms. A request waits 30 ms for its batch. Ignoring other overhead, which statement is correct?", 1, [
+      ["Every request's latency is 20 ms", "120/6 is not the elapsed time each request waits for its batched result."],
+      ["Ideal stage throughput is 50 requests/s; this request waits at least 150 ms for its result", "6/0.12 = 50, while 30 ms collection plus 120 ms execution gives 150 ms before other stages."],
+      ["System throughput is guaranteed 50 requests/s under all workloads", "An ideal continuously occupied stage rate excludes routing, other bottlenecks, and arrival patterns."],
+      ["Batch collection time disappears from end-to-end latency", "The caller experiences waiting before execution as part of the journey."]
+    ]),
+    q("d5-e15", "d5-l4", "exam", "Applied", "A cached policy answer has an unexpired TTL, but its source policy was superseded this morning. What should happen?", 2, [
+      ["Return it because expiry is the only validity condition", "Source changes can invalidate an entry before its TTL ends."],
+      ["Keep it if the wording sounds confident", "Confidence does not establish current authoritative policy."],
+      ["Invalidate or reject affected reuse and check the current authorized source", "Cache validity depends on current facts and relevant versions, not just age."],
+      ["Treat the source change as proof that every answer needs model retraining", "Updating evidence or invalidating reuse can address source freshness without changing weights."]
+    ]),
+    q("d5-e16", "d5-l4", "exam", "Stretch", "A semantic cache treats 'approve 10 units' and 'do not approve 10 units' as similar. What is the most important safeguard?", 0, [
+      ["Require task-appropriate equivalence checks or avoid this reuse for consequential decisions", "Similarity can miss a negation that reverses the decision; execution still needs current authorization and approval."],
+      ["Raise hit rate by removing the word not from every key", "Discarding the negation deliberately makes opposite requests collide."],
+      ["Execute the old approved action whenever similarity is high", "A cached answer does not authorize replaying a consequential operation."],
+      ["Use a longer TTL to ensure similarity becomes correct", "Entry lifetime cannot repair a semantic mismatch."]
+    ]),
+    q("d5-e17", "d5-l5", "exam", "Foundation", "Which statement distinguishes sharding from replication?", 2, [
+      ["Both guarantee recoverable data before an accidental deletion", "Live copies may replicate deletion, and partitions are not recovery copies."],
+      ["Sharding keeps identical copies; replication partitions different records", "This reverses the two concepts."],
+      ["Sharding partitions data or work; replication maintains copies", "Partitions can distribute capacity, while copies can support availability or reads; neither alone proves restore capability."],
+      ["Sharding means increasing one processor's clock speed", "Increasing a local resource is vertical scaling, not partitioning the workload."]
+    ]),
+    q("d5-e18", "d5-l5", "exam", "Applied", "A queue holds 480 jobs. Workers sustainably finish 50 jobs/s while 30 new jobs/s continue to arrive. Under constant rates, how long does it take to drain?", 3, [
+      ["9.6 seconds", "480/50 ignores ongoing arrivals that consume part of completion capacity."],
+      ["16 seconds", "480/30 uses arrival rate rather than the positive net drain rate."],
+      ["The queue cannot drain while any arrivals continue", "It can drain when completion capacity exceeds the ongoing arrival rate."],
+      ["24 seconds", "The net drain rate is 50 − 30 = 20 jobs/s, so 480/20 = 24 seconds."]
+    ]),
+    q("d5-e19", "d5-l5", "exam", "Applied", "Five ready replicas each sustain 20 requests/s. One fails, and a shared provider permits only 70 requests/s. What is the ideal upper limit before other overhead?", 0, [
+      ["70 requests/s", "Remaining replicas total 80 requests/s, but the shared 70 requests/s limit is lower; actual performance still needs verification."],
+      ["80 requests/s regardless of the provider limit", "The four-replica sum does not bypass the shared dependency quota."],
+      ["100 requests/s", "This counts the failed replica and ignores the shared limit."],
+      ["350 requests/s", "A shared quota is not separately available in full to each replica."]
+    ]),
+    q("d5-e20", "d5-l5", "exam", "Stretch", "A known launch burst begins in one minute, but new model replicas need five minutes to load. Which plan most directly protects the launch?", 1, [
+      ["Rely only on scaling after CPU reaches 100%", "Reactive provisioning starts too late for the stated loading delay and may miss other bottlenecks."],
+      ["Pre-scale ready capacity where possible and enforce bounded admission and evaluated degradation", "Startup-aware capacity and overload safeguards address demand while new instances become ready."],
+      ["Accept unlimited jobs and label them all completed immediately", "Intake acknowledgment cannot truthfully represent completion and unbounded queues threaten deadlines."],
+      ["Retry every rejection indefinitely at every layer", "Uncontrolled retries amplify overload rather than supply missing ready capacity."]
+    ]),
+    q("d5-e21", "d5-l6", "exam", "Foundation", "Which placement concept most directly addresses a validated workload that must continue during internet disconnection near a sensor?", 1, [
+      ["An unapproved remote API with no local path", "A remote-only dependency cannot meet the stated disconnected requirement."],
+      ["Edge processing with approved local data, updates, and recovery behavior", "Near-source execution can support offline operation, while security and stale-state handling still matter."],
+      ["A claim that every private cloud is physically on-premises", "Private cloud describes dedicated use and can be hosted elsewhere."],
+      ["A larger cross-region transfer for every reading", "Mandatory remote transfers preserve the connectivity dependency rather than remove it."]
+    ]),
+    q("d5-e22", "d5-l6", "exam", "Applied", "An outage starts at 14:00. Recoverable state is from 13:52 and validated service resumes at 14:35. Objectives are RTO 30 minutes and RPO 10 minutes. What is the result?", 3, [
+      ["Both objectives met because machines restarted", "The required service was interrupted for 35 minutes, exceeding the 30-minute recovery target."],
+      ["RTO met; RPO missed", "This reverses the result: interruption is too long, but the eight-minute data gap is within target."],
+      ["Both objectives missed because any data gap is forbidden", "The stated RPO permits up to ten minutes; the observed eight-minute gap is within it."],
+      ["RTO missed by 5 minutes; RPO met with an 8-minute data gap", "14:00 to 14:35 is 35 minutes, while 13:52 to 14:00 is eight minutes under the stated recovery evidence."]
+    ]),
+    q("d5-e23", "d5-l6", "exam", "Applied", "Two regions have healthy inference replicas but both depend on one unavailable identity service. What does this show?", 2, [
+      ["Different regions guarantee every dependency is independent", "Geographic separation does not remove a shared required service."],
+      ["Identity checks should be silently disabled during failover", "An outage cannot justify bypassing required authentication or authorization."],
+      ["A shared dependency can defeat otherwise redundant serving capacity", "Useful recovery must include identity and other required dependencies, not just model hosts."],
+      ["The system has proven its backup restore meets RPO", "Replica health and identity failure provide no recovered-data-gap evidence."]
+    ]),
+    q("d5-e24", "d5-l6", "exam", "Stretch", "A hosting option has the lowest hourly compute price but needs more staff, idle recovery capacity, and costly data transfers. How should it be compared?", 0, [
+      ["Compare total cost of meeting quality, permissions, service, and tested recovery requirements", "Useful service cost includes operational labor, transfers, headroom, evaluation, and recovery, not only a processor rate."],
+      ["Select it solely from the lowest processor price", "A component price can conceal larger operating and dependency costs."],
+      ["Ignore recovery because an SLA guarantees no outages", "Agreements can have consequences for failure but do not eliminate outages or the need for recovery."],
+      ["Declare compliance from its cloud or on-premises label", "Placement labels do not establish current legal obligations or actual controls."]
     ])
   ];
 })();

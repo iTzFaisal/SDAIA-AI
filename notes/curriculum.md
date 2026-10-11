@@ -6,7 +6,7 @@ Reviewed: 2026-10-12. Confirmed exam booking: 5 December 2026 (provided by learn
 
 ## Release status
 
-Available: the foundation primer, 24 lessons across Domains 1, 2, 3, 4, 72 lesson questions, and a separate 24-question paper for each available domain. Domains 5, 6, 7 and all full weighted mocks are planned. Detailed topic lists are inferred curriculum choices, not a verified official syllabus.
+Available: the foundation primer, 30 lessons across Domains 1, 2, 3, 4, 5, 90 lesson questions, and a separate 24-question paper for each available domain. Domains 6, 7 and all full weighted mocks are planned. Detailed topic lists are inferred curriculum choices, not a verified official syllabus.
 
 ## Learning path
 
@@ -101,7 +101,7 @@ Keep models useful and dependable after launch.
 
 ### Domain 5: Architecture, Infrastructure, Performance & Scalability (12.6%)
 
-Status: Outline only; planned.
+Status: Lessons and paper available.
 
 Balance quality, speed, scale, availability, and cost.
 
@@ -189,13 +189,13 @@ Target: 10–14 hours.
 
 ### 2–8 Nov: Integration & architecture
 
-Study Domain 3: APIs and contracts, asynchronous work, failure handling, testing, adapters, safe retrieval/tools, and maintainability. Complete its separate paper. Domain 5 architecture, compute, latency, throughput, and scaling remain planned.
+Study Domain 3: contracts, asynchronous work, failure handling, testing, safe tools, and maintainability. Complete its separate paper. Preview Domain 5's architecture and compute lessons; finish Domain 4 before its later capacity and recovery cases.
 
 Target: 10–14 hours.
 
-### 9–15 Nov: MLOps, LLMOps & reliability
+### 9–15 Nov: Operations, performance & reliability
 
-Study Domain 4: reproducible releases, pipeline gates, serving and rollout strategies, drift and delayed labels, reliability targets, LLM tracing, rollback, and incidents. Complete its separate paper and explain missed decisions. Domain 5 infrastructure and scaling remain planned.
+Study Domain 4's releases, monitoring, and incidents, then Domain 5's performance measurements, batching/caching, capacity, placement, and recovery. Split the weekly hours between both domains, complete their separate papers, and use revision time to repair missed decisions rather than rushing.
 
 Target: 10–14 hours.
 
@@ -283,3 +283,21 @@ Target: 10–14 hours.
   Reviewed 12 October 2026: latency, traffic, errors, saturation, user-visible symptoms, and actionable alerts. AI quality requires additional task-specific evidence.
 - **Google SRE — Managing Incidents** (Learning reference): https://sre.google/sre-book/managing-incidents/
   Reviewed 12 October 2026: coordinated roles, mitigation, live incident records, communication, evidence preservation, and explicit handoffs. Operational guidance, not Saudi incident-reporting law.
+- **IBM Think — What is object storage?** (Learning reference): https://www.ibm.com/think/topics/object-storage
+  Reviewed 12 October 2026: object, file, and block storage concepts. Vendor educational material; no product recommendation, unlimited-capacity promise, or implementation tutorial is adopted.
+- **Google ML glossary — Accelerator chip and parallelism** (Learning reference): https://developers.google.com/machine-learning/glossary#accelerator-chip
+  Reviewed 12 October 2026: accelerators, data/model parallelism, and quantization. Hardware fit and speedups require measurement on the actual workload.
+- **Jacob et al. — Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference** (Research reference): https://arxiv.org/abs/1712.05877
+  Abstract reviewed 12 October 2026. Foundational 2017 integer-inference research, not a guarantee of identical quality or universal speedup for modern models.
+- **Hinton, Vinyals & Dean — Distilling the Knowledge in a Neural Network** (Research reference): https://arxiv.org/abs/1503.02531
+  Abstract reviewed 12 October 2026. Foundational 2015 teacher/student compression research; students need independent task evaluation.
+- **Google SRE — Handling Overload** (Learning reference): https://sre.google/sre-book/handling-overload/
+  Reviewed 12 October 2026: varying request cost, quotas, resource saturation, graceful rejection, and bounded retry load. Google's example limits are not universal defaults.
+- **Google SRE — Load Balancing in the Datacenter** (Learning reference): https://sre.google/sre-book/load-balancing-datacenter/
+  Reviewed 12 October 2026: readiness, draining, uneven request cost, routing, and the danger of fast-failing replicas. Concept-only application, not Google's implementation.
+- **Google SRE — Data Integrity** (Learning reference): https://sre.google/sre-book/data-integrity/
+  Reviewed 12 October 2026: replication is not recoverability, coordinated state, tested restores, and current deletion/access requirements. Reference examples do not establish Saudi retention law.
+- **IBM Think — What is cloud computing?** (Learning reference): https://www.ibm.com/think/topics/cloud-computing
+  Reviewed 12 October 2026: public/private/hybrid cloud, service models, and shared responsibilities. Vendor educational material, not provider-specific setup or a claim that cloud capacity is unlimited.
+- **IBM Think — What is disaster recovery?** (Learning reference): https://www.ibm.com/think/topics/disaster-recovery
+  Reviewed 12 October 2026: dependency mapping, recovery time/point objectives, failover, readiness, and exercises. Objectives are business choices; this reference is not Saudi law or an official exam specification.
