@@ -1,5 +1,15 @@
 # Validation
 
+## Domain 3 expansion — 12 October 2026
+
+- `npm run build`: 20 downloadable documents generated from shared content. Domain 3 adds Markdown notes, a separate paper/key, and three printable HTML equivalents. Domain 1–2 download URLs remain stable.
+- `npm test`: 12 unit tests passed. Checks cover 18 substantial lessons, 126 unique questions, 18 quiz and 24 reserved paper questions per available domain, option explanations, grading with original indexes, absolute deadlines, isolated exam attempts, legacy Domain 1 attempts, valid Domain 2–3 attempts, retry/deadline arithmetic, generated answer-key separation, prerequisite copy, source links, and classic offline script wiring.
+- Attached Chrome smoke suite: 177 checks passed over local HTTP, with no JavaScript page errors. It exercises all six Domain 3 lesson routes, domain-local navigation and rail selection, prerequisites, continued planned status for Domain 4, Domain 3 quiz/bookmark persistence, earlier-domain progress, legacy attempt resumption, isolated timed papers for all three available domains, reload-preserved deadlines/answers/flags, Domain 3 expiry, all 20 downloads, mobile routes at 390px, and printable controls.
+- Domain 3 desktop and mobile layouts were visually reviewed, including an additional desktop lesson view. Browser tests restore the kit's prior progress. No dependencies, remote assets, runtime imports, or runtime requests were added.
+- Comparison against the pre-expansion Git content confirmed all 12 Domain 1–2 lessons and all 84 existing questions are unchanged, including IDs, original option indexes, and explanations. Shared source/glossary/release updates regenerated the existing workbooks.
+- General engineering references were reviewed on 12 October 2026; official assessment facts were not newly verified. The lessons remain English-only and concept-focused, without programming exercises. Domain 3's paper is not a full mock, and its 45-minute default is an unofficial practice choice.
+- The temporary local test server was stopped afterward; use `npm start` for manual review. Changes were not committed, pushed, or deployed as part of this request.
+
 ## Domain 2 expansion — 12 October 2026
 
 - `npm run build`: 14 downloadable documents generated from shared content, including separate Domain 2 Markdown notes, paper, key, and printable HTML equivalents. Existing Domain 1 download URLs remain unchanged.

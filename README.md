@@ -5,13 +5,14 @@ Independent English, concept-focused preparation for the learner's **confirmed 5
 ## Available now
 
 - Seven-domain curriculum outline and an eight-week, 10–14-hour/week plan.
-- Beginner foundation primer and twelve lessons: six each in Domains 1 and 2.
+- Beginner foundation primer and eighteen lessons: six each in Domains 1–3.
 - Domain 2 covers AI approaches, neural networks, model families and transfer learning, tokens and embeddings, prompting/RAG/fine-tuning, generative evaluation, and bounded agents. No coding exercises.
-- 36 lesson questions and **two separate 24-question domain papers**, all with explanations for every option. Domain papers never combine question pools or reuse lesson checks.
+- Domain 3 covers APIs and data contracts, asynchronous jobs/events, timeouts and duplicate-safe retries, testing and reproducibility, safe retrieval/tools, adapters, compatibility, and maintainable handoffs. No coding exercises.
+- 54 lesson questions and **three separate 24-question domain papers**, all with explanations for every option. Domain papers never combine question pools or reuse lesson checks.
 - Untimed learning and timed paper modes, shuffled question/option order, saved attempts, lesson bookmarks, reading progress, mistake review, and glossary search.
 - Downloadable Markdown notes, separate practice paper and answer key, and printable HTML documents that can be saved as PDF.
 
-**Domains 3–7 and three full weighted mocks are planned, not available.** Neither single-domain paper is a full seven-domain mock. Topic coverage is our interpretation of the broad supplied domains, not a verified exhaustive expert-level syllabus. No passing score or official badge cutoff is invented.
+**Domains 4–7 and three full weighted mocks are planned, not available.** No single-domain paper is a full seven-domain mock. Topic coverage is our interpretation of the broad supplied domains, not a verified exhaustive expert-level syllabus. No passing score or official badge cutoff is invented.
 
 ## Open it
 
@@ -35,6 +36,8 @@ Open `notes/printable-workbook.html` and choose **Print / save as PDF**. Separat
 
 Domain 2 starts at `index.html#domain/d2`; its paper is at `index.html#practice/d2`. Downloads are `notes/domain-2-study-notes.md`, `notes/domain-2-practice-paper.md`, and `notes/domain-2-answer-key.md`. Printable versions are `notes/domain-2-printable-workbook.html`, `notes/domain-2-printable-practice-paper.html`, and `notes/domain-2-printable-answer-key.html`. Keep the answer key separate until you finish the paper.
 
+Domain 3 starts at `index.html#domain/d3`; its paper is at `index.html#practice/d3`. Downloads are `notes/domain-3-study-notes.md`, `notes/domain-3-practice-paper.md`, and `notes/domain-3-answer-key.md`. Printable versions are `notes/domain-3-printable-workbook.html`, `notes/domain-3-printable-practice-paper.html`, and `notes/domain-3-printable-answer-key.html`. Read Domains 1–2 first and keep the key separate until you finish the paper.
+
 ## Content maintenance
 
 - `content/kit.js`: curriculum, schedule, lessons, glossary, and provenance.
@@ -50,7 +53,7 @@ npm run build
 npm test
 ```
 
-The notes build uses the website's shared content, preventing manual divergence. The 14 generated documents are deliberately included so recipients do not need Node.js. Study progress is saved only under `ai-engineer-study-kit-v1`; reset does not clear other sites' storage. Existing Domain 1 IDs, saved attempts, and download URLs remain valid. A timed attempt uses an absolute deadline; reloads do not restart the timer. If the page is closed, expiry is processed when it is reopened. Only the latest attempt has detailed results, with the latest 30 score summaries retained.
+The notes build uses the website's shared content, preventing manual divergence. The 20 generated documents are deliberately included so recipients do not need Node.js. Study progress is saved only under `ai-engineer-study-kit-v1`; reset does not clear other sites' storage. Existing Domain 1–2 IDs, saved attempts, and download URLs remain valid. A timed attempt uses an absolute deadline; reloads do not restart the timer. If the page is closed, expiry is processed when it is reopened. Only the latest attempt has detailed results, with the latest 30 score summaries retained.
 
 ## Source and assessment boundaries
 

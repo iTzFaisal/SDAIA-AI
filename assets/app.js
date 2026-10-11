@@ -10,7 +10,7 @@
   const availableDomains = kit.domains.filter(d => d.status === "available");
   const domainById = new Map(kit.domains.map(d => [d.id, d]));
   const lessonsFor = id => kit.lessons.filter(l => l.domain === id);
-  const availableLabel = `Domains ${availableDomains.map(d => d.number).join(" and ")}`;
+  const availableLabel = `Domains ${availableDomains.map(d => d.number).join(", ")}`;
   const plannedCount = kit.domains.length - availableDomains.length;
   let state = { completed: [], bookmarks: [], mistakes: [], history: [], active: null, lastResult: null };
   let storageAvailable = true;
@@ -75,8 +75,9 @@
     const d = kit.domains.find(item => item.id === id);
     if (!d) return notFound();
     if (d.status !== "available") return heading(d.title) + notice("This domain has an outline only. Its lessons and exam are planned.") + list(d.topics) + link("curriculum", "Back to curriculum");
+    const prerequisite = d.prerequisite || (d.number === 2 ? "Read the foundation primer and Domain 1, especially parameters, loss, validation, and leakage." : "");
     return heading(d.title, `${lessonsFor(id).length} lessons. ${d.summary} Work the examples on paper; there are no coding exercises.`) +
-      `<div class="lesson-meta">${pill(`${d.weight}% of the supplied exam blueprint`)}${pill("Original proposed curriculum")}</div>${d.number === 2 ? notice("Before you begin: read the foundation primer and Domain 1, especially parameters, loss, validation, and leakage.") : ""}<h2>Learning outcomes</h2>${list(d.objectives)}<ol class="lesson-list">${lessonsFor(id).map((l, i) => `<li><div><a href="#lesson/${l.id}">${i + 1}. ${esc(l.title)}</a><small>${l.minutes} min reading estimate · ${questionsFor("quiz", l.id).length} quiz questions</small></div>${state.completed.includes(l.id) ? pill("Read", "completed") : pill("Not marked read")}</li>`).join("")}</ol><h2>Revision sheet</h2>${list(kit.revisions[id].map(([term, text]) => `${term}: ${text}`))}<div class="actions">${link(`practice/${id}`, "Take the separate domain paper", "button primary")}${link("downloads", "Get the notes")}</div>` + notice(`Completing these lessons covers our proposed Domain ${d.number} learning objectives. It does not establish that every possible official Expert-level topic or question has been covered.`);
+      `<div class="lesson-meta">${pill(`${d.weight}% of the supplied exam blueprint`)}${pill("Original proposed curriculum")}</div>${prerequisite ? notice(`Before you begin: ${prerequisite}`) : ""}<h2>Learning outcomes</h2>${list(d.objectives)}<ol class="lesson-list">${lessonsFor(id).map((l, i) => `<li><div><a href="#lesson/${l.id}">${i + 1}. ${esc(l.title)}</a><small>${l.minutes} min reading estimate · ${questionsFor("quiz", l.id).length} quiz questions</small></div>${state.completed.includes(l.id) ? pill("Read", "completed") : pill("Not marked read")}</li>`).join("")}</ol><h2>Revision sheet</h2>${list(kit.revisions[id].map(([term, text]) => `${term}: ${text}`))}<div class="actions">${link(`practice/${id}`, "Take the separate domain paper", "button primary")}${link("downloads", "Get the notes")}</div>` + notice(`Completing these lessons covers our proposed Domain ${d.number} learning objectives. It does not establish that every possible official Expert-level topic or question has been covered.`);
   }
   function lesson(id) {
     const l = lessonById.get(id);

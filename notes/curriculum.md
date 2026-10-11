@@ -6,7 +6,7 @@ Reviewed: 2026-10-12. Confirmed exam booking: 5 December 2026 (provided by learn
 
 ## Release status
 
-Available: the foundation primer, 12 lessons across Domains 1 and 2, 36 lesson questions, and a separate 24-question paper for each available domain. Domains 3–7 and all full weighted mocks are planned. Detailed topic lists are inferred curriculum choices, not a verified official syllabus.
+Available: the foundation primer, 18 lessons across Domains 1, 2, 3, 54 lesson questions, and a separate 24-question paper for each available domain. Domains 4, 5, 6, 7 and all full weighted mocks are planned. Detailed topic lists are inferred curriculum choices, not a verified official syllabus.
 
 ## Learning path
 
@@ -57,7 +57,7 @@ Understand how modern AI represents information and produces outputs.
 
 ### Domain 3: AI Software Engineering & Integration (14.0%)
 
-Status: Outline only; planned.
+Status: Lessons and paper available.
 
 Make AI a reliable part of a larger application.
 
@@ -189,7 +189,7 @@ Target: 10–14 hours.
 
 ### 2–8 Nov: Integration & architecture
 
-Planned: APIs, testing, data contracts, system design, compute, latency, throughput, and scaling.
+Study Domain 3: APIs and contracts, asynchronous work, failure handling, testing, adapters, safe retrieval/tools, and maintainability. Complete its separate paper. Domain 5 architecture, compute, latency, throughput, and scaling remain planned.
 
 Target: 10–14 hours.
 
@@ -257,3 +257,15 @@ Target: 10–14 hours.
   Abstract reviewed 12 October 2026. Foundational 2020 RAG research; our lessons describe a general retrieval-and-generation workflow, not a replication of this paper.
 - **NIST AI RMF — Generative AI Profile (600-1)** (Further reading): https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence
   Publication page reviewed 12 October 2026. Voluntary cross-sector risk-management guidance, not Saudi law or an official SDAIA syllabus.
+- **MDN — HTTP response status codes** (Learning reference): https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status
+  Reviewed 12 October 2026: success, accepted-but-incomplete work, authentication, authorization, rate limits, and server errors. Protocol success does not establish AI answer correctness.
+- **JSON Schema — Object reference** (Learning reference): https://json-schema.org/understanding-json-schema/reference/object
+  Reviewed 12 October 2026: property types, required fields, additional properties, and null versus missing. Lessons teach contracts conceptually, not schema implementation.
+- **Amazon Builders' Library — Timeouts, retries, and backoff with jitter** (Learning reference): https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/
+  Reviewed 12 October 2026: ambiguous timeout outcomes, idempotency, bounded retries, backoff, jitter, and retry amplification. General engineering guidance, not a requirement to use AWS.
+- **Software Engineering at Google — Testing Overview** (Learning reference): https://abseil.io/resources/swe-book/html/ch11.html
+  Reviewed 12 October 2026: test scope versus size, controlled environments, failure tests, test doubles, and coverage limitations. Our lessons do not prescribe a universal test-count ratio.
+- **OWASP LLM Top 10 — LLM06:2025 Excessive Agency** (Learning reference): https://genai.owasp.org/llmrisk/llm062025-excessive-agency/
+  Reviewed 12 October 2026: narrow tools, least privilege, user-context authorization, and approval for high-impact actions. Security guidance, not Saudi law or official exam objectives.
+- **Google Engineering Practices — What to look for in a code review** (Learning reference): https://google.github.io/eng-practices/review/reviewer/looking-for.html
+  Reviewed 12 October 2026: design, functionality, complexity, useful tests, naming, comments, and documentation. Applied here as no-coding design-review concepts.

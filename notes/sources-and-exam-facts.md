@@ -44,7 +44,19 @@ Reviewed: 2026-10-12. Confirmed exam booking: 5 December 2026 (provided by learn
   Abstract reviewed 12 October 2026. Foundational 2020 RAG research; our lessons describe a general retrieval-and-generation workflow, not a replication of this paper.
 - **NIST AI RMF — Generative AI Profile (600-1)** (Further reading): https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence
   Publication page reviewed 12 October 2026. Voluntary cross-sector risk-management guidance, not Saudi law or an official SDAIA syllabus.
+- **MDN — HTTP response status codes** (Learning reference): https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status
+  Reviewed 12 October 2026: success, accepted-but-incomplete work, authentication, authorization, rate limits, and server errors. Protocol success does not establish AI answer correctness.
+- **JSON Schema — Object reference** (Learning reference): https://json-schema.org/understanding-json-schema/reference/object
+  Reviewed 12 October 2026: property types, required fields, additional properties, and null versus missing. Lessons teach contracts conceptually, not schema implementation.
+- **Amazon Builders' Library — Timeouts, retries, and backoff with jitter** (Learning reference): https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/
+  Reviewed 12 October 2026: ambiguous timeout outcomes, idempotency, bounded retries, backoff, jitter, and retry amplification. General engineering guidance, not a requirement to use AWS.
+- **Software Engineering at Google — Testing Overview** (Learning reference): https://abseil.io/resources/swe-book/html/ch11.html
+  Reviewed 12 October 2026: test scope versus size, controlled environments, failure tests, test doubles, and coverage limitations. Our lessons do not prescribe a universal test-count ratio.
+- **OWASP LLM Top 10 — LLM06:2025 Excessive Agency** (Learning reference): https://genai.owasp.org/llmrisk/llm062025-excessive-agency/
+  Reviewed 12 October 2026: narrow tools, least privilege, user-context authorization, and approval for high-impact actions. Security guidance, not Saudi law or official exam objectives.
+- **Google Engineering Practices — What to look for in a code review** (Learning reference): https://google.github.io/eng-practices/review/reviewer/looking-for.html
+  Reviewed 12 October 2026: design, functionality, complexity, useful tests, naming, comments, and documentation. Applied here as no-coding design-review concepts.
 
 ## Interpretation boundaries
 
-The domain weights come from a learner-supplied image. Assessment methodology was read from the rendered official Athka X public page on 11 October 2026; the Domain 2 learning references were reviewed on 12 October. Google, Berkeley, research, and NIST references support general learning and are not SDAIA exam objectives. The NIST profile is voluntary guidance, not Saudi law. The lessons and practice questions are original explanations and scenarios, not copied exam questions. The detailed topics, difficulty labels, suggested practice timing, and mock blueprint are our design choices. No numerical passing threshold or badge-level cutoff is invented.
+The domain weights come from a learner-supplied image. Assessment methodology was read from the rendered official Athka X public page on 11 October 2026; the Domain 2 and Domain 3 learning references were reviewed on 12 October. Google, Berkeley, MDN, JSON Schema, Amazon, research, OWASP, and NIST references support general learning and are not SDAIA exam objectives. The NIST profile and OWASP guidance are not Saudi law; no cloud vendor or software library is required for these concept-only lessons. The lessons and practice questions are original explanations and scenarios, not copied exam questions. The detailed topics, difficulty labels, suggested practice timing, and mock blueprint are our design choices. No numerical passing threshold or badge-level cutoff is invented.
