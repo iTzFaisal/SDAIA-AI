@@ -1,0 +1,56 @@
+# AI Engineer study kit
+
+Independent English, concept-focused preparation for the learner's **confirmed 5 December 2026 exam**, designed to be shared with friends who have no AI background.
+
+## This first release
+
+- Seven-domain curriculum outline and an eight-week, 10–14-hour/week plan.
+- Beginner foundation primer and six complete Domain 1 sample lessons.
+- 18 lesson questions and a **separate 24-question Domain 1 paper**, all with explanations for every option.
+- Untimed learning and timed paper modes, shuffled question/option order, saved attempts, lesson bookmarks, reading progress, mistake review, and glossary search.
+- Downloadable Markdown notes, separate practice paper and answer key, and printable HTML documents that can be saved as PDF.
+
+**Domains 2–7 and three full weighted mocks are planned, not available.** The Domain 1 paper is not a full seven-domain mock. Topic coverage is our interpretation of the broad published domain, not a verified exhaustive expert-level syllabus. No passing score or official badge cutoff is invented.
+
+## Open it
+
+Live site: **https://itzfaisal.github.io/SDAIA-AI/**
+
+Open `index.html` directly in a browser. The kit has no package dependencies, accounts, API keys, remote fonts, or backend. Files are already generated in `notes/`.
+
+For a more predictable local origin and saved progress, with Node.js 20+:
+
+```sh
+npm start
+```
+
+Then visit **http://127.0.0.1:4173**. The development server binds only to the local machine. If the port is busy, set `PORT=4174 npm start`.
+
+## Share or print
+
+Share the live site or the entire folder, including `assets/`, `content/`, and `notes/`. GitHub Pages automatically rebuilds, tests, and deploys the static site whenever changes are pushed to `main`, using `.github/workflows/pages.yml`. Friends' progress is independent and stays in their own browser; it does not sync across devices, browsers, or origins. File-based local storage behavior can differ by browser.
+
+Open `notes/printable-workbook.html` and choose **Print / save as PDF**. Separate printable paper and key are `notes/printable-practice-paper.html` and `notes/printable-answer-key.html`. These HTML files need no network to read; source links naturally need internet access.
+
+## Content maintenance
+
+- `content/kit.js`: curriculum, schedule, lessons, glossary, and provenance.
+- `content/questions.js`: original questions in separate quiz and exam pools.
+- `assets/app.js`: website and browser-only progress.
+- `assets/core.js`: tested shuffling, grading, deadline, and saved-attempt validation.
+- `docs/DESIGN.md`: visual design direction.
+
+After editing content:
+
+```sh
+npm run build
+npm test
+```
+
+The notes build uses the website's shared content, preventing manual divergence. Generated notes are deliberately included so recipients do not need Node.js. Study progress is saved only under `ai-engineer-study-kit-v1`; reset does not clear other sites' storage. A timed attempt uses an absolute deadline; reloads do not restart the timer. If the page is closed, expiry is processed when it is reopened. Only the latest attempt has detailed results, with the latest 30 score summaries retained.
+
+## Source and assessment boundaries
+
+The local `AI Engineer Badge.png` supplied by the learner gives domain names and weights. The public [Athka X page](https://athkax.sdaia.gov.sa/badges/61af22d9-2e3e-4412-9675-e8b4504a7d20), read on 11 October 2026, describes in-person assessment and performance-based Assistant/Associate/Expert awards, considering overall score and thresholds at question levels. Numerical cutoffs, question count, duration, and detailed official objectives were not verified. Our practice difficulty labels are not those official levels.
+
+General learning references are documented in `notes/sources-and-exam-facts.md`. Lessons and questions are original instructional material, not actual exam questions. The badge image is kept as supplied evidence, not used as the site's branding. This kit is not affiliated with or endorsed by SDAIA. Follow your appointment's official instructions.
