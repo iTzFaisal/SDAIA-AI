@@ -1,6 +1,6 @@
 (() => {
   const q = (id, lesson, pool, difficulty, stem, answer, choices) => ({
-    id, domain: "d1", lesson, pool, difficulty, stem, answer,
+    id, domain: lesson.split("-")[0], lesson, pool, difficulty, stem, answer,
     options: choices.map(([text, explanation]) => ({ text, explanation }))
   });
   globalThis.STUDY_KIT.questions = [
@@ -256,6 +256,259 @@
       ["Abandon all slice evaluation", "Slice evaluation matters; strengthen the evidence instead."],
       ["Request more representative paired evidence and quantify uncertainty", "A small observed difference does not establish a stable real-world gain."],
       ["Tune on those final-test cases until all are correct", "That overfits the evaluation instead of demonstrating generalization."]
+    ]),
+    q("d2-l1-q1", "d2-l1", "quiz", "Foundation", "A fee is defined exactly by a published weight table. Which is the most defensible starting approach?", 1, [
+      ["Train a text generator on old invoices", "A generator may approximate a rule that is already explicitly known."],
+      ["Apply and test the explicit fee rules", "Known stable requirements can be implemented deterministically without learning them."],
+      ["Cluster invoices and use the closest group's average fee", "Group averages do not enforce the authoritative table."],
+      ["Learn fee actions from customer satisfaction rewards", "Reward learning adds unnecessary uncertainty to a fixed calculation."]
+    ]),
+    q("d2-l1-q2", "d2-l1", "quiz", "Applied", "Route X has two roads totaling 18 minutes; route Y has three totaling 11 minutes. What should a lowest-time planner prefer?", 2, [
+      ["X, because it has fewer steps", "Fewest steps and lowest cost differ when road times differ."],
+      ["X, because breadth-first search always minimizes minutes", "Breadth-first search minimizes steps, not arbitrary unequal costs."],
+      ["Y, because the chosen path cost is travel time", "Eleven minutes is lower than eighteen under the stated objective."],
+      ["Either, because both reach the same goal", "Goal attainment alone does not make path costs equivalent."]
+    ]),
+    q("d2-l1-q3", "d2-l1", "quiz", "Applied", "A warehouse agent is rewarded only for parcels moved per hour. What concern should be checked first?", 0, [
+      ["It may increase throughput by sacrificing safety or parcel quality", "The reward omits important constraints and can incentivize harmful shortcuts."],
+      ["The reward already measures every business requirement", "Throughput alone does not encode safety or quality."],
+      ["It must be supervised classification because numbers are used", "Numerical rewards do not make an action-learning task classification."],
+      ["More exploration alone will fix the objective definition", "Exploration changes experience, not what the reward encourages."]
+    ]),
+    q("d2-l2-q1", "d2-l2", "quiz", "Foundation", "A neuron's weighted sum is −2.5. What does ReLU return?", 3, [
+      ["−2.5", "This is the unmodified sum, not max(0, z)."],
+      ["2.5", "ReLU is not an absolute-value function."],
+      ["1", "ReLU does not turn every nonzero input into one."],
+      ["0", "ReLU returns max(0, −2.5), which is zero."]
+    ]),
+    q("d2-l2-q2", "d2-l2", "quiz", "Foundation", "What is the specific role of backpropagation in a usual training cycle?", 0, [
+      ["Compute gradients of the loss with respect to parameters", "The optimizer then uses these gradients to perform parameter updates."],
+      ["Choose the final test examples with the highest scores", "Test selection is not a gradient computation and must not favor scores."],
+      ["Retrieve documents for the input prompt", "Retrieval is a separate system operation, not backpropagation."],
+      ["Generate predictions without a loss or parameter derivatives", "That describes forward computation or inference rather than backpropagation."]
+    ]),
+    q("d2-l2-q3", "d2-l2", "quiz", "Applied", "There are 200 training examples and batches of 50, with no dropped examples. How many batches are in one epoch?", 2, [
+      ["1", "One epoch is a full pass, not necessarily one batch."],
+      ["50", "Fifty is the number of examples per batch."],
+      ["4", "Two hundred divided by fifty gives four batches per complete pass."],
+      ["200", "Two hundred counts examples rather than batches."]
+    ]),
+    q("d2-l3-q1", "d2-l3", "quiz", "Foundation", "Which description most directly characterizes a CNN?", 1, [
+      ["Updating a hidden state one sequence step at a time", "This describes a recurrent architecture more directly."],
+      ["Applying shared learned filters across local regions", "Convolution exploits locality and weight sharing, such as in images."],
+      ["Searching a route graph by accumulated road cost", "That describes uniform-cost search, not a neural architecture."],
+      ["Generating text from a database without learned parameters", "This does not describe convolutional representation learning."]
+    ]),
+    q("d2-l3-q2", "d2-l3", "quiz", "Applied", "Why use a causal mask when training an autoregressive language model?", 3, [
+      ["To remove all word-order information", "Position information remains important for sequence interpretation."],
+      ["To ensure every generated fact is supported", "Masking controls available positions, not factual verification."],
+      ["To let every position inspect its future target", "This would expose information absent at generation time."],
+      ["To prevent prediction from using future tokens", "Training must respect the information boundary of next-token generation."]
+    ]),
+    q("d2-l3-q3", "d2-l3", "quiz", "Applied", "A pretrained vision backbone is frozen while a new classification head is trained. What changes?", 0, [
+      ["The head's parameters change; the frozen backbone's do not", "Freezing selected parameters does not prevent training a separate head."],
+      ["Neither component can change because the backbone is frozen", "The head remains trainable under the stated setup."],
+      ["All backbone weights change at every step", "That contradicts the specified frozen backbone."],
+      ["Only the evaluation labels change", "Training should fit parameters, not rewrite held-out answers."]
+    ]),
+    q("d2-l4-q1", "d2-l4", "quiz", "Foundation", "Which statement about tokens is correct?", 2, [
+      ["Each token always corresponds to exactly one English word", "Tokens may be subwords, characters, or punctuation."],
+      ["Nearby token ID values always mean similar concepts", "IDs identify vocabulary entries, not semantic distances."],
+      ["The token count depends on the tokenizer and the text", "Different tokenizers can split the same text into different units."],
+      ["A token is a verified factual claim", "Tokens are processing units, not evidence of truth."]
+    ]),
+    q("d2-l4-q2", "d2-l4", "quiz", "Applied", "An answer invents a policy date at high temperature. What can lowering temperature establish?", 1, [
+      ["The date must become correct", "Sampling changes cannot supply missing authoritative evidence."],
+      ["Choices may become less varied, but the date still needs verification", "Lower temperature concentrates choices without certifying factual content."],
+      ["The model permanently learns the current policy", "Decoding settings do not update learned parameters."],
+      ["The context window becomes larger", "Temperature does not increase the token budget."]
+    ]),
+    q("d2-l4-q3", "d2-l4", "quiz", "Applied", "A retrieval query uses embedding model B while indexed documents use unrelated model A of the same vector length. What is the issue?", 3, [
+      ["Equal length guarantees valid similarity comparisons", "Matching dimensions do not align independently learned coordinate spaces."],
+      ["Token IDs should be compared instead", "Vocabulary IDs are not a substitute for compatible semantic representations."],
+      ["Changing only temperature will align the vectors", "Generation sampling does not transform embedding coordinates."],
+      ["The spaces may be incompatible; use a compatible query/document setup", "Retrieval needs representations designed to be compared in the same space."]
+    ]),
+    q("d2-l5-q1", "d2-l5", "quiz", "Foundation", "Adding three demonstrations to a prompt without training is what kind of adaptation?", 0, [
+      ["Few-shot prompting", "The demonstrations steer inference within context without updating weights."],
+      ["Full-weight fine-tuning", "Fine-tuning requires parameter updates from training."],
+      ["Training a new tokenizer", "Examples in a prompt do not fit a token vocabulary."],
+      ["Distillation into a smaller model", "No student model is trained in the described process."]
+    ]),
+    q("d2-l5-q2", "d2-l5", "quiz", "Applied", "An assistant must answer from approved policies that change daily. Which lever best addresses freshness?", 2, [
+      ["Increase temperature to introduce new facts", "Varied sampling cannot provide authoritative updates."],
+      ["Fine-tune once and stop updating the knowledge source", "One training event does not track daily policy changes."],
+      ["Retrieve current approved policy evidence for each answer", "RAG can supply updated evidence without retraining the generator each day."],
+      ["Add a longer style instruction with no policy content", "Style instructions do not supply current policy facts."]
+    ]),
+    q("d2-l5-q3", "d2-l5", "quiz", "Applied", "The right clause is retrieved, but the generated answer adds an exception absent from it. What should be investigated most directly?", 1, [
+      ["Whether every query needs a larger vector dimension", "The needed evidence is already found; dimension is not the direct diagnosis."],
+      ["Evidence use, answer constraints, and citation support", "The failure occurs when forming an unsupported claim from available evidence."],
+      ["Whether the answer needs more confident wording", "Confidence cannot make the invented exception supported."],
+      ["Whether retrieving no passages is preferable", "Removing the correct evidence does not fix unsupported generation."]
+    ]),
+    q("d2-l6-q1", "d2-l6", "quiz", "Foundation", "An answer accurately quotes an obsolete policy passage. Which distinction matters?", 3, [
+      ["Faithfulness guarantees present-day correctness", "A faithful answer can inherit outdated or incorrect source content."],
+      ["Obsolete passages cannot have embeddings", "Any passage can be represented; representation does not certify freshness."],
+      ["Text overlap alone proves current authority", "Overlap says nothing about a policy's effective date."],
+      ["Agreement with supplied evidence differs from correctness for today's task", "Evaluate faithfulness and factual currency as separate properties."]
+    ]),
+    q("d2-l6-q2", "d2-l6", "quiz", "Applied", "An assistant answers 20 of 50 questions and 15 answers pass the rubric. What are answer rate and quality among answers?", 0, [
+      ["40% answer rate; 75% of answers pass", "Answer rate = 20/50; quality among answers = 15/20."],
+      ["75% answer rate; 40% of answers pass", "This reverses the two fractions and their meanings."],
+      ["30% answer rate; 100% of answers pass", "15/50 is overall passing coverage, not answer rate."],
+      ["Both 75%", "Only conditional quality uses the twenty answered cases as its denominator."]
+    ]),
+    q("d2-l6-q3", "d2-l6", "quiz", "Stretch", "A draft-only support agent can access an unrestricted payment tool. Its prompt says never issue refunds. Which safeguard is strongest?", 2, [
+      ["Repeat the prohibition in a longer prompt", "Text instructions do not remove the tool's effective authority."],
+      ["Trust the agent's final summary as an audit log", "A summary can omit or misdescribe actual tool side effects."],
+      ["Remove payment permission and enforce allowed actions in the application", "A draft-only task does not require payment authority; permissions must be enforced externally."],
+      ["Use temperature zero without changing permissions", "Less sampling variety does not create an authorization boundary."]
+    ]),
+    // Domain 2 paper: distinct scenarios, never reused in lesson quizzes.
+    q("d2-e01", "d2-l1", "exam", "Foundation", "A planner represents a robot's location and battery charge, permitted moves, and a destination. What is battery charge in this formulation?", 2, [
+      ["A generated answer's citation", "Battery charge is part of the modeled situation, not a source reference."],
+      ["A neural network learning rate", "Learning rate configures parameter updates, not the robot's current condition."],
+      ["Part of the search state", "Charge can affect feasible actions and therefore belongs in the state representation."],
+      ["The final reward for every episode", "Current charge is not necessarily the reward or the goal value."]
+    ]),
+    q("d2-e02", "d2-l1", "exam", "Applied", "A finite route graph has varying nonnegative toll costs. The objective is least total toll, not fewest roads. Which search priority fits most directly?", 0, [
+      ["Lowest accumulated path cost, with correct repeated-state handling", "Uniform-cost search orders paths by their cost rather than their step count."],
+      ["Deepest path discovered so far", "Depth-first exploration does not generally minimize total toll."],
+      ["Fewest roads without considering tolls", "Shallowest paths can be more expensive under unequal toll costs."],
+      ["Highest estimated remaining cost only", "Favoring high remaining cost does not target the cheapest route."]
+    ]),
+    q("d2-e03", "d2-l1", "exam", "Applied", "A team calls a support system reinforcement learning solely because it makes several tool calls in sequence. Which response is best?", 3, [
+      ["Sequential calls alone prove reward-based learning", "A workflow can be sequential without learning from rewards."],
+      ["Any system with a language model must use reinforcement learning at runtime", "A trained model can be used without runtime reward-driven updates."],
+      ["Tool calls make the system a convolutional network", "Tool use says nothing about convolutional architecture."],
+      ["Ask whether an action policy is learned from reward feedback", "Reward-based policy learning, not mere sequence length, is the defining distinction."]
+    ]),
+    q("d2-e04", "d2-l1", "exam", "Stretch", "A team uses A* with a guessed remaining-cost heuristic that sometimes overestimates. It claims lowest-cost results are guaranteed just because f = g + h. What is the best assessment?", 1, [
+      ["The formula alone proves optimality", "Optimality also depends on heuristic properties and search handling."],
+      ["The guarantee is not established; check heuristic and algorithm conditions", "An overestimating guess lacks the usual admissibility basis for the claim."],
+      ["Overestimation always improves optimality", "It can steer search away from the truly cheapest route."],
+      ["Replacing path costs with model confidence preserves the objective", "Confidence is not the stated route-cost measure."]
+    ]),
+    q("d2-e05", "d2-l2", "exam", "Foundation", "A network stacks weighted sums and biases but no nonlinear hidden activations. What can be said about the resulting mapping?", 1, [
+      ["Every extra layer necessarily introduces nonlinear structure", "Composing linear/affine transformations alone remains linear/affine."],
+      ["It is still an affine mapping despite the additional layers", "Weighted sums and biases compose into another weighted sum plus bias."],
+      ["It must be a retrieval system rather than a model", "The activation choice does not define document retrieval."],
+      ["It is automatically calibrated", "Neither depth nor linearity establishes probability reliability."]
+    ]),
+    q("d2-e06", "d2-l2", "exam", "Applied", "Under simple gradient descent, a weight is 0.8, its gradient is −0.3, and learning rate is 0.2. What is its updated value?", 3, [
+      ["0.74", "This adds learning rate times gradient instead of subtracting it."],
+      ["0.5", "This subtracts the gradient magnitude without applying the learning rate."],
+      ["0.06", "This is the magnitude of the step, not the new weight."],
+      ["0.86", "New weight = 0.8 − 0.2 × (−0.3) = 0.86."]
+    ]),
+    q("d2-e07", "d2-l2", "exam", "Applied", "A team changes only the inference prompt of a frozen deployed model. Which statement about the model's learned weights is justified?", 0, [
+      ["They are unchanged by ordinary prompting", "Context can affect output without a gradient-based parameter update."],
+      ["They are retrained once for each token in the prompt", "Token processing is not itself a training update."],
+      ["They become permanently adapted to that user's examples", "Prompt context is not permanent weight learning."],
+      ["They shrink because fewer training epochs are used", "Inference prompting does not change the trained parameter count."]
+    ]),
+    q("d2-e08", "d2-l2", "exam", "Stretch", "On an audited neural-network split, training loss keeps improving but validation loss worsens late in training. Which action fits the evidence?", 2, [
+      ["Select the final epoch solely because training loss is lowest", "This ignores the observed deterioration on unseen development cases."],
+      ["Tune dropout on the final test until its score peaks", "That would contaminate final evaluation."],
+      ["Consider validation-based early stopping or regularization", "The pattern suggests overfitting; select remedies using validation, not the final test."],
+      ["Declare vanishing gradients from the generalization gap alone", "A train/validation gap does not specifically diagnose vanishing gradients."]
+    ]),
+    q("d2-e09", "d2-l3", "exam", "Foundation", "Which family directly carries a hidden state from one sequence step to the next?", 3, [
+      ["A road-search heuristic", "A heuristic estimates remaining cost rather than defining recurrent computation."],
+      ["A fixed fee table", "A rule table is not a learned sequential state model."],
+      ["A standard local convolution filter", "Convolution shares local filters rather than the described recurrent state."],
+      ["A recurrent neural network, such as an LSTM", "Recurrent families update state across the sequence."]
+    ]),
+    q("d2-e10", "d2-l3", "exam", "Applied", "Two sentences use the same tokens but reverse who pays whom. What helps a transformer distinguish their order?", 1, [
+      ["Token IDs sorted numerically", "Sorting IDs discards the original sequence rather than encoding it."],
+      ["Position information alongside token representations", "Attention needs sequence-order information to distinguish otherwise similar token sets."],
+      ["An extra training/test leak", "Leaked answers are not a valid representation technique."],
+      ["A source citation attached after generation", "A citation does not encode the original token order."]
+    ]),
+    q("d2-e11", "d2-l3", "exam", "Applied", "A company has limited labeled defect images and access to a suitably licensed pretrained vision model. Which initial experiment is strongest?", 2, [
+      ["Assume the public benchmark score proves factory performance", "Domain-specific lighting, cameras, and defects may differ."],
+      ["Use only a text generator because deep learning means language", "Deep learning includes vision and many non-generative tasks."],
+      ["Train a head on frozen features and evaluate representative held-out images", "Transfer learning is a reasonable starting point, with honest task-specific validation."],
+      ["Remove low-light test images to match the pretrained dataset", "Removing required deployment cases hides the mismatch rather than solving it."]
+    ]),
+    q("d2-e12", "d2-l3", "exam", "Stretch", "An analyst presents one self-attention heatmap as complete proof of why a transformer made a harmful decision. What is the best response?", 0, [
+      ["Treat it as limited evidence, not a full causal explanation", "Attention weights show some information weighting, not all computations or causal effects."],
+      ["Accept it because all model behavior is a single attention head", "Transformers contain multiple heads, layers, and other transformations."],
+      ["Declare attention impossible during inference", "Attention is part of the model's forward computation too."],
+      ["Replace factual evaluation with the heatmap alone", "A visualization cannot establish task correctness or safety by itself."]
+    ]),
+    q("d2-e13", "d2-l4", "exam", "Foundation", "Which description fits a text-to-image diffusion model most directly?", 0, [
+      ["Generating through learned iterative denoising, conditioned on text", "Diffusion generation reverses a noising process using learned denoising steps."],
+      ["Finding a minimum-toll path through a road graph", "That is search over structured states and costs."],
+      ["Training only a generator against a real/fake discriminator", "That describes a GAN more directly than diffusion."],
+      ["Filling a fixed fee table without learned representations", "That describes rules, not the generative model family."]
+    ]),
+    q("d2-e14", "d2-l4", "exam", "Applied", "A simplified shared 6,000-token budget uses 800 for instructions, 1,200 for history, 2,500 for evidence, and reserves 700 for output. How much remains?", 2, [
+      ["1,500 tokens", "This omits the reserved output from the total usage."],
+      ["5,200 tokens", "This is the used budget, not what remains."],
+      ["800 tokens", "6,000 − (800 + 1,200 + 2,500 + 700) = 800."],
+      ["2,000 words", "The stated budget is in tokens, and tokens are not interchangeable with words."]
+    ]),
+    q("d2-e15", "d2-l4", "exam", "Applied", "The word 'port' has different meanings in a shipping report and a network manual. Which representation is designed to use this surrounding context?", 1, [
+      ["A vocabulary ID treated as a numerical quantity", "The ID identifies a token and does not model surrounding meaning."],
+      ["A contextual embedding", "Contextual representations incorporate neighboring information to distinguish usage."],
+      ["A single static word vector for every occurrence", "A static vector does not change with the sentence context."],
+      ["A temperature setting alone", "Temperature controls sampling rather than encoding word sense."]
+    ]),
+    q("d2-e16", "d2-l4", "exam", "Stretch", "A generated answer has high token likelihood but cites a nonexistent report. Which conclusion is most justified?", 3, [
+      ["The report must exist because the continuation is likely", "Likelihood under a model is not evidence of external existence."],
+      ["A larger context limit alone validates the citation", "Capacity to accept context does not verify a report."],
+      ["Using the same random seed makes the report factual", "Reproducibility and factual validity are different properties."],
+      ["Plausible generation can still be unsupported; verify the citation", "External claims need evidence beyond the model's continuation probabilities."]
+    ]),
+    q("d2-e17", "d2-l5", "exam", "Foundation", "Which intervention necessarily involves training parameters rather than only supplying request context?", 2, [
+      ["Including two formatted examples in a prompt", "Few-shot examples can be used at inference without parameter updates."],
+      ["Appending retrieved approved excerpts", "Providing evidence in context does not require training the generator."],
+      ["Training parameter-efficient adapters on reviewed task examples", "Adapter adaptation trains learned parameters even with base weights frozen."],
+      ["Changing the requested answer length", "An instruction changes the request, not learned weights."]
+    ]),
+    q("d2-e18", "d2-l5", "exam", "Applied", "A policy assistant retrieves the headline rule but misses an exception in the next paragraph because chunks are tiny. Which change should be evaluated first?", 0, [
+      ["Chunk boundaries and enough surrounding context to preserve conditions", "The evidence is fragmented; chunking and context assembly are direct diagnostic levers."],
+      ["A stronger style fine-tune with the same incomplete evidence", "Style adaptation does not supply the missing exception."],
+      ["Removing all effective-date metadata", "That loses important authority and freshness information."],
+      ["A higher sampling temperature for more diverse exceptions", "Sampling variety is not a substitute for the actual policy evidence."]
+    ]),
+    q("d2-e19", "d2-l5", "exam", "Applied", "A relevant paragraph is found by lexical search and then supplied to a generator. The team says it cannot be RAG without a vector database. What is correct?", 3, [
+      ["RAG is defined only by a specific database technology", "The defining relationship is retrieval supporting generation."],
+      ["Lexical search changes the generator's weights", "Supplying retrieved text does not itself update generator parameters."],
+      ["It becomes fine-tuning because the paragraph contains examples", "Examples in inference context do not constitute a training update."],
+      ["Retrieval can be lexical, vector-based, or hybrid in a RAG workflow", "A vector database is an implementation choice, not a universal requirement."]
+    ]),
+    q("d2-e20", "d2-l5", "exam", "Stretch", "A cross-department assistant indexes restricted documents. A team proposes retrieving everything, then asking the model not to reveal unauthorized text. What is the strongest correction?", 1, [
+      ["Increase chunk size to make restricted passages less noticeable", "Obscuring content does not enforce access control."],
+      ["Enforce user permissions before restricted content enters the answer context", "Authorization must be an application boundary, not a model's voluntary disclosure rule."],
+      ["Keep the design if answers include citations", "Citations can themselves expose restricted information and do not authorize access."],
+      ["Fine-tune the model to memorize department names", "Memorized names do not establish enforceable document permissions."]
+    ]),
+    q("d2-e21", "d2-l6", "exam", "Foundation", "For one query, four passages are known relevant. Two appear in the top five retrieved passages. Under passage-level recall@5, what is recall?", 1, [
+      ["40%", "Two of five is precision among retrieved passages, not the defined recall."],
+      ["50%", "Recall@5 = two relevant passages retrieved / four known relevant passages."],
+      ["80%", "Four divided by five does not count retrieved relevant evidence."],
+      ["100%", "Two relevant passages are still missing from the top-five candidates."]
+    ]),
+    q("d2-e22", "d2-l6", "exam", "Applied", "A summarizer gets a high lexical-overlap score while reversing whether a request was approved. What should the evaluator conclude?", 3, [
+      ["Shared words establish correct meaning", "Overlap can remain high when a critical decision is reversed."],
+      ["The score can replace every human-reviewed case", "Important semantic errors need task-specific correctness checks."],
+      ["The source must be removed because overlap is high", "The score alone does not identify a source defect."],
+      ["Add semantic correctness checks; overlap alone misses the failure", "A decision reversal violates the task despite many matching words."]
+    ]),
+    q("d2-e23", "d2-l6", "exam", "Applied", "An LLM judge consistently prefers longer answers even when experts flag unsupported details. What is the best next step?", 0, [
+      ["Calibrate the rubric and judge against expert cases and inspect disagreement", "The measurement component has a bias that must be evaluated rather than assumed correct."],
+      ["Make every candidate answer longer to win the score", "This optimizes the judge's bias, not grounded answer quality."],
+      ["Treat the judge as authoritative because it is another model", "Models used for evaluation are also fallible."],
+      ["Reuse final-test answers as fine-tuning examples and keep the same final score", "That contaminates the final evaluation boundary."]
+    ]),
+    q("d2-e24", "d2-l6", "exam", "Stretch", "A tool-using agent usually finishes correctly but sometimes retries a money-transfer call after a timeout and transfers twice. Which evaluation and safeguard fit best?", 2, [
+      ["Score only the final explanation and increase temperature", "The harmful side effect is not captured by fluency or sampling variety."],
+      ["Allow unlimited retries to maximize eventual completion", "Unbounded repeated actions can compound financial harm."],
+      ["Inspect action traces and enforce duplicate-action protection, limits, and approval", "Evaluate side effects and recovery; application controls must bound consequential actions."],
+      ["Hide tool logs so the model focuses on the goal", "Removing evidence makes diagnosis and oversight weaker."]
     ])
   ];
 })();

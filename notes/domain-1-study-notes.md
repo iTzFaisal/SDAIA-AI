@@ -2,11 +2,11 @@
 
 > Independent, unofficial preparation. Not affiliated with or endorsed by SDAIA. Questions are original practice material, not actual examination questions. Topic breakdowns and practice timings are our design choices, not official exam specifications.
 
-Reviewed: 2026-10-11. Confirmed exam booking: 5 December 2026 (provided by learner).
+Reviewed: 2026-10-12. Confirmed exam booking: 5 December 2026 (provided by learner).
 
 ## How to use this workbook
 
-Read, explain without notes, work examples on paper, then answer the lesson checks. These notes require no coding. They are a complete first-domain sample of our proposed curriculum, not a claim to cover every possible official expert-level objective.
+Read, explain without notes, work examples on paper, then answer the lesson checks. These notes cover our proposed domain curriculum, not every possible official expert-level objective.
 
 ## Start from zero: the essential primer
 
@@ -456,7 +456,32 @@ Write down the data version, split rationale, preparation steps, chosen settings
 - **Calibration:** Agreement between predicted probabilities and observed outcome frequencies.
 - **Slice:** A meaningful subset of evaluation examples, such as a region or device category.
 - **MLOps / LLMOps:** Operational practices for ML systems / large-language-model systems; covered in the planned Domain 4.
-- **RAG:** Retrieval-augmented generation: using retrieved information to support generation; planned Domain 2.
+- **RAG:** Retrieval-augmented generation: supplying retrieved evidence to support an answer; does not guarantee correctness.
+- **Heuristic:** An estimate used to guide search; a useful estimate does not automatically satisfy optimality conditions.
+- **Policy (reinforcement learning):** A rule for selecting actions from observations or states; distinct from an organizational policy document.
+- **Neural network:** A learned network of numerical transformations, often organized into layers with nonlinear activations.
+- **Activation:** A function applied to a neuron's weighted sum; nonlinear activations enable nonlinear representations.
+- **ReLU:** Rectified linear unit: max(0, z).
+- **Softmax:** A transformation of scores into nonnegative values summing to one; calibration is not guaranteed.
+- **Backpropagation:** Computing loss gradients backward through a network; the optimizer uses them to update parameters.
+- **Batch / epoch:** A group of training examples for a step / one pass through the training dataset.
+- **Dropout:** Training-time random suppression of activations used as regularization.
+- **CNN / RNN:** Convolutional neural network using shared local filters / recurrent neural network updating a state across a sequence.
+- **Transfer learning:** Reusing representations or parameters learned on another dataset or task.
+- **Transformer:** A neural architecture using attention and other transformations, with position information for sequences.
+- **Self-attention:** Combining information from allowed positions within a sequence using learned relevance weights.
+- **Causal mask:** A restriction preventing next-token prediction from using future tokens.
+- **Token:** A processing unit such as a word, subword, character, or punctuation; not necessarily a full word.
+- **Embedding:** A numerical vector representing an item in a learned space; proximity is a similarity signal, not truth.
+- **Context window:** The tokenized information a model can consider within its limits; not unlimited persistent memory.
+- **Temperature / top-p:** Sampling controls affecting distribution concentration / the candidate set's cumulative probability mass.
+- **Diffusion / GAN:** Generation by learned iterative denoising / a generator trained against a discriminator.
+- **Few-shot prompting:** Supplying a few demonstrations in the prompt without updating model weights.
+- **Fine-tuning:** Additional training that adapts learned parameters to selected task examples.
+- **Grounding / faithfulness:** Connecting claims to evidence / agreement with the supplied evidence; evidence itself can be outdated or wrong.
+- **Hallucination:** Generated content that is invented or unsupported, despite possibly sounding confident.
+- **Agent:** A system selecting actions toward a goal using observations and possibly tools; requires enforced permissions and limits.
+- **Abstention:** Declining to answer or act when evidence or permission is insufficient.
 - **PDPL:** Saudi Personal Data Protection Law; current legal requirements need official verification in planned Domain 6.
 
 ## Lesson checks — questions
@@ -847,3 +872,19 @@ D. Tune on the final test until the region looks good
   MAE, MSE, RMSE, and sensitivity to large errors.
 - **Google Machine Learning glossary** (Further reading): https://developers.google.com/machine-learning/glossary
   A supplementary glossary, not an official SDAIA syllabus.
+- **UC Berkeley CS 188 — Uninformed search** (Learning reference): https://inst.eecs.berkeley.edu/~cs188/textbook/search/uninformed.html
+  Reviewed 12 October 2026: search strategies and the distinction between fewest steps and lowest cost.
+- **Google ML Crash Course — Nodes and hidden layers** (Learning reference): https://developers.google.com/machine-learning/crash-course/neural-networks/nodes-hidden-layers
+  Reviewed 12 October 2026: weights, biases, hidden layers, and why linear layers alone remain linear.
+- **Google ML Crash Course — Training using backpropagation** (Learning reference): https://developers.google.com/machine-learning/crash-course/neural-networks/backpropagation
+  Reviewed 12 October 2026: gradients, training failures, and dropout.
+- **Google ML Crash Course — Obtaining embeddings** (Learning reference): https://developers.google.com/machine-learning/crash-course/embeddings/obtaining-embeddings
+  Reviewed 12 October 2026: learned vector representations and static versus contextual embeddings.
+- **Google ML Crash Course — What's a large language model?** (Learning reference): https://developers.google.com/machine-learning/crash-course/llm/transformers
+  Reviewed 12 October 2026: tokens, self-attention, encoder/decoder families, and generation limitations.
+- **Google ML Crash Course — Fine-tuning, distillation, and prompt engineering** (Learning reference): https://developers.google.com/machine-learning/crash-course/llm/tuning
+  Reviewed 12 October 2026: prompt examples do not update weights; fine-tuning and parameter-efficient adaptation do.
+- **Lewis et al. — Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks** (Research reference): https://arxiv.org/abs/2005.11401
+  Abstract reviewed 12 October 2026. Foundational 2020 RAG research; our lessons describe a general retrieval-and-generation workflow, not a replication of this paper.
+- **NIST AI RMF — Generative AI Profile (600-1)** (Further reading): https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence
+  Publication page reviewed 12 October 2026. Voluntary cross-sector risk-management guidance, not Saudi law or an official SDAIA syllabus.

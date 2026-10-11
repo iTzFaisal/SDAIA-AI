@@ -2,15 +2,16 @@
 
 Independent English, concept-focused preparation for the learner's **confirmed 5 December 2026 exam**, designed to be shared with friends who have no AI background.
 
-## This first release
+## Available now
 
 - Seven-domain curriculum outline and an eight-week, 10–14-hour/week plan.
-- Beginner foundation primer and six complete Domain 1 sample lessons.
-- 18 lesson questions and a **separate 24-question Domain 1 paper**, all with explanations for every option.
+- Beginner foundation primer and twelve lessons: six each in Domains 1 and 2.
+- Domain 2 covers AI approaches, neural networks, model families and transfer learning, tokens and embeddings, prompting/RAG/fine-tuning, generative evaluation, and bounded agents. No coding exercises.
+- 36 lesson questions and **two separate 24-question domain papers**, all with explanations for every option. Domain papers never combine question pools or reuse lesson checks.
 - Untimed learning and timed paper modes, shuffled question/option order, saved attempts, lesson bookmarks, reading progress, mistake review, and glossary search.
 - Downloadable Markdown notes, separate practice paper and answer key, and printable HTML documents that can be saved as PDF.
 
-**Domains 2–7 and three full weighted mocks are planned, not available.** The Domain 1 paper is not a full seven-domain mock. Topic coverage is our interpretation of the broad published domain, not a verified exhaustive expert-level syllabus. No passing score or official badge cutoff is invented.
+**Domains 3–7 and three full weighted mocks are planned, not available.** Neither single-domain paper is a full seven-domain mock. Topic coverage is our interpretation of the broad supplied domains, not a verified exhaustive expert-level syllabus. No passing score or official badge cutoff is invented.
 
 ## Open it
 
@@ -32,6 +33,8 @@ Share the live site or the entire folder, including `assets/`, `content/`, and `
 
 Open `notes/printable-workbook.html` and choose **Print / save as PDF**. Separate printable paper and key are `notes/printable-practice-paper.html` and `notes/printable-answer-key.html`. These HTML files need no network to read; source links naturally need internet access.
 
+Domain 2 starts at `index.html#domain/d2`; its paper is at `index.html#practice/d2`. Downloads are `notes/domain-2-study-notes.md`, `notes/domain-2-practice-paper.md`, and `notes/domain-2-answer-key.md`. Printable versions are `notes/domain-2-printable-workbook.html`, `notes/domain-2-printable-practice-paper.html`, and `notes/domain-2-printable-answer-key.html`. Keep the answer key separate until you finish the paper.
+
 ## Content maintenance
 
 - `content/kit.js`: curriculum, schedule, lessons, glossary, and provenance.
@@ -47,7 +50,7 @@ npm run build
 npm test
 ```
 
-The notes build uses the website's shared content, preventing manual divergence. Generated notes are deliberately included so recipients do not need Node.js. Study progress is saved only under `ai-engineer-study-kit-v1`; reset does not clear other sites' storage. A timed attempt uses an absolute deadline; reloads do not restart the timer. If the page is closed, expiry is processed when it is reopened. Only the latest attempt has detailed results, with the latest 30 score summaries retained.
+The notes build uses the website's shared content, preventing manual divergence. The 14 generated documents are deliberately included so recipients do not need Node.js. Study progress is saved only under `ai-engineer-study-kit-v1`; reset does not clear other sites' storage. Existing Domain 1 IDs, saved attempts, and download URLs remain valid. A timed attempt uses an absolute deadline; reloads do not restart the timer. If the page is closed, expiry is processed when it is reopened. Only the latest attempt has detailed results, with the latest 30 score summaries retained.
 
 ## Source and assessment boundaries
 

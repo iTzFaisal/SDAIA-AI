@@ -2,11 +2,11 @@
 
 > Independent, unofficial preparation. Not affiliated with or endorsed by SDAIA. Questions are original practice material, not actual examination questions. Topic breakdowns and practice timings are our design choices, not official exam specifications.
 
-Reviewed: 2026-10-11. Confirmed exam booking: 5 December 2026 (provided by learner).
+Reviewed: 2026-10-12. Confirmed exam booking: 5 December 2026 (provided by learner).
 
 ## Release status
 
-Available: the foundation primer, six Domain 1 lessons, 18 lesson questions, and one separate 24-question Domain 1 paper. The other six domains and all full weighted mocks are planned. Detailed topic lists are inferred curriculum choices, not a verified official syllabus.
+Available: the foundation primer, 12 lessons across Domains 1 and 2, 36 lesson questions, and a separate 24-question paper for each available domain. Domains 3–7 and all full weighted mocks are planned. Detailed topic lists are inferred curriculum choices, not a verified official syllabus.
 
 ## Learning path
 
@@ -35,7 +35,7 @@ Turn a business question into an honest, useful model evaluation.
 
 ### Domain 2: Core AI, Deep Learning & Generative AI (16.7%)
 
-Status: Outline only; planned.
+Status: Lessons and paper available.
 
 Understand how modern AI represents information and produces outputs.
 
@@ -183,7 +183,7 @@ Target: 10–14 hours.
 
 ### 26 Oct–1 Nov: Core AI, deep learning & GenAI
 
-Planned: neural networks, transformers, embeddings, prompting, RAG, fine-tuning, and generative evaluation.
+Study Domain 2: AI approaches, neural networks, transformers, embeddings, prompting, RAG, fine-tuning, and generative evaluation. Complete the separate Domain 2 paper and repair missed concepts.
 
 Target: 10–14 hours.
 
@@ -241,3 +241,19 @@ Target: 10–14 hours.
   MAE, MSE, RMSE, and sensitivity to large errors.
 - **Google Machine Learning glossary** (Further reading): https://developers.google.com/machine-learning/glossary
   A supplementary glossary, not an official SDAIA syllabus.
+- **UC Berkeley CS 188 — Uninformed search** (Learning reference): https://inst.eecs.berkeley.edu/~cs188/textbook/search/uninformed.html
+  Reviewed 12 October 2026: search strategies and the distinction between fewest steps and lowest cost.
+- **Google ML Crash Course — Nodes and hidden layers** (Learning reference): https://developers.google.com/machine-learning/crash-course/neural-networks/nodes-hidden-layers
+  Reviewed 12 October 2026: weights, biases, hidden layers, and why linear layers alone remain linear.
+- **Google ML Crash Course — Training using backpropagation** (Learning reference): https://developers.google.com/machine-learning/crash-course/neural-networks/backpropagation
+  Reviewed 12 October 2026: gradients, training failures, and dropout.
+- **Google ML Crash Course — Obtaining embeddings** (Learning reference): https://developers.google.com/machine-learning/crash-course/embeddings/obtaining-embeddings
+  Reviewed 12 October 2026: learned vector representations and static versus contextual embeddings.
+- **Google ML Crash Course — What's a large language model?** (Learning reference): https://developers.google.com/machine-learning/crash-course/llm/transformers
+  Reviewed 12 October 2026: tokens, self-attention, encoder/decoder families, and generation limitations.
+- **Google ML Crash Course — Fine-tuning, distillation, and prompt engineering** (Learning reference): https://developers.google.com/machine-learning/crash-course/llm/tuning
+  Reviewed 12 October 2026: prompt examples do not update weights; fine-tuning and parameter-efficient adaptation do.
+- **Lewis et al. — Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks** (Research reference): https://arxiv.org/abs/2005.11401
+  Abstract reviewed 12 October 2026. Foundational 2020 RAG research; our lessons describe a general retrieval-and-generation workflow, not a replication of this paper.
+- **NIST AI RMF — Generative AI Profile (600-1)** (Further reading): https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence
+  Publication page reviewed 12 October 2026. Voluntary cross-sector risk-management guidance, not Saudi law or an official SDAIA syllabus.

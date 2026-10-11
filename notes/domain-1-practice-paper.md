@@ -2,7 +2,7 @@
 
 > Independent, unofficial preparation. Not affiliated with or endorsed by SDAIA. Questions are original practice material, not actual examination questions. Topic breakdowns and practice timings are our design choices, not official exam specifications.
 
-Reviewed: 2026-10-11. Confirmed exam booking: 5 December 2026 (provided by learner).
+Reviewed: 2026-10-12. Confirmed exam booking: 5 December 2026 (provided by learner).
 
 24 original questions; one best answer each. Suggested practice time: 45 minutes, an unofficial training choice. Write your answers separately. Unanswered questions count as incorrect. The answer key is in a separate file. This is not a full seven-domain mock.
 

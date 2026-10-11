@@ -7,6 +7,11 @@
   const esc = value => String(value).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const questionById = new Map(kit.questions.map(q => [q.id, q]));
   const lessonById = new Map(kit.lessons.map(l => [l.id, l]));
+  const availableDomains = kit.domains.filter(d => d.status === "available");
+  const domainById = new Map(kit.domains.map(d => [d.id, d]));
+  const lessonsFor = id => kit.lessons.filter(l => l.domain === id);
+  const availableLabel = `Domains ${availableDomains.map(d => d.number).join(" and ")}`;
+  const plannedCount = kit.domains.length - availableDomains.length;
   let state = { completed: [], bookmarks: [], mistakes: [], history: [], active: null, lastResult: null };
   let storageAvailable = true;
   try {
@@ -38,17 +43,18 @@
   const table = data => data ? `<div class="table-wrap"><table><caption>${esc(data.caption)}</caption><thead><tr>${data.headers.map(h => `<th scope="col">${esc(h)}</th>`).join("")}</tr></thead><tbody>${data.rows.map(row => `<tr>${row.map((cell, i) => i ? `<td>${esc(cell)}</td>` : `<th scope="row">${esc(cell)}</th>`).join("")}</tr>`).join("")}</tbody></table></div>` : "";
   const sections = items => items.map(s => `<section class="${s.title.toLowerCase().startsWith("worked example") ? "worked" : ""}"><h2>${esc(s.title)}</h2>${s.paragraphs.map(p => `<p>${esc(p)}</p>`).join("")}${table(s.table)}${s.bullets.length ? list(s.bullets) : ""}</section>`).join("");
   const questionsFor = (pool, lesson) => kit.questions.filter(q => q.pool === pool && (!lesson || q.lesson === lesson));
+  const paperFor = id => core.paperQuestions(kit.questions, id);
   const showDate = time => new Date(time).toLocaleDateString("en-GB", { day: "numeric", month: "short" });
   const action = (name, text, data = "", classes = "") => `<button class="${classes}" data-action="${name}" ${data}>${esc(text)}</button>`;
   function updateRail() {
-    document.querySelector("#rail-progress").innerHTML = `<div class="rail-progress">Domain 1 reading progress<progress value="${state.completed.length}" max="${kit.lessons.length}" aria-label="Completed Domain 1 lessons"></progress>${state.completed.length} of ${kit.lessons.length} lessons marked complete<br>Other six domains are planned.</div>`;
+    document.querySelector("#rail-progress").innerHTML = `<div class="rail-progress">${availableLabel} reading progress<progress value="${state.completed.length}" max="${kit.lessons.length}" aria-label="Completed available lessons"></progress>${state.completed.length} of ${kit.lessons.length} lessons marked complete<br>${plannedCount} other domains are planned.</div>`;
   }
   function home() {
     const next = kit.lessons.find(l => !state.completed.includes(l.id));
     const latest = state.history.at(-1);
     return heading("Understand first. Then test yourself.", "Your study workbook for the confirmed 5 December exam. Start with the essentials, learn one domain at a time, and use fresh questions to find what needs another look.") +
-      notice("Available now: the beginner primer, six Domain 1 lessons, 18 lesson questions, and a separate 24-question domain paper. The other six domains and three full weighted mocks are planned—not available yet.") +
-      `<div class="actions">${link("foundation", "Start from zero", "button primary")}${link(next ? `lesson/${next.id}` : "practice", next ? "Continue Domain 1" : "Practice Domain 1")}${state.active ? link("attempt", "Resume saved practice") : ""}</div>` +
+      notice(`Available now: the beginner primer, ${kit.lessons.length} lessons across ${availableLabel}, ${questionsFor("quiz").length} lesson questions, and a separate paper for each available domain. The other ${plannedCount} domains and three full weighted mocks are planned—not available yet.`) +
+      `<div class="actions">${link("foundation", "Start from zero", "button primary")}${link(next ? `lesson/${next.id}` : "practice", next ? `Continue Domain ${domainById.get(next.domain).number}` : "Choose a domain paper")}${state.active ? link("attempt", "Resume saved practice") : ""}</div>` +
       `<div class="flow" aria-label="Learning sequence"><span>Understand the idea</span><b aria-hidden="true">›</b><span>Work an example</span><b aria-hidden="true">›</b><span>Check your understanding</span><b aria-hidden="true">›</b><span>Take the separate paper</span></div>` +
       `<div class="two-col"><section class="panel"><h2 style="margin-top:0">Your next study session</h2><p>${next ? `Read “${esc(next.title)}”, work the example, and take its three-question quiz.` : "All available lessons are marked complete. Use the domain paper and mistake review to check understanding."}</p><p class="muted">Plan for 10–14 hours per week: about 60–90 minutes on most weekdays, with longer practice and revision sessions at the weekend. Reading estimates exclude retrieval practice and revision.</p>${link("curriculum", "See the eight-week plan")}</section><section class="panel"><h2 style="margin-top:0">Your notebook</h2><p class="progress-summary">${state.completed.length}/${kit.lessons.length}<small>Available lessons marked complete, not mastery certified</small></p><p>${state.mistakes.length} questions currently need review.</p><p>${latest ? `Latest practice: ${esc(latest.title)} — ${latest.percent}% (${showDate(latest.finished)}).` : "No practice attempt completed yet."}</p>${link("review", "Review your mistakes")}</section></div>` +
       `<h2>Keep the goal honest</h2><p class="intro">This kit teaches from zero; it cannot certify production experience or promise an Expert badge in eight weeks. Practice difficulty labels are ours, not SDAIA's official question levels. Your official result depends on the real assessment.</p>`;
@@ -58,7 +64,7 @@
   }
   function curriculum() {
     return heading("Curriculum & schedule", "A prerequisite-aware path for a complete beginner, with an intensive 10–14-hour weekly target.") +
-      notice("Domain names and weights come from your supplied image. The detailed topic breakdown below is our proposed interpretation, not a verified official objective-by-objective syllabus. Only Domain 1 teaching and its paper are available in this release.") +
+      notice(`Domain names and weights come from your supplied image. The detailed topic breakdown below is our proposed interpretation, not a verified official objective-by-objective syllabus. ${availableLabel} teaching and their separate papers are available in this release.`) +
       domainRows() + `<h2>Your route to 5 December</h2><div class="schedule">${kit.schedule.map(w => `<section class="week"><time>${esc(w.dates)} · ${esc(w.hours)} hours</time><h3>${esc(w.focus)}</h3><p>${esc(w.tasks)}</p></section>`).join("")}</div>` +
       `<h2>Assessment plan</h2>${list(["Each domain: short lesson checks and a separate domain paper with an explanation for every option.", "Three reserved, original full mocks after all seven domains are written and reviewed. Mock duration and question count will be labeled practice assumptions unless official instructions establish them.", "A possible 150-question practice blueprint: 26 / 25 / 21 / 27 / 19 / 22 / 10 questions across Domains 1–7, respectively. This approximates the published weights; 150 is not a verified official exam length.", "For readiness, use first-attempt unfamiliar questions and explain your reasoning. Retake improvement can reflect memory; no practice score is mapped to an official badge level."])}${link("downloads", "Download the curriculum")}`;
   }
@@ -69,33 +75,40 @@
     const d = kit.domains.find(item => item.id === id);
     if (!d) return notFound();
     if (d.status !== "available") return heading(d.title) + notice("This domain has an outline only. Its lessons and exam are planned.") + list(d.topics) + link("curriculum", "Back to curriculum");
-    return heading(d.title, "Six lessons, from defining a prediction to defending a model-selection decision. Work the examples on paper; there are no coding exercises.") +
-      `<div class="lesson-meta">${pill(`${d.weight}% of the published exam blueprint`)}${pill("Original sample curriculum")}</div><h2>Learning outcomes</h2>${list(d.objectives)}<ol class="lesson-list">${kit.lessons.filter(l => l.domain === id).map((l, i) => `<li><div><a href="#lesson/${l.id}">${i + 1}. ${esc(l.title)}</a><small>${l.minutes} min reading estimate · 3 quiz questions</small></div>${state.completed.includes(l.id) ? pill("Read", "completed") : pill("Not marked read")}</li>`).join("")}</ol><div class="actions">${link("practice", "Take the separate domain paper", "button primary")}${link("downloads", "Get the notes")}</div>` + notice("Completing this sample covers our proposed Domain 1 learning objectives. It does not establish that every possible official Expert-level topic or question has been covered.");
+    return heading(d.title, `${lessonsFor(id).length} lessons. ${d.summary} Work the examples on paper; there are no coding exercises.`) +
+      `<div class="lesson-meta">${pill(`${d.weight}% of the supplied exam blueprint`)}${pill("Original proposed curriculum")}</div>${d.number === 2 ? notice("Before you begin: read the foundation primer and Domain 1, especially parameters, loss, validation, and leakage.") : ""}<h2>Learning outcomes</h2>${list(d.objectives)}<ol class="lesson-list">${lessonsFor(id).map((l, i) => `<li><div><a href="#lesson/${l.id}">${i + 1}. ${esc(l.title)}</a><small>${l.minutes} min reading estimate · ${questionsFor("quiz", l.id).length} quiz questions</small></div>${state.completed.includes(l.id) ? pill("Read", "completed") : pill("Not marked read")}</li>`).join("")}</ol><h2>Revision sheet</h2>${list(kit.revisions[id].map(([term, text]) => `${term}: ${text}`))}<div class="actions">${link(`practice/${id}`, "Take the separate domain paper", "button primary")}${link("downloads", "Get the notes")}</div>` + notice(`Completing these lessons covers our proposed Domain ${d.number} learning objectives. It does not establish that every possible official Expert-level topic or question has been covered.`);
   }
   function lesson(id) {
     const l = lessonById.get(id);
     if (!l) return notFound();
-    const index = kit.lessons.indexOf(l);
+    const domainLessons = lessonsFor(l.domain);
+    const index = domainLessons.indexOf(l);
+    const d = domainById.get(l.domain);
     const completed = state.completed.includes(id);
-    return `<article class="reading"><div class="breadcrumb"><a href="#domain/d1">Domain 1</a> / Lesson ${index + 1} of ${kit.lessons.length}</div>${heading(l.title)}<div class="lesson-meta">${pill(`${l.minutes} min reading estimate`)}${completed ? pill("Marked read", "completed") : ""}</div><div class="actions">${action("bookmark", state.bookmarks.includes(id) ? "Remove bookmark" : "Bookmark lesson", `data-id="${id}"`)}${action("print", "Print lesson")}</div><h2>What you will learn</h2>${list(l.objectives)}<div class="prose">${sections(l.sections)}<div class="takeaway"><strong>The idea to remember</strong>${esc(l.takeaway)}</div></div><h2>Common exam traps</h2>${list(l.traps)}<h2>Close the notes and explain</h2>${list(l.recall)}<h2>Check your understanding</h2><p>Three original learning questions. Answers explain every option; these are separate from the domain paper.</p><div class="actions">${action("quiz", "Start lesson quiz", `data-id="${id}"`, "primary")}${action("complete", completed ? "Mark as not read" : "Mark lesson read", `data-id="${id}"`)}</div><div class="actions">${index ? link(`lesson/${kit.lessons[index - 1].id}`, "Previous lesson") : link("foundation", "Foundation primer")}${index < kit.lessons.length - 1 ? link(`lesson/${kit.lessons[index + 1].id}`, "Next lesson") : link("practice", "Domain paper")}</div><details><summary>Learning references</summary>${list(l.sources.map(id => kit.sources.find(s => s.id === id).title))}<a href="#sources">Open source links and verification notes</a></details></article>`;
+    return `<article class="reading"><div class="breadcrumb"><a href="#domain/${d.id}">Domain ${d.number}</a> / Lesson ${index + 1} of ${domainLessons.length}</div>${heading(l.title)}<div class="lesson-meta">${pill(`${l.minutes} min reading estimate`)}${completed ? pill("Marked read", "completed") : ""}</div><div class="actions">${action("bookmark", state.bookmarks.includes(id) ? "Remove bookmark" : "Bookmark lesson", `data-id="${id}"`)}${action("print", "Print lesson")}</div><h2>What you will learn</h2>${list(l.objectives)}<div class="prose">${sections(l.sections)}<div class="takeaway"><strong>The idea to remember</strong>${esc(l.takeaway)}</div></div><h2>Common exam traps</h2>${list(l.traps)}<h2>Close the notes and explain</h2>${list(l.recall)}<h2>Check your understanding</h2><p>Three original learning questions. Answers explain every option; these are separate from the domain paper.</p><div class="actions">${action("quiz", "Start lesson quiz", `data-id="${id}"`, "primary")}${action("complete", completed ? "Mark as not read" : "Mark lesson read", `data-id="${id}"`)}</div><div class="actions">${index ? link(`lesson/${domainLessons[index - 1].id}`, "Previous lesson") : link(`domain/${d.id}`, "Domain overview")}${index < domainLessons.length - 1 ? link(`lesson/${domainLessons[index + 1].id}`, "Next lesson") : link(`practice/${d.id}`, "Domain paper")}</div><details><summary>Learning references</summary>${list(l.sources.map(id => kit.sources.find(s => s.id === id).title))}<a href="#sources">Open source links and verification notes</a></details></article>`;
   }
-  function practice() {
-    const difficulties = ["Foundation", "Applied", "Stretch"].map(label => `${questionsFor("exam").filter(q => q.difficulty === label).length} ${label}`).join(", ");
+  function practice(id) {
+    const domains = id ? availableDomains.filter(d => d.id === id) : availableDomains;
+    if (!domains.length) return notFound();
     return heading("Practice & exams", "Use lesson quizzes while learning. Take the separate domain paper when you can explain the main ideas without looking.") +
       (state.active ? `<section class="panel"><h2 style="margin-top:0">A practice session is saved</h2><p>${esc(state.active.title)}. ${Object.keys(state.active.answers).length} answers saved. A timed session's deadline keeps running even if you leave.</p><div class="actions">${link("attempt", "Resume practice", "button primary")}${action("discard", "Discard saved attempt")}</div></section>` : "") +
-      `<section class="panel"><h2 style="margin-top:0">Domain 1 paper</h2><p>24 original questions: ${difficulties}. These teaching labels do not correspond to verified official badge thresholds. The paper is separate from the 18 lesson questions.</p><p>Choose learning mode for feedback after each answer, or timed mode to hide every answer until submission. Question and option order are shuffled each attempt.</p><label for="duration">Practice time limit</label> <select id="duration"><option value="45">45 minutes</option><option value="30">30 minutes</option><option value="60">60 minutes</option></select><p class="muted">This timing is a practice choice, not the official examination duration.</p><div class="actions">${action("exam-learning", "Start learning mode")}${action("exam-timed", "Start timed paper", "", "primary")}${state.lastResult ? link("results", "View latest results") : ""}</div><p class="muted">Retakes use the same paper, not a fresh mock. Scores may improve through question familiarity.</p></section>` +
-      `<h2>Lesson quizzes</h2><ol class="lesson-list">${kit.lessons.map((l, i) => `<li><div>${i + 1}. ${esc(l.title)}<small>3 questions · untimed feedback</small></div>${action("quiz", "Start quiz", `data-id="${l.id}"`)}</li>`).join("")}</ol><h2>Full weighted mocks</h2><div class="empty"><strong>Planned, not available yet</strong><p>Three full mocks will follow the remaining six domains. A Domain 1-only paper is not a full SDAIA mock.</p>${link("curriculum", "See the full curriculum")}</div>`;
+      domains.map(d => {
+        const paper = paperFor(d.id);
+        const difficulties = ["Foundation", "Applied", "Stretch"].map(label => `${paper.filter(q => q.difficulty === label).length} ${label}`).join(", ");
+        return `<section class="panel" aria-label="Domain ${d.number} paper"><h2 style="margin-top:0">Domain ${d.number} paper</h2><p>${paper.length} original questions: ${difficulties}. These teaching labels do not correspond to verified official badge thresholds. This paper is separate from the ${kit.questions.filter(q => q.pool === "quiz" && q.domain === d.id).length} lesson questions in this domain.</p><p>Choose learning mode for feedback after each answer, or timed mode to hide every answer until submission. Question and option order are shuffled each attempt.</p><label for="duration-${d.id}">Practice time limit for Domain ${d.number}</label> <select id="duration-${d.id}"><option value="${d.paperMinutes}">${d.paperMinutes} minutes</option><option value="30">30 minutes</option><option value="60">60 minutes</option></select><p class="muted">This timing is a practice choice, not the official examination duration.</p><div class="actions">${action("exam-learning", "Start learning mode", `data-domain="${d.id}"`)}${action("exam-timed", "Start timed paper", `data-domain="${d.id}"`, "primary")}</div><p class="muted">Retakes use the same paper, not a fresh mock. Scores may improve through question familiarity.</p></section>`;
+      }).join("") +
+      `<div class="actions">${id ? link("practice", "See all domain papers") : ""}${state.lastResult ? link("results", "View latest results") : ""}</div><h2>Lesson quizzes</h2>${domains.map(d => `<h3>Domain ${d.number}: ${esc(d.title)}</h3><ol class="lesson-list">${lessonsFor(d.id).map((l, i) => `<li><div>${i + 1}. ${esc(l.title)}<small>3 questions · untimed feedback</small></div>${action("quiz", "Start quiz", `data-id="${l.id}"`)}</li>`).join("")}</ol>`).join("")}<h2>Full weighted mocks</h2><div class="empty"><strong>Planned, not available yet</strong><p>Three full mocks will follow the remaining ${plannedCount} domains. A single-domain paper is not a full SDAIA mock.</p>${link("curriculum", "See the full curriculum")}</div>`;
   }
-  function startAttempt(kind, mode, lessonId, minutes) {
+  function startAttempt(kind, mode, lessonId, minutes, domainId) {
     if (state.active && !confirm("Replace your saved practice session? Its unfinished answers will be discarded.")) return;
     let pool;
     if (kind === "quiz") pool = questionsFor("quiz", lessonId);
-    else if (kind === "exam") pool = questionsFor("exam");
+    else if (kind === "exam") pool = paperFor(domainId);
     else pool = state.mistakes.map(id => questionById.get(id));
     if (!pool.length) return;
     const prepared = core.prepare(pool);
     state.active = {
-      kind, mode, title: kind === "quiz" ? `Lesson quiz: ${lessonById.get(lessonId).title}` : kind === "exam" ? "Domain 1 paper" : "Mistake review",
+      kind, mode, ...(kind === "exam" ? { domain: domainId } : {}), title: kind === "quiz" ? `Lesson quiz: ${lessonById.get(lessonId).title}` : kind === "exam" ? `Domain ${domainById.get(domainId).number} paper` : "Mistake review",
       started: Date.now(), deadline: mode === "timed" ? Date.now() + minutes * 60000 : null,
       questions: prepared.map(q => ({ id: q.id, order: q.order })), answers: {}, checked: [], flags: [], index: 0
     };
@@ -149,7 +162,7 @@
       `<h2>Recent attempts</h2>${state.history.length ? `<div class="table-wrap"><table><thead><tr><th scope="col">Practice</th><th scope="col">Date</th><th scope="col">Mode</th><th scope="col">Score</th></tr></thead><tbody>${[...state.history].reverse().map(h => `<tr><td>${esc(h.title)}</td><td>${showDate(h.finished)}</td><td>${esc(h.mode)}</td><td>${h.percent}%</td></tr>`).join("")}</tbody></table></div><p class="muted">Detailed answers are retained for the latest completed attempt only. The latest 30 attempt summaries are kept.</p>` : '<p class="muted">No completed attempts yet.</p>'}`;
   }
   function glossary() {
-    return heading("Glossary", "The vocabulary used in the first domain, with a few signposts for later topics.") + '<label for="glossary-search">Find a term or definition</label><input id="glossary-search" class="search" type="search" placeholder="Try: recall, leakage, or inference"><div id="glossary-rows"></div><p id="glossary-count" class="muted" role="status"></p>';
+    return heading("Glossary", "Vocabulary for the available domains, with a few signposts for later topics.") + '<label for="glossary-search">Find a term or definition</label><input id="glossary-search" class="search" type="search" placeholder="Try: recall, embedding, or inference"><div id="glossary-rows"></div><p id="glossary-count" class="muted" role="status"></p>';
   }
   function filterGlossary(query = "") {
     const matches = kit.glossary.filter(pair => pair.join(" ").toLowerCase().includes(query.toLowerCase()));
@@ -159,15 +172,21 @@
   function downloads() {
     const files = [
       ["curriculum.md", "Curriculum & study schedule", "All seven domain outlines, availability, and your eight-week plan."],
-      ["domain-1-study-notes.md", "Foundation & Domain 1 notes", "The full primer, all six lessons, revision sheet, glossary, and lesson-quiz explanations."],
-      ["domain-1-practice-paper.md", "Domain 1 practice paper", "24 questions without answers. Use this before opening the separate key."],
-      ["domain-1-answer-key.md", "Domain 1 answer key", "Correct answers and explanations for every option; contains spoilers."],
+      ...availableDomains.flatMap(d => [
+        [`domain-${d.number}-study-notes.md`, `${d.number === 1 ? "Foundation & " : ""}Domain ${d.number} notes`, `All ${lessonsFor(d.id).length} lessons, revision sheet, glossary, and lesson-quiz explanations.`],
+        [`domain-${d.number}-practice-paper.md`, `Domain ${d.number} practice paper`, `${paperFor(d.id).length} questions without answers. Use this before opening the separate key.`],
+        [`domain-${d.number}-answer-key.md`, `Domain ${d.number} answer key`, "Correct answers and explanations for every option; contains spoilers."]
+      ]),
       ["sources-and-exam-facts.md", "Sources & verified exam facts", "Official methodology, supplied image, learning references, and unknowns."]
     ];
-    return heading("Notes & downloads", "The website and notes use the same source content. Download the notes for sharing or open the printable workbook to save a PDF.") + `<div class="actions"><a class="button primary" href="notes/printable-workbook.html" target="_blank" rel="noopener">Open printable workbook</a><a class="button" href="notes/printable-practice-paper.html" target="_blank" rel="noopener">Printable practice paper</a><a class="button" href="notes/printable-answer-key.html" target="_blank" rel="noopener">Printable answer key (spoilers)</a></div><p class="muted">In the printable workbook, use Print / Save as PDF and choose your browser's PDF destination. It includes study notes and lesson checks, not the reserved domain-paper answers.</p><div class="download-list">${files.map(([file, title, description]) => `<a href="notes/${file}" download>${esc(title)} <small>Markdown (.md) — ${esc(description)}</small></a>`).join("")}</div><h2>Share with friends</h2><p class="intro">Share the whole project folder or a hosted copy of this static site. Friends can open index.html directly without an account or installing packages. Each browser keeps its own progress; it does not sync between devices. A browser may treat different file paths as separate storage locations.</p><h2>Your local progress</h2><div class="actions">${action("export", "Download progress backup")}${action("reset", "Reset this kit's local progress")}</div><p class="muted">The backup is a JSON record for safekeeping; this release does not import backups. Reset deletes only this study kit's progress, after confirmation.</p><p class="status-text" id="download-status" role="status"></p>`;
+    const printLinks = availableDomains.map(d => {
+      const prefix = d.number === 1 ? "printable" : `domain-${d.number}-printable`;
+      return `<h2>Domain ${d.number} printable documents</h2><div class="actions"><a class="button primary" href="notes/${prefix}-workbook.html" target="_blank" rel="noopener">Domain ${d.number} workbook</a><a class="button" href="notes/${prefix}-practice-paper.html" target="_blank" rel="noopener">Domain ${d.number} practice paper</a><a class="button" href="notes/${prefix}-answer-key.html" target="_blank" rel="noopener">Domain ${d.number} answer key (spoilers)</a></div>`;
+    }).join("");
+    return heading("Notes & downloads", "The website and notes use the same source content. Download the notes for sharing or open a printable workbook to save a PDF.") + printLinks + `<p class="muted">In a printable workbook, use Print / Save as PDF and choose your browser's PDF destination. It includes study notes and lesson checks, not the reserved domain-paper answers.</p><div class="download-list">${files.map(([file, title, description]) => `<a href="notes/${file}" download>${esc(title)} <small>Markdown (.md) — ${esc(description)}</small></a>`).join("")}</div><h2>Share with friends</h2><p class="intro">Share the whole project folder or a hosted copy of this static site. Friends can open index.html directly without an account or installing packages. Each browser keeps its own progress; it does not sync between devices. A browser may treat different file paths as separate storage locations.</p><h2>Your local progress</h2><div class="actions">${action("export", "Download progress backup")}${action("reset", "Reset this kit's local progress")}</div><p class="muted">The backup is a JSON record for safekeeping; this release does not import backups. Reset deletes only this study kit's progress, after confirmation.</p><p class="status-text" id="download-status" role="status"></p>`;
   }
   function sources() {
-    return heading("Sources & exam facts", "Last reviewed 11 October 2026. Keep confirmed exam information separate from curriculum design choices.") +
+    return heading("Sources & exam facts", `Content reviewed ${kit.reviewed}; official assessment page reviewed 11 October 2026. Keep confirmed exam information separate from curriculum design choices.`) +
       `<h2>What is verified or supplied</h2>${list(kit.facts)}${notice(kit.disclaimer)}<h2>References</h2>${kit.sources.map(s => `<section class="source"><h3><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a></h3>${pill(s.type)}<p>${esc(s.note)}</p></section>`).join("")}<h2>Before the exam</h2>${list(["Your appointment instructions take precedence over assumptions in this kit.", "Confirm the venue, accepted identification, arrival time, language, and permitted items.", "If official question count, duration, objectives, or thresholds are provided later, update the kit rather than presenting guessed values as facts."])}`;
   }
   function notFound() { return heading("This page is not in the kit") + link("home", "Return to your study desk"); }
@@ -176,11 +195,11 @@
     const route = location.hash.slice(1) || "home";
     const [page, id] = route.split("/");
     const views = { home, curriculum, foundation, practice, review, glossary, downloads, sources, results, attempt: attemptPage };
-    main.innerHTML = page === "domain" ? domain(id) : page === "lesson" ? lesson(id) : views[page] ? views[page]() : notFound();
+    main.innerHTML = page === "domain" ? domain(id) : page === "lesson" ? lesson(id) : page === "practice" ? practice(id) : views[page] ? views[page]() : notFound();
     document.title = `${main.querySelector("h1")?.textContent || "Study"} | AI Engineer Study Kit`;
     document.querySelectorAll(".rail nav a").forEach(a => {
       const target = a.getAttribute("href").slice(1);
-      const active = target === route || (page === "lesson" && target === "domain/d1") || (["attempt", "results"].includes(page) && target === "practice");
+      const active = target === route || (page === "lesson" && target === `domain/${lessonById.get(id)?.domain}`) || (["attempt", "results", "practice"].includes(page) && target === "practice");
       if (active) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
     });
     updateRail();
@@ -234,8 +253,9 @@
     if (name === "quiz") { startAttempt("quiz", "learning", id); return; }
     if (name === "review") { startAttempt("review", "learning"); return; }
     if (name.startsWith("exam-")) {
-      const duration = Number(document.querySelector("#duration").value);
-      startAttempt("exam", name === "exam-timed" ? "timed" : "learning", null, duration); return;
+      const domainId = button.dataset.domain;
+      const duration = Number(document.querySelector(`#duration-${domainId}`).value);
+      startAttempt("exam", name === "exam-timed" ? "timed" : "learning", null, duration, domainId); return;
     }
     if (name === "discard") {
       if (confirm("Discard this unfinished practice session?")) { state.active = null; save(); render(); } return;

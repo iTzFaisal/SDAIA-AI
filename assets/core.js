@@ -30,6 +30,7 @@
     return { correct, answered, total: questions.length, percent: questions.length ? Math.round(correct / questions.length * 100) : 0, byLesson, byDifficulty };
   };
   const remaining = (deadline, now = Date.now()) => deadline === null ? null : Math.max(0, Math.ceil((deadline - now) / 1000));
+  const paperQuestions = (questions, domain) => questions.filter(q => q.pool === "exam" && q.domain === domain);
   const validAttempt = (attempt, questions) => {
     if (!attempt || !Array.isArray(attempt.questions) || !attempt.questions.length || typeof attempt.answers !== "object" || !attempt.answers || Array.isArray(attempt.answers)) return false;
     if (!["quiz", "exam", "review"].includes(attempt.kind) || !["learning", "timed"].includes(attempt.mode) || typeof attempt.title !== "string") return false;
@@ -41,17 +42,20 @@
     }
     if (!Number.isInteger(attempt.index) || attempt.index < 0 || attempt.index >= attempt.questions.length) return false;
     const known = new Map(questions.map(q => [q.id, q]));
+    const examDomain = attempt.kind === "exam" ? known.get(attempt.questions[0]?.id)?.domain : null;
+    if (attempt.kind === "exam" && attempt.domain !== undefined && attempt.domain !== examDomain) return false;
     const ids = new Set();
     const valid = attempt.questions.every(item => {
       const canonical = known.get(item.id);
       if (!canonical || ids.has(item.id) || !Array.isArray(item.order) || item.order.length !== canonical.options.length) return false;
       ids.add(item.id);
       if (attempt.kind !== "review" && canonical.pool !== attempt.kind) return false;
+      if (attempt.kind === "exam" && canonical.domain !== examDomain) return false;
       if (new Set(item.order).size !== canonical.options.length || item.order.some(i => !Number.isInteger(i) || i < 0 || i >= canonical.options.length)) return false;
       const answer = attempt.answers[item.id];
       return answer === undefined || (Number.isInteger(answer) && answer >= 0 && answer < canonical.options.length);
     });
     return valid && Object.keys(attempt.answers).every(id => ids.has(id));
   };
-  globalThis.StudyCore = { shuffle, prepare, score, remaining, validAttempt };
+  globalThis.StudyCore = { shuffle, prepare, score, remaining, paperQuestions, validAttempt };
 })();

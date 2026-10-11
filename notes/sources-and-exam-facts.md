@@ -2,7 +2,7 @@
 
 > Independent, unofficial preparation. Not affiliated with or endorsed by SDAIA. Questions are original practice material, not actual examination questions. Topic breakdowns and practice timings are our design choices, not official exam specifications.
 
-Reviewed: 2026-10-11. Confirmed exam booking: 5 December 2026 (provided by learner).
+Reviewed: 2026-10-12. Confirmed exam booking: 5 December 2026 (provided by learner).
 
 ## Confirmed or supplied information
 
@@ -28,7 +28,23 @@ Reviewed: 2026-10-11. Confirmed exam booking: 5 December 2026 (provided by learn
   MAE, MSE, RMSE, and sensitivity to large errors.
 - **Google Machine Learning glossary** (Further reading): https://developers.google.com/machine-learning/glossary
   A supplementary glossary, not an official SDAIA syllabus.
+- **UC Berkeley CS 188 — Uninformed search** (Learning reference): https://inst.eecs.berkeley.edu/~cs188/textbook/search/uninformed.html
+  Reviewed 12 October 2026: search strategies and the distinction between fewest steps and lowest cost.
+- **Google ML Crash Course — Nodes and hidden layers** (Learning reference): https://developers.google.com/machine-learning/crash-course/neural-networks/nodes-hidden-layers
+  Reviewed 12 October 2026: weights, biases, hidden layers, and why linear layers alone remain linear.
+- **Google ML Crash Course — Training using backpropagation** (Learning reference): https://developers.google.com/machine-learning/crash-course/neural-networks/backpropagation
+  Reviewed 12 October 2026: gradients, training failures, and dropout.
+- **Google ML Crash Course — Obtaining embeddings** (Learning reference): https://developers.google.com/machine-learning/crash-course/embeddings/obtaining-embeddings
+  Reviewed 12 October 2026: learned vector representations and static versus contextual embeddings.
+- **Google ML Crash Course — What's a large language model?** (Learning reference): https://developers.google.com/machine-learning/crash-course/llm/transformers
+  Reviewed 12 October 2026: tokens, self-attention, encoder/decoder families, and generation limitations.
+- **Google ML Crash Course — Fine-tuning, distillation, and prompt engineering** (Learning reference): https://developers.google.com/machine-learning/crash-course/llm/tuning
+  Reviewed 12 October 2026: prompt examples do not update weights; fine-tuning and parameter-efficient adaptation do.
+- **Lewis et al. — Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks** (Research reference): https://arxiv.org/abs/2005.11401
+  Abstract reviewed 12 October 2026. Foundational 2020 RAG research; our lessons describe a general retrieval-and-generation workflow, not a replication of this paper.
+- **NIST AI RMF — Generative AI Profile (600-1)** (Further reading): https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence
+  Publication page reviewed 12 October 2026. Voluntary cross-sector risk-management guidance, not Saudi law or an official SDAIA syllabus.
 
 ## Interpretation boundaries
 
-The domain weights come from a learner-supplied image. Assessment methodology was read from the rendered official Athka X public page. Google materials support general learning content and are not SDAIA exam objectives. The lessons and practice questions are original explanations and scenarios, not copied exam questions. The detailed topics, difficulty labels, suggested practice timing, and mock blueprint are our design choices. No numerical passing threshold or badge-level cutoff is invented.
+The domain weights come from a learner-supplied image. Assessment methodology was read from the rendered official Athka X public page on 11 October 2026; the Domain 2 learning references were reviewed on 12 October. Google, Berkeley, research, and NIST references support general learning and are not SDAIA exam objectives. The NIST profile is voluntary guidance, not Saudi law. The lessons and practice questions are original explanations and scenarios, not copied exam questions. The detailed topics, difficulty labels, suggested practice timing, and mock blueprint are our design choices. No numerical passing threshold or badge-level cutoff is invented.
