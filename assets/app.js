@@ -56,8 +56,7 @@
   function home() {
     const next = kit.lessons.find(l => !state.completed.includes(l.id));
     const latest = state.history.at(-1);
-    return heading("Understand first. Then test yourself.", "Your study workbook for the confirmed 5 December exam. Start with the essentials, learn one domain at a time, and use fresh questions to find what needs another look.") +
-      notice(`Available now: the beginner primer, ${kit.lessons.length} lessons across ${availableLabel}, ${questionsFor("quiz").length} lesson questions, a separate paper for each available domain, and three separate 150-question full weighted practice mocks. ${mockRelease} Coverage is our proposed curriculum, not a verified exhaustive official syllabus.`) +
+    return heading("Prepare for the SDAIA AI Engineer Badge.", "Your independent study workbook to help you prepare to pass the SDAIA AI Engineer Badge exam on 5 December. Start with the essentials, learn one domain at a time, and use fresh questions to find what needs another look.") +
       `<div class="actions">${link("foundation", "Start from zero", "button primary")}${link(next ? `lesson/${next.id}` : "practice", next ? `Continue Domain ${domainById.get(next.domain).number}` : "Choose a domain paper")}${availableMocks.map(m => link(`mock/${m.id}`, `Open ${m.title}`)).join("")}${state.active ? link("attempt", "Resume saved practice") : ""}</div>` +
       `<div class="flow" aria-label="Learning sequence"><span>Understand the idea</span><b aria-hidden="true">›</b><span>Work an example</span><b aria-hidden="true">›</b><span>Check your understanding</span><b aria-hidden="true">›</b><span>Take the separate paper</span></div>` +
       `<div class="two-col"><section class="panel"><h2 style="margin-top:0">Your next study session</h2><p>${next ? `Read “${esc(next.title)}”, work the example, and take its three-question quiz.` : "All available lessons are marked complete. Use the domain paper and mistake review to check understanding."}</p><p class="muted">Plan for 10–14 hours per week: about 60–90 minutes on most weekdays, with longer practice and revision sessions at the weekend. Reading estimates exclude retrieval practice and revision.</p>${link("curriculum", "See the eight-week plan")}</section><section class="panel"><h2 style="margin-top:0">Your notebook</h2><p class="progress-summary">${state.completed.length}/${kit.lessons.length}<small>Available lessons marked complete, not mastery certified</small></p><p>${state.mistakes.length} questions currently need review.</p><p>${latest ? `Latest practice: ${esc(latest.title)} — ${latest.percent}% (${showDate(latest.finished)}).` : "No practice attempt completed yet."}</p>${link("review", "Review your mistakes")}</section></div>` +
@@ -68,7 +67,6 @@
   }
   function curriculum() {
     return heading("Curriculum & schedule", "A prerequisite-aware path for a complete beginner, with an intensive 10–14-hour weekly target.") +
-      notice(`Domain names and weights come from your supplied image. The detailed topic breakdown below is our proposed interpretation, not a verified official objective-by-objective syllabus. ${availableLabel} teaching and their separate papers are available in this release.`) +
       domainRows() + `<h2>Your route to 5 December</h2><div class="schedule">${kit.schedule.map(w => `<section class="week"><time>${esc(w.dates)} · ${esc(w.hours)} hours</time><h3>${esc(w.focus)}</h3><p>${esc(w.tasks)}</p></section>`).join("")}</div>` +
       `<h2>Assessment plan</h2>${list(["Each domain: short lesson checks and a separate domain paper with an explanation for every option.", `${mockRelease} Each available mock uses its own 150 fresh questions and a suggested 180-minute practice limit. Count and timing are training choices, not verified official exam specifications.`, "Each mock's practice blueprint: 26 / 25 / 21 / 27 / 19 / 22 / 10 questions across Domains 1–7, respectively. This approximates the supplied image weights; each question carries one point, not an additional domain multiplier.", "Use first-attempt unfamiliar questions and explain your reasoning. Retake improvement can reflect memory; no practice score is mapped to an official badge level."])}<div class="actions">${availableMocks.map(m => link(`mock/${m.id}`, `Open ${m.title}`)).join("")}${link("downloads", "Download the curriculum")}</div>`;
   }
@@ -217,7 +215,7 @@
     const [page, id] = route.split("/");
     const views = { home, curriculum, foundation, practice, review, glossary, downloads, sources, results, attempt: attemptPage };
     main.innerHTML = page === "domain" ? domain(id) : page === "lesson" ? lesson(id) : page === "practice" ? practice(id) : page === "mock" ? mock(id) : views[page] ? views[page]() : notFound();
-    document.title = `${main.querySelector("h1")?.textContent || "Study"} | AI Engineer Study Kit`;
+    document.title = `${main.querySelector("h1")?.textContent || "Study"} | ${kit.title}`;
     document.querySelectorAll(".rail nav a").forEach(a => {
       const target = a.getAttribute("href").slice(1);
       const assessment = page === "attempt" ? state.active : page === "results" ? state.lastResult : null;

@@ -359,13 +359,25 @@ test("Domain 7 keeps business evidence, financial assumptions, collaboration, an
   assert.ok(facts.includes("Released staff time is not automatically cash saved"));
   assert.ok(facts.includes("not Saudi law or compulsory Saudi team-role definitions"));
 });
+test("site name and homepage identify independent SDAIA AI Engineer Badge preparation", async () => {
+  assert.equal(kit.title, "SDAIA AI Engineer Badge");
+  const index = await readFile(new URL("../index.html", import.meta.url), "utf8");
+  const app = await readFile(new URL("../assets/app.js", import.meta.url), "utf8");
+  assert.ok(index.includes(`<title>${kit.title}</title>`));
+  assert.ok(index.includes(`aria-label="${kit.title} home"`));
+  assert.ok(index.includes("Not an official SDAIA product."));
+  assert.ok(app.includes('heading("Prepare for the SDAIA AI Engineer Badge."'));
+  assert.ok(app.includes("prepare to pass the SDAIA AI Engineer Badge exam"));
+  assert.ok(app.includes('| ${kit.title}`'));
+});
 test("release copy and classic offline script wiring include all seven domains and Mocks 1–3", async () => {
   const read = name => readFile(new URL(`../${name}`, import.meta.url), "utf8");
   const index = await read("index.html");
   assert.deepEqual([...index.matchAll(/<script defer src="([^"]+)"><\/script>/g)].map(m => m[1]), ["content/kit.js", "content/questions.js", "content/mocks.js", "assets/core.js", "assets/app.js"]);
-  assert.ok(index.includes('href="#domain/d7"') && index.includes("Available: Domains 1–7"));
+  assert.ok(index.includes('href="#domain/d7"'));
+  assert.ok(!index.includes('class="release-label"'));
   assert.ok(index.includes('href="#mock/m1"') && index.includes("Mock 1"));
-  assert.ok(index.includes('href="#mock/m2"') && index.includes("Mocks 1–3"));
+  assert.ok(index.includes('href="#mock/m2"') && index.includes("Mock 2"));
   assert.ok(index.includes('href="#mock/m3"'));
   for (const file of ["content/kit.js", "content/questions.js", "content/mocks.js", "assets/core.js", "assets/app.js"]) {
     assert.ok(!/^\s*import\b|\bimport\s*\(|\bfetch\s*\(/m.test(await read(file)), file);

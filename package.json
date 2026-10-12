@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Independent beginner-friendly AI Engineer exam preparation",
+  "description": "Independent beginner-friendly SDAIA AI Engineer Badge exam preparation",
   "scripts": {
     "start": "node scripts/serve.js",
     "build": "node scripts/build-notes.js",

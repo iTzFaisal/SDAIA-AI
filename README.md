@@ -1,6 +1,10 @@
-# AI Engineer study kit
+# SDAIA AI Engineer Badge
 
-Independent English, concept-focused preparation for the learner's **confirmed 5 December 2026 exam**, designed to be shared with friends who have no AI background.
+Independent English, concept-focused preparation to help learners prepare to pass the **SDAIA AI Engineer Badge exam**, with the learner's **confirmed 5 December 2026 booking**.
+
+## Open it
+
+Live site: **https://itzfaisal.github.io/SDAIA-AI/**
 
 ## Available now
 
@@ -19,10 +23,6 @@ Independent English, concept-focused preparation for the learner's **confirmed 5
 
 **All seven proposed domain curricula and Mocks 1–3 are available.** No single-domain paper is a full seven-domain mock. Topic coverage is our interpretation of the broad supplied domains, not a verified exhaustive expert-level syllabus. No passing score or official badge cutoff is invented.
 
-## Open it
-
-Live site: **https://itzfaisal.github.io/SDAIA-AI/**
-
 Open `index.html` directly in a browser. The kit has no package dependencies, accounts, API keys, remote fonts, or backend. Files are already generated in `notes/`.
 
 For a more predictable local origin and saved progress, with Node.js 20+:
@@ -32,42 +32,6 @@ npm start
 ```
 
 Then visit **http://127.0.0.1:4173**. The development server binds only to the local machine. If the port is busy, set `PORT=4174 npm start`.
-
-## Share or print
-
-Share the live site or the entire folder, including `assets/`, `content/`, and `notes/`. GitHub Pages automatically rebuilds, tests, and deploys the static site whenever changes are pushed to `main`, using `.github/workflows/pages.yml`. Friends' progress is independent and stays in their own browser; it does not sync across devices, browsers, or origins. File-based local storage behavior can differ by browser.
-
-Open `notes/printable-workbook.html` and choose **Print / save as PDF**. Separate printable paper and key are `notes/printable-practice-paper.html` and `notes/printable-answer-key.html`. These HTML files need no network to read; source links naturally need internet access.
-
-Domain 2 starts at `index.html#domain/d2`; its paper is at `index.html#practice/d2`. Downloads are `notes/domain-2-study-notes.md`, `notes/domain-2-practice-paper.md`, and `notes/domain-2-answer-key.md`. Printable versions are `notes/domain-2-printable-workbook.html`, `notes/domain-2-printable-practice-paper.html`, and `notes/domain-2-printable-answer-key.html`. Keep the answer key separate until you finish the paper.
-
-Domain 3 starts at `index.html#domain/d3`; its paper is at `index.html#practice/d3`. Downloads are `notes/domain-3-study-notes.md`, `notes/domain-3-practice-paper.md`, and `notes/domain-3-answer-key.md`. Printable versions are `notes/domain-3-printable-workbook.html`, `notes/domain-3-printable-practice-paper.html`, and `notes/domain-3-printable-answer-key.html`. Read Domains 1–2 first and keep the key separate until you finish the paper.
-
-Domain 4 starts at `index.html#domain/d4`; its paper is at `index.html#practice/d4`. Downloads are `notes/domain-4-study-notes.md`, `notes/domain-4-practice-paper.md`, and `notes/domain-4-answer-key.md`. Printable versions are `notes/domain-4-printable-workbook.html`, `notes/domain-4-printable-practice-paper.html`, and `notes/domain-4-printable-answer-key.html`. Read Domains 1–3 first and keep the key separate until you finish the paper.
-
-Domain 5 starts at `index.html#domain/d5`; its paper is at `index.html#practice/d5`. Downloads are `notes/domain-5-study-notes.md`, `notes/domain-5-practice-paper.md`, and `notes/domain-5-answer-key.md`. Printable versions are `notes/domain-5-printable-workbook.html`, `notes/domain-5-printable-practice-paper.html`, and `notes/domain-5-printable-answer-key.html`. Read Domains 1–4 first and keep the key separate until you finish the paper.
-
-Domain 6 starts at `index.html#domain/d6`; its paper is at `index.html#practice/d6`. Downloads are `notes/domain-6-study-notes.md`, `notes/domain-6-practice-paper.md`, and `notes/domain-6-answer-key.md`. Printable versions are `notes/domain-6-printable-workbook.html`, `notes/domain-6-printable-practice-paper.html`, and `notes/domain-6-printable-answer-key.html`. Read Domains 1–5 first and keep the key separate until you finish the paper.
-
-Domain 7 starts at `index.html#domain/d7`; its paper is at `index.html#practice/d7`. Downloads are `notes/domain-7-study-notes.md`, `notes/domain-7-practice-paper.md`, and `notes/domain-7-answer-key.md`. Printable versions are `notes/domain-7-printable-workbook.html`, `notes/domain-7-printable-practice-paper.html`, and `notes/domain-7-printable-answer-key.html`. Read Domains 1–6 first and keep the key separate until you finish the paper.
-
-## Mock 1
-
-Mock 1 opens at `index.html#mock/m1` (live: https://itzfaisal.github.io/SDAIA-AI/#mock/m1). Read all seven domains first. It uses the proposed allocation **26 / 25 / 21 / 27 / 19 / 22 / 10** and a suggested **180-minute practice limit**; neither 150 questions nor this timing is a verified official exam specification. Each question has one point: weighting comes from counts, not a second domain multiplier. Timed mode hides feedback until submission; learning mode offers checked-answer explanations and is supported study. Retakes shuffle the same questions, not fresh assessment.
-
-Separate downloads: `notes/mock-1-practice-paper.md` and `notes/mock-1-answer-key.md`; printable equivalents: `notes/mock-1-printable-practice-paper.html` and `notes/mock-1-printable-answer-key.html`. The paper is mixed-domain and fixed-order; its key's letters match that order, not the website's shuffled letters. Keep the key closed until finished. Results link missed concepts back to existing lessons and reviewed sources. Legal and financial interpretation boundaries below apply equally to the mock.
-
-## Mock 2
-
-Mock 2 opens at `index.html#mock/m2` (live: https://itzfaisal.github.io/SDAIA-AI/#mock/m2). Use it after studying all seven domains and repairing weak concepts from Mock 1. It has its own 150 reserved scenarios and stable IDs, covering all 42 lessons; it does not reuse Mock 1, quiz, or domain-paper questions. The same proposed allocation, suggested 180-minute practice limit, one-point scoring, modes, and source boundaries described above apply. These are practice assumptions, not verified official count, timing, or readiness criteria. Each mock's retakes reuse that mock's familiar questions.
-
-Separate downloads: `notes/mock-2-practice-paper.md` and `notes/mock-2-answer-key.md`; printable equivalents: `notes/mock-2-printable-practice-paper.html` and `notes/mock-2-printable-answer-key.html`. Keep the key closed until the first attempt is complete. Download letters refer to the fixed mixed-domain paper, not shuffled website letters. Only one active attempt and one latest detailed result are stored across all practice; starting a replacement asks for confirmation.
-
-## Mock 3
-
-Mock 3 opens at `index.html#mock/m3` (live: https://itzfaisal.github.io/SDAIA-AI/#mock/m3). Use its 150 independently authored reserved cases after repairing concepts from earlier practice. It covers all 42 lessons without reusing the other mocks, quizzes, or domain papers. The proposed allocation, suggested 180-minute limit, one-point scoring, modes, and interpretation boundaries above also apply. First attempts use unfamiliar cases; retakes do not. Fit it around revision and rest rather than treating completion of all three mocks as a readiness guarantee.
-
-Separate downloads: `notes/mock-3-practice-paper.md` and `notes/mock-3-answer-key.md`; printable equivalents: `notes/mock-3-printable-practice-paper.html` and `notes/mock-3-printable-answer-key.html`. Keep the key closed until finished. Its letters match the fixed mixed-domain download order, not shuffled website letters. The same one-active-attempt and latest-detailed-result limits apply across all practice.
 
 ## Content maintenance
 

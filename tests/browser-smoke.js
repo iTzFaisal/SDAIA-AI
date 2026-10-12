@@ -52,7 +52,7 @@ async page => {
     ensure((await page.locator("main .notice").first().textContent()).includes("Domains 1–5"), "Domain 6 states its prerequisites");
     ensure((await page.locator("main .notice").first().textContent()).includes("not legal advice"), "Domain 6 states legal interpretation boundaries");
     ensure(await page.locator('main .lesson-list a[href^="#lesson/d6-"]').count() === 6, "Domain 6 overview lists six lessons");
-    ensure((await page.locator(".release-label").textContent()).includes("Domains 1–7"), "Release label includes seven available domains");
+    ensure(await page.locator(".release-label").count() === 0, "Header omits the availability label");
     await page.goto(base + "#domain/d7");
     ensure((await page.locator("main .notice").first().textContent()).includes("Domains 1–6"), "Domain 7 states its prerequisites");
     ensure(await page.locator('main .lesson-list a[href^="#lesson/d7-"]').count() === 6, "Domain 7 overview lists six lessons");

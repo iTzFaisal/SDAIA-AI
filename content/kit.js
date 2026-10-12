@@ -3,7 +3,7 @@
   const section = (title, paragraphs, bullets = [], table = null) => ({ title, paragraphs, bullets, table });
   globalThis.STUDY_KIT = {
     version: 1,
-    title: "AI Engineer Study Kit",
+    title: "SDAIA AI Engineer Badge",
     examDate: "2026-12-05",
     reviewed: "2026-10-12",
     disclaimer: "Independent, unofficial preparation. Not affiliated with or endorsed by SDAIA. Questions are original practice material, not actual examination questions. Topic breakdowns and practice timings are our design choices, not official exam specifications.",
