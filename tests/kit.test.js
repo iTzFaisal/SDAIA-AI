@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { readFile, access } from "node:fs/promises";
 import "../content/kit.js";
 import "../content/questions.js";
+import "../content/mocks.js";
 import "../assets/core.js";
 
 const kit = globalThis.STUDY_KIT;
@@ -36,16 +37,17 @@ test("all forty-two lessons have objectives, substantial content, references, an
     assert.equal(kit.questions.filter(q => q.lesson === l.id && q.pool === "exam").length, 4);
   }
 });
-test("294 unique original question entries have valid answers and explanations for every option", () => {
-  assert.equal(kit.questions.length, 294);
-  assert.equal(new Set(kit.questions.map(q => q.id)).size, 294);
-  assert.equal(new Set(kit.questions.map(q => q.stem)).size, 294);
+test("444 unique original question entries have valid answers and explanations for every option", () => {
+  assert.equal(kit.questions.length, 444);
+  assert.equal(new Set(kit.questions.map(q => q.id)).size, 444);
+  assert.equal(new Set(kit.questions.map(q => q.stem)).size, 444);
   for (const domain of ["d1", "d2", "d3", "d4", "d5", "d6", "d7"]) {
     assert.equal(kit.questions.filter(q => q.domain === domain && q.pool === "quiz").length, 18);
     assert.equal(core.paperQuestions(kit.questions, domain).length, 24);
   }
   for (const q of kit.questions) {
     assert.equal(q.options.length, 4);
+    assert.equal(new Set(q.options.map(o => o.text)).size, 4, q.id);
     assert.ok(Number.isInteger(q.answer) && q.answer >= 0 && q.answer < 4);
     assert.ok(q.options.every(o => o.text && o.explanation.length > 20));
     assert.ok(kit.lessons.some(l => l.id === q.lesson && l.domain === q.domain));
@@ -63,11 +65,12 @@ test("grading uses original option indexes, not shuffled display letters", () =>
   const questions = core.prepare(kit.questions, () => 0);
   const answers = Object.fromEntries(questions.map(q => [q.id, q.answer]));
   const result = core.score(questions, answers);
-  assert.equal(result.correct, 294);
+  assert.equal(result.correct, 444);
   assert.equal(result.percent, 100);
-  assert.equal(result.answered, 294);
+  assert.equal(result.answered, 444);
   assert.equal(Object.keys(result.byLesson).length, 42);
-  assert.equal(Object.values(result.byDifficulty).reduce((sum, b) => sum + b.total, 0), 294);
+  assert.equal(Object.values(result.byDifficulty).reduce((sum, b) => sum + b.total, 0), 444);
+  assert.equal(Object.values(result.byDomain).reduce((sum, b) => sum + b.total, 0), 444);
 });
 test("unanswered and invalid responses count as incorrect", () => {
   const q = kit.questions.slice(0, 3);
@@ -356,17 +359,21 @@ test("Domain 7 keeps business evidence, financial assumptions, collaboration, an
   assert.ok(facts.includes("Released staff time is not automatically cash saved"));
   assert.ok(facts.includes("not Saudi law or compulsory Saudi team-role definitions"));
 });
-test("release copy and classic offline script wiring include all seven domains while mocks remain planned", async () => {
+test("release copy and classic offline script wiring include all seven domains and only Mock 1", async () => {
   const read = name => readFile(new URL(`../${name}`, import.meta.url), "utf8");
   const index = await read("index.html");
-  assert.deepEqual([...index.matchAll(/<script defer src="([^"]+)"><\/script>/g)].map(m => m[1]), ["content/kit.js", "content/questions.js", "assets/core.js", "assets/app.js"]);
+  assert.deepEqual([...index.matchAll(/<script defer src="([^"]+)"><\/script>/g)].map(m => m[1]), ["content/kit.js", "content/questions.js", "content/mocks.js", "assets/core.js", "assets/app.js"]);
   assert.ok(index.includes('href="#domain/d7"') && index.includes("Available: Domains 1–7"));
-  for (const file of ["content/kit.js", "content/questions.js", "assets/core.js", "assets/app.js"]) {
+  assert.ok(index.includes('href="#mock/m1"') && index.includes("Mock 1"));
+  for (const file of ["content/kit.js", "content/questions.js", "content/mocks.js", "assets/core.js", "assets/app.js"]) {
     assert.ok(!/^\s*import\b|\bimport\s*\(|\bfetch\s*\(/m.test(await read(file)), file);
   }
   const curriculum = await read("notes/curriculum.md");
   assert.ok(curriculum.includes("42 lessons") && curriculum.includes("126 lesson questions"));
-  assert.ok(curriculum.includes("All full weighted mocks are planned."));
+  assert.ok(curriculum.includes("Mock 1 is available with 150 fresh questions"));
+  assert.ok(curriculum.includes("Mocks 2–3 remain planned, not available"));
+  assert.ok(curriculum.includes("180 minutes, not a verified official duration"));
+  assert.ok(!curriculum.includes("All full weighted mocks are planned."));
   assert.ok(!curriculum.includes("Domain 7 and all full weighted mocks are planned"));
   const sources = await read("notes/sources-and-exam-facts.md");
   for (const id of ["http", "schema", "retries", "testing", "agency", "review", "ml-rules", "ml-monitoring", "release", "canary", "slo", "observability", "incidents", "storage", "compute", "quantization", "distillation", "overload", "balancing", "integrity", "placement", "recovery", "sa-ethics", "sa-pdpl", "sa-regulations", "sa-transfer", "ai-rmf", "injection", "supply-chain", "poisoning", "output-security", "user-needs", "service-success", "benefits", "team-roles", "professional-ethics"]) {

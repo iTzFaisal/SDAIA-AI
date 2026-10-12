@@ -24,7 +24,7 @@ async page => {
     await page.waitForFunction(() => document.activeElement.id === "main", null, { timeout: 5000 });
     ensure(await page.evaluate(() => location.hash) === initialHash, "Skip link preserves the current route");
     ensure(await page.evaluate(() => document.activeElement.id) === "main", "Skip link focuses the main content");
-    for (const route of ["home", "curriculum", "foundation", "domain/d1", "lesson/d1-l1", ...["d2", "d3", "d4", "d5", "d6", "d7"].flatMap(domain => [`domain/${domain}`, ...Array.from({ length: 6 }, (_, i) => `lesson/${domain}-l${i + 1}`)]), "practice", "practice/d1", "practice/d2", "practice/d3", "practice/d4", "practice/d5", "practice/d6", "practice/d7", "review", "glossary", "downloads", "sources"]) {
+    for (const route of ["home", "curriculum", "foundation", "domain/d1", "lesson/d1-l1", ...["d2", "d3", "d4", "d5", "d6", "d7"].flatMap(domain => [`domain/${domain}`, ...Array.from({ length: 6 }, (_, i) => `lesson/${domain}-l${i + 1}`)]), "practice", "practice/d1", "practice/d2", "practice/d3", "practice/d4", "practice/d5", "practice/d6", "practice/d7", "mock/m1", "mock/m2", "mock/m3", "review", "glossary", "downloads", "sources"]) {
       await page.goto(base + "#" + route);
       await page.locator("main h1").waitFor();
       ensure(await page.locator("main h1").count() === 1, `Route renders: ${route}`);
@@ -73,13 +73,20 @@ async page => {
     ensure((await page.locator("main .notice").textContent()).includes("126 lesson questions"), "Home shows 126 lesson questions");
     ensure(!(await page.locator("main").textContent()).includes("other 0 domains"), "Home avoids obsolete remaining-domain copy");
     ensure((await page.locator("#rail-progress").textContent()).includes("All seven domains are available"), "Rail reports all seven available without implying mastery");
+    ensure((await page.locator("main .notice").textContent()).includes("Mock 1 is available"), "Home advertises only the released mock");
     await page.goto(base + "#curriculum");
     ensure(await page.locator(".domain-row.available").count() === 7, "Curriculum marks seven domains available");
     ensure(await page.locator(".domain-row.planned").count() === 0, "No curriculum domain remains planned");
     await page.goto(base + "#practice");
     ensure(await page.getByRole("button", { name: "Start timed paper", exact: true }).count() === 7, "Practice lists seven separate papers");
-    ensure((await page.locator("main .empty").textContent()).includes("Planned, not available yet"), "Full mocks remain clearly planned");
+    ensure((await page.locator("main").textContent()).includes("Mocks 2–3 are planned, not available yet"), "Mocks 2–3 remain clearly planned");
+    ensure(await page.getByRole("link", { name: "Open Mock 1", exact: true }).count() === 1, "Practice links the separate full mock");
     ensure(!(await page.locator("main").textContent()).includes("remaining 0 domains"), "Practice avoids obsolete remaining-domain copy");
+    for (const id of ["m2", "m3"]) {
+      await page.goto(base + `#mock/${id}`);
+      ensure((await page.locator("main .notice").textContent()).includes("Planned, not available yet"), `${id} is unavailable`);
+      ensure(await page.getByRole("button", { name: "Start timed mock", exact: true }).count() === 0, `${id} cannot launch a mock`);
+    }
     await page.goto(base + "#glossary");
     await page.getByRole("searchbox").fill("recall");
     ensure((await page.locator("#glossary-count").textContent()).includes("terms shown"), "Glossary search updates count");
@@ -205,13 +212,124 @@ async page => {
     ensure((await page.locator("main").textContent()).includes("time limit expired"), "Expired saved attempt auto-submits on reload");
     ensure((await page.locator(".result-score").textContent()).includes("0%"), "Expired unanswered paper scores zero");
 
+    await page.goto(base + "#mock/m1");
+    ensure((await page.locator("main .notice").textContent()).includes("practice design choices"), "Mock page qualifies question count and suggested duration");
+    ensure(await page.locator("main table tbody tr").count() === 7, "Mock allocation displays all seven domains");
+    await page.locator("#duration-m1").selectOption("150");
+    await page.getByRole("button", { name: "Start timed mock", exact: true }).click();
+    await page.waitForURL("**/#attempt");
+    const mockStart = await page.evaluate(key => JSON.parse(localStorage.getItem(key)).active, key);
+    ensure(mockStart.kind === "mock" && mockStart.mock === "m1" && mockStart.domain === undefined, "Mock uses separate attempt identity");
+    ensure(mockStart.deadline - mockStart.started >= 150 * 60000 && mockStart.deadline - mockStart.started < 150 * 60000 + 1000, "Mock honors selected practice duration");
+    ensure(await page.evaluate(key => {
+      const a = JSON.parse(localStorage.getItem(key)).active;
+      const pool = a.questions.map(item => STUDY_KIT.questions.find(q => q.id === item.id));
+      return pool.length === 150 && new Set(pool.map(q => q.id)).size === 150 && pool.every(q => q.pool === "mock" && q.mock === "m1") && Object.entries(STUDY_KIT.mocks[0].allocation).every(([id, count]) => pool.filter(q => q.domain === id).length === count);
+    }, key), "Mock contains the exact 150-question reserved weighted set");
+    ensure(await page.locator(".question-map button").count() === 150, "Mock map has 150 accessible question jumps");
+    ensure(await page.locator('.rail a[href="#mock/m1"]').getAttribute("aria-current") === "page", "Mock attempt selects its rail entry");
+    await page.getByRole("radio").first().check();
+    await page.getByRole("button", { name: "Flag for review", exact: true }).click();
+    ensure(await page.locator(".feedback").count() === 0 && await page.getByRole("button", { name: "Check answer", exact: true }).count() === 0, "Timed mock has no answer-feedback shortcut");
+    await page.setViewportSize({ width: 390, height: 844 });
+    ensure(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), "150-question map fits mobile without overflow");
+    await page.screenshot({ path: "/private/var/folders/4s/2grtwc3j2rvf0gkv9l7s3xp80000gn/T/opencode/mock-1-attempt-mobile.png", fullPage: false });
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    await page.locator('[data-action="jump"][data-index="149"]').click();
+    ensure(await page.getByRole("button", { name: "Next", exact: true }).isDisabled(), "Mock last question disables Next");
+    await page.reload();
+    ensure(await page.evaluate(key => JSON.parse(localStorage.getItem(key)).active.index, key) === 149, "Mock jump position survives reload");
+    ensure(await page.evaluate(key => JSON.parse(localStorage.getItem(key)).active.deadline, key) === mockStart.deadline, "Mock reload preserves absolute deadline");
+    await page.getByRole("link", { name: "Save & leave", exact: true }).click();
+    await page.waitForURL("**/#practice");
+    await page.goto(base + "#mock/m1");
+    await page.evaluate(() => { window.confirm = () => false; });
+    await page.getByRole("button", { name: "Start learning mock", exact: true }).click();
+    ensure(await page.evaluate(key => JSON.parse(localStorage.getItem(key)).active.deadline, key) === mockStart.deadline, "Declining replacement preserves saved timed mock");
+    await page.getByRole("link", { name: "Resume practice", exact: true }).click();
+    await page.waitForURL("**/#attempt");
+    await page.locator('[data-action="jump"][data-index="0"]').click();
+    ensure(await page.getByRole("button", { name: "Remove review flag", exact: true }).count() === 1, "Mock flag survives save and resume");
+    ensure(await page.locator("input[name=answer]:checked").count() === 1, "Mock original-index answer survives save and resume");
+    const mockMisses = [mockStart.questions[0].id, mockStart.questions[149].id];
+    for (let i = 0; i < 150; i++) {
+      const correct = await page.evaluate(key => {
+        const a = JSON.parse(localStorage.getItem(key)).active;
+        return STUDY_KIT.questions.find(q => q.id === a.questions[a.index].id).answer;
+      }, key);
+      if (i < 149) await page.locator(`input[name=answer][value="${i === 0 ? (correct + 1) % 4 : correct}"]`).check();
+      if (i < 149) await page.getByRole("button", { name: "Next", exact: true }).click();
+    }
+    await page.evaluate(() => { window.confirm = () => true; });
+    await page.getByRole("button", { name: "Finish & see results", exact: true }).click();
+    await page.waitForURL("**/#results");
+    ensure((await page.locator(".result-score").textContent()).includes("148 / 150 correct"), "Timed shuffled mock grades 148 correct, one wrong, and one unanswered");
+    ensure((await page.locator("main").textContent()).includes("149 answered; 1 unanswered"), "Mock result reports unanswered denominator");
+    ensure(await page.locator("#domain-results li").count() === 7, "Mock result includes seven domain breakdowns");
+    ensure(await page.evaluate(key => {
+      const a = JSON.parse(localStorage.getItem(key)).lastResult;
+      const result = StudyCore.score(a.questions.map(item => STUDY_KIT.questions.find(q => q.id === item.id)), a.answers);
+      return Object.entries(STUDY_KIT.mocks[0].allocation).every(([id, count]) => result.byDomain[id].total === count) && result.correct === 148;
+    }, key), "Domain scores sum correctly without double weighting");
+    ensure(await page.locator("main details").count() === 150, "Mock result retains all 150 answer reviews");
+    await page.locator("main details").first().locator("summary").click();
+    ensure(await page.locator("main details").first().locator(".feedback li").count() === 4, "Mock answer review explains every option");
+    await page.setViewportSize({ width: 390, height: 844 });
+    ensure(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), "Mock results fit mobile");
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    await page.reload();
+    ensure((await page.locator(".result-score").textContent()).includes("148 / 150 correct"), "Mock detailed result survives reload");
+    ensure(await page.evaluate(({ key, ids }) => ids.every(id => JSON.parse(localStorage.getItem(key)).mistakes.includes(id)), { key, ids: mockMisses }), "Wrong and unanswered mock items enter the existing mistake queue");
+
+    await page.goto(base + "#review");
+    await page.getByRole("button", { name: "Practice these questions", exact: true }).click();
+    await page.waitForURL("**/#attempt");
+    const reviewIndex = await page.evaluate(({ key, id }) => JSON.parse(localStorage.getItem(key)).active.questions.findIndex(q => q.id === id), { key, id: mockMisses[0] });
+    await page.locator(`[data-action="jump"][data-index="${reviewIndex}"]`).click();
+    const reviewAnswer = await page.evaluate(id => STUDY_KIT.questions.find(q => q.id === id).answer, mockMisses[0]);
+    await page.locator(`input[name=answer][value="${reviewAnswer}"]`).check();
+    await page.getByRole("button", { name: "Check answer", exact: true }).click();
+    ensure(await page.locator(".feedback li").count() === 4, "Mixed-pool mistake review explains mock questions");
+    await page.evaluate(() => { window.confirm = () => true; });
+    await page.getByRole("button", { name: "Finish & see results", exact: true }).click();
+    await page.waitForURL("**/#results");
+    ensure(await page.evaluate(({ key, id }) => !JSON.parse(localStorage.getItem(key)).mistakes.includes(id), { key, id: mockMisses[0] }), "A later correct review removes a mock mistake");
+
+    await page.goto(base + "#mock/m1");
+    await page.getByRole("button", { name: "Start learning mock", exact: true }).click();
+    await page.waitForURL("**/#attempt");
+    ensure(await page.evaluate(key => JSON.parse(localStorage.getItem(key)).active.deadline === null, key), "Learning mock is untimed");
+    const learningAnswer = await page.evaluate(key => {
+      const a = JSON.parse(localStorage.getItem(key)).active;
+      return STUDY_KIT.questions.find(q => q.id === a.questions[0].id).answer;
+    }, key);
+    await page.locator(`input[name=answer][value="${learningAnswer}"]`).check();
+    await page.getByRole("button", { name: "Check answer", exact: true }).click();
+    ensure(await page.locator(".feedback li").count() === 4, "Learning mock exposes every-option feedback only after checking");
+    await page.reload();
+    ensure(await page.locator("input[name=answer]:disabled").count() === 4, "Learning mock checked answer remains locked after reload");
+    await page.goto(base + "#mock/m1");
+    await page.evaluate(() => { window.confirm = () => true; });
+    await page.getByRole("button", { name: "Discard saved attempt", exact: true }).click();
+    await page.getByRole("button", { name: "Start timed mock", exact: true }).click();
+    await page.waitForURL("**/#attempt");
+    await page.evaluate(key => { const state = JSON.parse(localStorage.getItem(key)); state.active.deadline = Date.now() - 10; localStorage.setItem(key, JSON.stringify(state)); }, key);
+    await page.reload();
+    await page.waitForURL("**/#results");
+    ensure((await page.locator("main").textContent()).includes("time limit expired"), "Expired saved mock auto-submits on reload");
+    ensure((await page.locator(".result-score").textContent()).includes("0 / 150 correct"), "Expired unanswered mock counts all 150 as incorrect");
+    ensure(await page.evaluate(key => {
+      const state = JSON.parse(localStorage.getItem(key));
+      return state.completed.includes("d1-l1") && state.completed.includes("d7-l5") && state.bookmarks.includes("d1-l1") && state.history.some(h => h.title === "Domain 1 paper");
+    }, key), "Mock use preserves earlier reading, bookmarks, and paper history");
+
     await page.goto(base + "#downloads");
     const links = await page.locator("main a[href^='notes/']").evaluateAll(nodes => nodes.map(n => n.href));
     for (const url of links) ensure((await page.request.get(url)).ok(), `Download exists: ${url.split("/").pop()}`);
     const downloadable = page.getByRole("link", { name: "Curriculum & study schedule Markdown", exact: false });
     ensure(await downloadable.getAttribute("download") !== null, "Markdown link requests a download rather than navigation");
 
-    for (const route of ["home", "curriculum", "lesson/d1-l5", "domain/d2", "lesson/d2-l4", "lesson/d2-l6", ...["d3", "d4", "d5", "d6", "d7"].flatMap(domain => [`domain/${domain}`, ...Array.from({ length: 6 }, (_, i) => `lesson/${domain}-l${i + 1}`)]), "practice", "practice/d2", "practice/d3", "practice/d4", "practice/d5", "practice/d6", "practice/d7", "glossary", "downloads"]) {
+    for (const route of ["home", "curriculum", "lesson/d1-l5", "domain/d2", "lesson/d2-l4", "lesson/d2-l6", ...["d3", "d4", "d5", "d6", "d7"].flatMap(domain => [`domain/${domain}`, ...Array.from({ length: 6 }, (_, i) => `lesson/${domain}-l${i + 1}`)]), "practice", "practice/d2", "practice/d3", "practice/d4", "practice/d5", "practice/d6", "practice/d7", "mock/m1", "mock/m2", "mock/m3", "glossary", "downloads"]) {
       await page.setViewportSize({ width: 390, height: 844 });
       await page.goto(base + "#" + route);
       await page.locator("main h1").waitFor();
@@ -231,10 +349,19 @@ async page => {
       ensure(await page.locator(".print-tools").isHidden(), `Domain ${number} print stylesheet removes controls`);
       await page.emulateMedia({ media: "screen" });
     }
-    await page.goto(base + "#domain/d7");
-    await page.screenshot({ path: "/private/var/folders/4s/2grtwc3j2rvf0gkv9l7s3xp80000gn/T/opencode/domain-7-desktop.png", fullPage: true });
+    await page.goto(base + "notes/mock-1-printable-practice-paper.html");
+    ensure(await page.locator(".question").count() === 150, "Printable mock paper contains 150 mixed-domain questions");
+    ensure(!(await page.locator("body").textContent()).includes("Correct:"), "Printable mock paper has no answer key");
+    await page.emulateMedia({ media: "print" });
+    ensure(await page.locator(".print-tools").isHidden(), "Printable mock paper hides controls in print");
+    await page.emulateMedia({ media: "screen" });
+    await page.goto(base + "notes/mock-1-printable-answer-key.html");
+    ensure(await page.locator(".question").count() === 150, "Printable mock key contains 150 every-option answer reviews");
+    await page.goto(base + "#mock/m1");
+    await page.screenshot({ path: "/private/var/folders/4s/2grtwc3j2rvf0gkv9l7s3xp80000gn/T/opencode/mock-1-desktop.png", fullPage: false });
     await page.setViewportSize({ width: 390, height: 844 });
-    await page.screenshot({ path: "/private/var/folders/4s/2grtwc3j2rvf0gkv9l7s3xp80000gn/T/opencode/domain-7-mobile.png", fullPage: true });
+    await page.locator("main h1").scrollIntoViewIfNeeded();
+    await page.screenshot({ path: "/private/var/folders/4s/2grtwc3j2rvf0gkv9l7s3xp80000gn/T/opencode/mock-1-mobile.png", fullPage: false });
 
     await page.goto(base);
     await page.evaluate(key => localStorage.setItem(key, JSON.stringify({ active: { questions: [{ id: "bad" }] }, completed: ["bad"], bookmarks: ["bad"] })), key);

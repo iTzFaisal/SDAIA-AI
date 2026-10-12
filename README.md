@@ -13,10 +13,11 @@ Independent English, concept-focused preparation for the learner's **confirmed 5
 - Domain 6 covers the May 2025 SDAIA ethics principles, risk tiers, lifecycle controls, roles and annex tools/checklists, fairness, explanations and oversight, privacy and Saudi PDPL context, threat modeling and supply chains, prompt injection and tool abuse, impact assessments, auditability, and conditional breach notification. English explanations and paper examples only; no coding exercises or legal advice.
 - Domain 7 covers problem discovery and non-AI alternatives, success measures, total cost and simple ROI/payback, evidence and uncertainty, ownership and accepted handoffs, prioritization, adoption and scope changes, professional integrity, escalation, and continuous learning. Worked paper examples only; no coding exercises or project compliance guarantees.
 - 126 lesson questions and **seven separate 24-question domain papers**, all with explanations for every option. Domain papers never combine question pools or reuse lesson checks.
+- **Mock 1: 150 fresh reserved questions across all seven domains**, with every-option explanations and results by domain, lesson, and practice difficulty. It does not reuse quiz or domain-paper questions.
 - Untimed learning and timed paper modes, shuffled question/option order, saved attempts, lesson bookmarks, reading progress, mistake review, and glossary search.
 - Downloadable Markdown notes, separate practice paper and answer key, and printable HTML documents that can be saved as PDF.
 
-**All seven proposed domain curricula are available; three full weighted mocks remain planned, not available.** No single-domain paper is a full seven-domain mock. Topic coverage is our interpretation of the broad supplied domains, not a verified exhaustive expert-level syllabus. No passing score or official badge cutoff is invented.
+**All seven proposed domain curricula and Mock 1 are available; Mocks 2–3 remain planned, not available.** No single-domain paper is a full seven-domain mock. Topic coverage is our interpretation of the broad supplied domains, not a verified exhaustive expert-level syllabus. No passing score or official badge cutoff is invented.
 
 ## Open it
 
@@ -50,10 +51,17 @@ Domain 6 starts at `index.html#domain/d6`; its paper is at `index.html#practice/
 
 Domain 7 starts at `index.html#domain/d7`; its paper is at `index.html#practice/d7`. Downloads are `notes/domain-7-study-notes.md`, `notes/domain-7-practice-paper.md`, and `notes/domain-7-answer-key.md`. Printable versions are `notes/domain-7-printable-workbook.html`, `notes/domain-7-printable-practice-paper.html`, and `notes/domain-7-printable-answer-key.html`. Read Domains 1–6 first and keep the key separate until you finish the paper.
 
+## Mock 1
+
+Mock 1 opens at `index.html#mock/m1` (live: https://itzfaisal.github.io/SDAIA-AI/#mock/m1). Read all seven domains first. It uses the proposed allocation **26 / 25 / 21 / 27 / 19 / 22 / 10** and a suggested **180-minute practice limit**; neither 150 questions nor this timing is a verified official exam specification. Each question has one point: weighting comes from counts, not a second domain multiplier. Timed mode hides feedback until submission; learning mode offers checked-answer explanations and is supported study. Retakes shuffle the same questions, not fresh assessment.
+
+Separate downloads: `notes/mock-1-practice-paper.md` and `notes/mock-1-answer-key.md`; printable equivalents: `notes/mock-1-printable-practice-paper.html` and `notes/mock-1-printable-answer-key.html`. The paper is mixed-domain and fixed-order; its key's letters match that order, not the website's shuffled letters. Keep the key closed until finished. Results link missed concepts back to existing lessons and reviewed sources. Legal and financial interpretation boundaries below apply equally to the mock.
+
 ## Content maintenance
 
 - `content/kit.js`: curriculum, schedule, lessons, glossary, and provenance.
 - `content/questions.js`: original questions in separate quiz and exam pools.
+- `content/mocks.js`: fresh reserved mock questions, with stable IDs and original answer indexes.
 - `assets/app.js`: website and browser-only progress.
 - `assets/core.js`: tested shuffling, grading, deadline, and saved-attempt validation.
 - `docs/DESIGN.md`: visual design direction.
@@ -65,7 +73,7 @@ npm run build
 npm test
 ```
 
-The notes build uses the website's shared content, preventing manual divergence. The 44 generated documents are deliberately included so recipients do not need Node.js. Study progress is saved only under `ai-engineer-study-kit-v1`; reset does not clear other sites' storage. Existing Domain 1–6 IDs, saved attempts, and download URLs remain valid. A timed attempt uses an absolute deadline; reloads do not restart the timer. If the page is closed, expiry is processed when it is reopened. Only the latest attempt has detailed results, with the latest 30 score summaries retained.
+The notes build uses the website's shared content, preventing manual divergence. The 48 generated documents are deliberately included so recipients do not need Node.js. Study progress is saved only under `ai-engineer-study-kit-v1`; reset does not clear other sites' storage. Existing Domain 1–7 IDs, saved attempts, and download URLs remain valid. A timed attempt uses an absolute deadline; reloads do not restart the timer. If the page is closed, expiry is processed when it is reopened. Only the latest attempt has detailed results, with the latest 30 score summaries retained.
 
 ## Source and assessment boundaries
 
