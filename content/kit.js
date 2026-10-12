@@ -75,11 +75,11 @@
       { dates: "9–15 Nov", focus: "Operations, performance & reliability", tasks: "Study Domain 4's releases, monitoring, and incidents, then Domain 5's performance measurements, batching/caching, capacity, placement, and recovery. Split the weekly hours between both domains, complete their separate papers, and use revision time to repair missed decisions rather than rushing.", hours: "10–14" },
       { dates: "16–22 Nov", focus: "Responsible AI & business", tasks: "Study Domain 6: fairness, oversight, privacy and Saudi PDPL context, threat boundaries, prompt injection, and governance. Study Domain 7: problem discovery, business measures, cost/benefit assumptions, uncertainty, collaboration, change, and professional integrity. Split the hours across both domains, take their separate papers, and repair weak decisions during revision rather than rushing.", hours: "10–14" },
       { dates: "23–29 Nov", focus: "Mixed revision & mock 1", tasks: "Take the available Mock 1 after studying all seven domains. Use a first attempt without the key, then repair weak concepts using its every-option explanations. Retaking this mock is familiar practice, not another fresh assessment.", hours: "10–14" },
-      { dates: "30 Nov–4 Dec", focus: "Mocks 2–3 & final review", tasks: "Planned: fresh mocks early in the week, targeted revision, then light review. Confirm center, ID, arrival time, and official instructions.", hours: "10–14" }
+      { dates: "30 Nov–4 Dec", focus: "Mock 2 & final review", tasks: "Take the available Mock 2 without its key after repairing Mock 1's weak concepts. Its reserved scenarios are separate from Mock 1; retakes of either are familiar practice. Mock 3 remains planned. Finish with targeted revision, then light review. Confirm center, ID, arrival time, and official instructions.", hours: "10–14" }
     ],
     mocks: [
       { id: "m1", number: 1, title: "Mock 1", status: "available", minutes: 180, allocation: { d1: 26, d2: 25, d3: 21, d4: 27, d5: 19, d6: 22, d7: 10 } },
-      { id: "m2", number: 2, title: "Mock 2", status: "planned" },
+      { id: "m2", number: 2, title: "Mock 2", status: "available", minutes: 180, allocation: { d1: 26, d2: 25, d3: 21, d4: 27, d5: 19, d6: 22, d7: 10 } },
       { id: "m3", number: 3, title: "Mock 3", status: "planned" }
     ],
     domains: [

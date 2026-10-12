@@ -6,7 +6,7 @@ Reviewed: 2026-10-12. Confirmed exam booking: 5 December 2026 (provided by learn
 
 ## Release status
 
-Available: the foundation primer, 42 lessons across Domains 1, 2, 3, 4, 5, 6, 7, 126 lesson questions, and a separate 24-question paper for each available domain. Mock 1 is available with 150 fresh questions across all seven domains; Mocks 2–3 remain planned, not available. Detailed topic lists are inferred curriculum choices, not a verified official syllabus.
+Available: the foundation primer, 42 lessons across Domains 1, 2, 3, 4, 5, 6, 7, 126 lesson questions, and a separate 24-question paper for each available domain. Mocks 1–2 are available with 150 fresh questions each across all seven domains; Mock 3 remains planned, not available. Detailed topic lists are inferred curriculum choices, not a verified official syllabus.
 
 ## Learning path
 
@@ -211,18 +211,18 @@ Take the available Mock 1 after studying all seven domains. Use a first attempt 
 
 Target: 10–14 hours.
 
-### 30 Nov–4 Dec: Mocks 2–3 & final review
+### 30 Nov–4 Dec: Mock 2 & final review
 
-Planned: fresh mocks early in the week, targeted revision, then light review. Confirm center, ID, arrival time, and official instructions.
+Take the available Mock 2 without its key after repairing Mock 1's weak concepts. Its reserved scenarios are separate from Mock 1; retakes of either are familiar practice. Mock 3 remains planned. Finish with targeted revision, then light review. Confirm center, ID, arrival time, and official instructions.
 
 Target: 10–14 hours.
 
 ## Assessment design
 
-- Separate lesson checks, domain papers, and a reserved mock pool. Explanations cover every option.
-- Mock 1 is available with 150 fresh questions across all seven domains; Mocks 2–3 remain planned, not available.
-- Mock 1 uses the proposed 150-question allocation: 26 / 25 / 21 / 27 / 19 / 22 / 10 across Domains 1–7. This approximates the image weights; 150 is not an official verified exam length.
-- Suggested Mock 1 practice time: 180 minutes, not a verified official duration. Timed mode hides feedback until submission; learning mode is supported study.
+- Separate lesson checks, domain papers, and reserved mock pools. Explanations cover every option.
+- Mocks 1–2 are available with 150 fresh questions each across all seven domains; Mock 3 remains planned, not available.
+- Each available mock uses the proposed 150-question allocation: 26 / 25 / 21 / 27 / 19 / 22 / 10 across Domains 1–7. This approximates the image weights; 150 is not an official verified exam length.
+- Suggested practice time per mock: 180 minutes, not a verified official duration. Timed mode hides feedback until submission; learning mode is supported study.
 - Each question carries one point. Weighting comes from domain question counts, not an additional domain multiplier. Unanswered questions count as incorrect.
 - Do not map practice scores or our difficulty labels to official badge levels.
 - Retakes use familiar questions and do not measure the same thing as a first attempt at fresh questions.
