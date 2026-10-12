@@ -13,11 +13,11 @@ Independent English, concept-focused preparation for the learner's **confirmed 5
 - Domain 6 covers the May 2025 SDAIA ethics principles, risk tiers, lifecycle controls, roles and annex tools/checklists, fairness, explanations and oversight, privacy and Saudi PDPL context, threat modeling and supply chains, prompt injection and tool abuse, impact assessments, auditability, and conditional breach notification. English explanations and paper examples only; no coding exercises or legal advice.
 - Domain 7 covers problem discovery and non-AI alternatives, success measures, total cost and simple ROI/payback, evidence and uncertainty, ownership and accepted handoffs, prioritization, adoption and scope changes, professional integrity, escalation, and continuous learning. Worked paper examples only; no coding exercises or project compliance guarantees.
 - 126 lesson questions and **seven separate 24-question domain papers**, all with explanations for every option. Domain papers never combine question pools or reuse lesson checks.
-- **Mocks 1–2: 150 fresh reserved questions each across all seven domains**, with every-option explanations and results by domain, lesson, and practice difficulty. Their sets are separate from each other, quizzes, and domain papers: 594 questions in total.
+- **Mocks 1–3: 150 fresh reserved questions each across all seven domains**, with every-option explanations and results by domain, lesson, and practice difficulty. Their sets are separate from each other, quizzes, and domain papers: 744 questions in total.
 - Untimed learning and timed paper modes, shuffled question/option order, saved attempts, lesson bookmarks, reading progress, mistake review, and glossary search.
 - Downloadable Markdown notes, separate practice paper and answer key, and printable HTML documents that can be saved as PDF.
 
-**All seven proposed domain curricula and Mocks 1–2 are available; Mock 3 remains planned, not available.** No single-domain paper is a full seven-domain mock. Topic coverage is our interpretation of the broad supplied domains, not a verified exhaustive expert-level syllabus. No passing score or official badge cutoff is invented.
+**All seven proposed domain curricula and Mocks 1–3 are available.** No single-domain paper is a full seven-domain mock. Topic coverage is our interpretation of the broad supplied domains, not a verified exhaustive expert-level syllabus. No passing score or official badge cutoff is invented.
 
 ## Open it
 
@@ -59,9 +59,15 @@ Separate downloads: `notes/mock-1-practice-paper.md` and `notes/mock-1-answer-ke
 
 ## Mock 2
 
-Mock 2 opens at `index.html#mock/m2` (live: https://itzfaisal.github.io/SDAIA-AI/#mock/m2). Use it after studying all seven domains and repairing weak concepts from Mock 1. It has its own 150 reserved scenarios and stable IDs, covering all 42 lessons; it does not reuse Mock 1, quiz, or domain-paper questions. The same proposed allocation, suggested 180-minute practice limit, one-point scoring, modes, and source boundaries described above apply. These are practice assumptions, not verified official count, timing, or readiness criteria. Each mock's retakes reuse that mock's familiar questions; Mock 3 remains unavailable.
+Mock 2 opens at `index.html#mock/m2` (live: https://itzfaisal.github.io/SDAIA-AI/#mock/m2). Use it after studying all seven domains and repairing weak concepts from Mock 1. It has its own 150 reserved scenarios and stable IDs, covering all 42 lessons; it does not reuse Mock 1, quiz, or domain-paper questions. The same proposed allocation, suggested 180-minute practice limit, one-point scoring, modes, and source boundaries described above apply. These are practice assumptions, not verified official count, timing, or readiness criteria. Each mock's retakes reuse that mock's familiar questions.
 
 Separate downloads: `notes/mock-2-practice-paper.md` and `notes/mock-2-answer-key.md`; printable equivalents: `notes/mock-2-printable-practice-paper.html` and `notes/mock-2-printable-answer-key.html`. Keep the key closed until the first attempt is complete. Download letters refer to the fixed mixed-domain paper, not shuffled website letters. Only one active attempt and one latest detailed result are stored across all practice; starting a replacement asks for confirmation.
+
+## Mock 3
+
+Mock 3 opens at `index.html#mock/m3` (live: https://itzfaisal.github.io/SDAIA-AI/#mock/m3). Use its 150 independently authored reserved cases after repairing concepts from earlier practice. It covers all 42 lessons without reusing the other mocks, quizzes, or domain papers. The proposed allocation, suggested 180-minute limit, one-point scoring, modes, and interpretation boundaries above also apply. First attempts use unfamiliar cases; retakes do not. Fit it around revision and rest rather than treating completion of all three mocks as a readiness guarantee.
+
+Separate downloads: `notes/mock-3-practice-paper.md` and `notes/mock-3-answer-key.md`; printable equivalents: `notes/mock-3-printable-practice-paper.html` and `notes/mock-3-printable-answer-key.html`. Keep the key closed until finished. Its letters match the fixed mixed-domain download order, not shuffled website letters. The same one-active-attempt and latest-detailed-result limits apply across all practice.
 
 ## Content maintenance
 
@@ -79,7 +85,7 @@ npm run build
 npm test
 ```
 
-The notes build uses the website's shared content, preventing manual divergence. The 52 generated documents are deliberately included so recipients do not need Node.js. Study progress is saved only under `ai-engineer-study-kit-v1`; reset does not clear other sites' storage. Existing Domain 1–7 and Mock 1 IDs, saved attempts, and download URLs remain valid. A timed attempt uses an absolute deadline; reloads do not restart the timer. If the page is closed, expiry is processed when it is reopened. Only the latest attempt has detailed results, with the latest 30 score summaries retained.
+The notes build uses the website's shared content, preventing manual divergence. The 56 generated documents are deliberately included so recipients do not need Node.js. Study progress is saved only under `ai-engineer-study-kit-v1`; reset does not clear other sites' storage. Existing Domain 1–7 and Mocks 1–2 IDs, saved attempts, and download URLs remain valid. A timed attempt uses an absolute deadline; reloads do not restart the timer. If the page is closed, expiry is processed when it is reopened. Only the latest attempt has detailed results, with the latest 30 score summaries retained.
 
 ## Source and assessment boundaries
 

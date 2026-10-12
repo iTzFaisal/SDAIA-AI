@@ -37,10 +37,10 @@ test("all forty-two lessons have objectives, substantial content, references, an
     assert.equal(kit.questions.filter(q => q.lesson === l.id && q.pool === "exam").length, 4);
   }
 });
-test("594 unique original question entries have valid answers and explanations for every option", () => {
-  assert.equal(kit.questions.length, 594);
-  assert.equal(new Set(kit.questions.map(q => q.id)).size, 594);
-  assert.equal(new Set(kit.questions.map(q => q.stem)).size, 594);
+test("744 unique original question entries have valid answers and explanations for every option", () => {
+  assert.equal(kit.questions.length, 744);
+  assert.equal(new Set(kit.questions.map(q => q.id)).size, 744);
+  assert.equal(new Set(kit.questions.map(q => q.stem)).size, 744);
   for (const domain of ["d1", "d2", "d3", "d4", "d5", "d6", "d7"]) {
     assert.equal(kit.questions.filter(q => q.domain === domain && q.pool === "quiz").length, 18);
     assert.equal(core.paperQuestions(kit.questions, domain).length, 24);
@@ -65,12 +65,12 @@ test("grading uses original option indexes, not shuffled display letters", () =>
   const questions = core.prepare(kit.questions, () => 0);
   const answers = Object.fromEntries(questions.map(q => [q.id, q.answer]));
   const result = core.score(questions, answers);
-  assert.equal(result.correct, 594);
+  assert.equal(result.correct, 744);
   assert.equal(result.percent, 100);
-  assert.equal(result.answered, 594);
+  assert.equal(result.answered, 744);
   assert.equal(Object.keys(result.byLesson).length, 42);
-  assert.equal(Object.values(result.byDifficulty).reduce((sum, b) => sum + b.total, 0), 594);
-  assert.equal(Object.values(result.byDomain).reduce((sum, b) => sum + b.total, 0), 594);
+  assert.equal(Object.values(result.byDifficulty).reduce((sum, b) => sum + b.total, 0), 744);
+  assert.equal(Object.values(result.byDomain).reduce((sum, b) => sum + b.total, 0), 744);
 });
 test("unanswered and invalid responses count as incorrect", () => {
   const q = kit.questions.slice(0, 3);
@@ -359,21 +359,21 @@ test("Domain 7 keeps business evidence, financial assumptions, collaboration, an
   assert.ok(facts.includes("Released staff time is not automatically cash saved"));
   assert.ok(facts.includes("not Saudi law or compulsory Saudi team-role definitions"));
 });
-test("release copy and classic offline script wiring include all seven domains and Mocks 1–2", async () => {
+test("release copy and classic offline script wiring include all seven domains and Mocks 1–3", async () => {
   const read = name => readFile(new URL(`../${name}`, import.meta.url), "utf8");
   const index = await read("index.html");
   assert.deepEqual([...index.matchAll(/<script defer src="([^"]+)"><\/script>/g)].map(m => m[1]), ["content/kit.js", "content/questions.js", "content/mocks.js", "assets/core.js", "assets/app.js"]);
   assert.ok(index.includes('href="#domain/d7"') && index.includes("Available: Domains 1–7"));
   assert.ok(index.includes('href="#mock/m1"') && index.includes("Mock 1"));
-  assert.ok(index.includes('href="#mock/m2"') && index.includes("Mocks 1–2"));
-  assert.ok(!index.includes('href="#mock/m3"'));
+  assert.ok(index.includes('href="#mock/m2"') && index.includes("Mocks 1–3"));
+  assert.ok(index.includes('href="#mock/m3"'));
   for (const file of ["content/kit.js", "content/questions.js", "content/mocks.js", "assets/core.js", "assets/app.js"]) {
     assert.ok(!/^\s*import\b|\bimport\s*\(|\bfetch\s*\(/m.test(await read(file)), file);
   }
   const curriculum = await read("notes/curriculum.md");
   assert.ok(curriculum.includes("42 lessons") && curriculum.includes("126 lesson questions"));
-  assert.ok(curriculum.includes("Mocks 1–2 are available with 150 fresh questions each"));
-  assert.ok(curriculum.includes("Mock 3 remains planned, not available"));
+  assert.ok(curriculum.includes("Mocks 1–3 are available with 150 fresh questions each"));
+  assert.ok(!curriculum.includes("Mock 3 remains planned"));
   assert.ok(curriculum.includes("180 minutes, not a verified official duration"));
   assert.ok(!curriculum.includes("All full weighted mocks are planned."));
   assert.ok(!curriculum.includes("Domain 7 and all full weighted mocks are planned"));

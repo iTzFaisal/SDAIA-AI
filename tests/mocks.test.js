@@ -19,12 +19,18 @@ test("Mock 1's released content, persisted IDs, original indexes, and paper orde
   assert.equal(createHash("sha256").update(JSON.stringify(paper)).digest("hex"), "9ce44c51a7a72f00e1a102bef87036c15493034e8d57f2f6819719224bb8979d");
 });
 
-for (const mockId of ["m1", "m2"]) {
+test("Mock 2's released content, persisted IDs, original indexes, and paper order are unchanged", () => {
+  // Fingerprint at 9645afb, before Mock 3.
+  assert.equal(createHash("sha256").update(JSON.stringify(core.mockQuestions(kit.questions, "m2"))).digest("hex"), "cea9583be81fb4e26c7c53d5972b562ad1a08a3fe1692505a70ad4f609bd98f2");
+});
+
+const mockIds = ["m1", "m2", "m3"];
+for (const mockId of mockIds) {
 const paper = core.mockQuestions(kit.questions, mockId);
 const makeAttempt = () => ({ kind: "mock", mock: mockId, mode: "timed", title: `Mock ${mockId.slice(1)}`, started: 1000, deadline: 2000, questions: core.prepare(paper, () => .37).map(q => ({ id: q.id, order: q.order })), answers: {}, checked: [], flags: [], index: 0 });
 
 test(`${mockId} is a fresh reserved 150-question set with the exact practice allocation`, () => {
-  assert.deepEqual(kit.mocks.map(m => [m.id, m.status]), [["m1", "available"], ["m2", "available"], ["m3", "planned"]]);
+  assert.deepEqual(kit.mocks.map(m => [m.id, m.status]), [["m1", "available"], ["m2", "available"], ["m3", "available"]]);
   const metadata = kit.mocks.find(m => m.id === mockId);
   assert.deepEqual(metadata.allocation, allocation);
   assert.equal(metadata.minutes, 180);
@@ -32,7 +38,7 @@ test(`${mockId} is a fresh reserved 150-question set with the exact practice all
   assert.equal(new Set(paper.map(q => q.id)).size, 150);
   assert.deepEqual(paper.map(q => q.id).sort(), Array.from({ length: 150 }, (_, i) => `${mockId}-${String(i + 1).padStart(3, "0")}`));
   const prior = kit.questions.filter(q => q.mock !== mockId);
-  assert.equal(prior.length, 444);
+  assert.equal(prior.length, 594);
   for (const q of paper) {
     assert.equal(q.mock, mockId);
     assert.ok(!prior.some(old => old.id === q.id || old.stem === q.stem));
@@ -47,7 +53,7 @@ test(`${mockId} is a fresh reserved 150-question set with the exact practice all
   for (const l of kit.lessons) assert.ok(paper.some(q => q.lesson === l.id), l.id);
   for (const difficulty of ["Foundation", "Applied", "Stretch"]) assert.ok(paper.some(q => q.difficulty === difficulty));
   assert.deepEqual([0, 1, 2, 3].map(a => paper.filter(q => q.answer === a).length), [38, 38, 37, 37]);
-  assert.deepEqual(core.mockQuestions(kit.questions, "m3"), []);
+  assert.deepEqual(core.mockQuestions(kit.questions, "m4"), []);
   assert.deepEqual(core.mockQuestions(kit.questions, undefined), []);
   assert.deepEqual(core.mockQuestions(kit.questions, "d1"), []);
   // Fixed downloadable order begins across domains, not seven concatenated papers.
@@ -102,23 +108,27 @@ test(`${mockId} saved attempts require a complete isolated reserved set and pres
     assert.equal(core.validAttempt(corrupt, kit.questions), false);
   }
   // Available mocks must be isolated even when their domains and sizes match.
-  const second = core.mockQuestions(kit.questions, mockId === "m1" ? "m2" : "m1");
+  for (const otherId of mockIds.filter(id => id !== mockId)) {
+    const mixed = structuredClone(good);
+    mixed.questions[0].id = core.mockQuestions(kit.questions, otherId)[0].id;
+    assert.equal(core.validAttempt(mixed, kit.questions), false, `${mockId}/${otherId}`);
+    const wrongIdentity = structuredClone(good);
+    wrongIdentity.mock = otherId;
+    assert.equal(core.validAttempt(wrongIdentity, kit.questions), false);
+  }
+  const unknown = paper.map(q => ({ ...q, id: q.id.replace(`${mockId}-`, "m4-"), mock: "m4" }));
   const mixed = structuredClone(good);
-  mixed.questions[0].id = second[0].id;
-  assert.equal(core.validAttempt(mixed, kit.questions), false);
-  const third = paper.map(q => ({ ...q, id: q.id.replace(`${mockId}-`, "m3-"), mock: "m3" }));
-  mixed.questions[0].id = third[0].id;
-  assert.equal(core.validAttempt(mixed, [...kit.questions, ...third]), false);
+  mixed.questions[0].id = unknown[0].id;
+  assert.equal(core.validAttempt(mixed, [...kit.questions, ...unknown]), false);
   const exam = { kind: "exam", mode: "timed", title: "Legacy paper", started: 1000, deadline: 2000, index: 0, questions: core.prepare(core.paperQuestions(kit.questions, "d1")).map(q => ({ id: q.id, order: q.order })), answers: {} };
   assert.ok(core.validAttempt(exam, kit.questions));
   exam.questions[0].id = paper[0].id;
   assert.equal(core.validAttempt(exam, kit.questions), false);
 });
 
-test(`${mockId} mistake review can combine old and both mock pools without becoming a weighted mock`, () => {
+test(`${mockId} mistake review can combine old and all three mock pools without becoming a weighted mock`, () => {
   const old = kit.questions.find(q => q.pool === "quiz");
-  const other = core.mockQuestions(kit.questions, mockId === "m1" ? "m2" : "m1")[0];
-  const review = { ...makeAttempt(), kind: "review", mode: "learning", deadline: null, questions: core.prepare([old, paper[0], other]).map(q => ({ id: q.id, order: q.order })) };
+  const review = { ...makeAttempt(), kind: "review", mode: "learning", deadline: null, questions: core.prepare([old, ...mockIds.map(id => core.mockQuestions(kit.questions, id)[0])]).map(q => ({ id: q.id, order: q.order })) };
   delete review.mock;
   assert.ok(core.validAttempt(review, kit.questions));
   review.mock = mockId;
@@ -168,12 +178,12 @@ test("mock explanations preserve reviewed Saudi ethics/legal and financial bound
   assert.ok(text("m1-142").includes("not production approval"));
 });
 
-for (const number of [1, 2]) {
-test(`all 52 downloads exist; Mock ${number} paper and fixed key agree without leaking spoilers`, async () => {
+for (const number of [1, 2, 3]) {
+test(`all 56 downloads exist; Mock ${number} paper and fixed key agree without leaking spoilers`, async () => {
   const paper = core.mockQuestions(kit.questions, `m${number}`);
   const files = await readdir(new URL("../notes/", import.meta.url));
-  assert.equal(files.filter(name => /\.(md|html)$/.test(name)).length, 52);
-  assert.ok(!files.some(name => /^mock-3-/.test(name)));
+  assert.equal(files.filter(name => /\.(md|html)$/.test(name)).length, 56);
+  assert.ok(!files.some(name => /^mock-4-/.test(name)));
   const mdPaper = await read(`mock-${number}-practice-paper.md`);
   const mdKey = await read(`mock-${number}-answer-key.md`);
   const htmlPaper = await read(`mock-${number}-printable-practice-paper.html`);
@@ -204,7 +214,8 @@ test(`all 52 downloads exist; Mock ${number} paper and fixed key agree without l
     assert.ok(output.includes("180 minutes"));
     assert.ok(output.includes("not verified exam specifications"));
     assert.ok(output.includes("not another score multiplier"));
-    assert.ok(output.includes("Mock 3 remains planned"));
+    assert.ok(output.includes("The other available mocks have their own reserved questions"));
+    assert.ok(!output.includes("Mock 3 remains planned"));
   }
 });
 }
@@ -249,4 +260,43 @@ test("Mock 2 preserves reviewed legal, ethics, professional, and financial disti
   assert.ok(text("143").includes("one-year simple undiscounted training example"));
   assert.ok(text("144").includes("not proven cash savings"));
   assert.ok(text("147").includes("not itself Saudi law"));
+});
+
+test("Mock 3 calculations preserve metric units, exposure, net alternatives, and outcome denominators", () => {
+  const q = suffix => kit.questions.find(q => q.id === `m3-${suffix}`);
+  const answer = suffix => q(suffix).options[q(suffix).answer].text;
+  const correctExplanation = suffix => q(suffix).options[q(suffix).answer].explanation;
+  assert.equal(answer("002"), `A ${20 / 100 * 100}%; B ${20 / 400 * 100}%, using each branch's delivery count`);
+  assert.equal(answer("017"), `F1 about ${(2 * 40 / (2 * 40 + 10 + 40) * 100).toFixed(1)}%; accuracy ${(40 + 910) / 1000 * 100}%, with many true negatives lifting accuracy`);
+  assert.equal(answer("021"), "A has higher precision; B has higher recall");
+  assert.ok(12 / 15 > 18 / 30 && 12 / 24 < 18 / 24);
+  assert.ok(correctExplanation("021").includes("A precision = 12/15 = 80%, recall = 12/24 = 50%; B precision = 60%, recall = 75%"));
+  assert.equal(answer("022"), `MAE ties at ${(0 + 6) / 2} litres; RMSE favors B`);
+  assert.ok(Math.sqrt((0 ** 2 + 6 ** 2) / 2) > Math.sqrt((3 ** 2 + 3 ** 2) / 2));
+  assert.equal(answer("025"), `${Math.sqrt(25)} minutes`);
+  assert.equal(answer("091"), `${9800 / 10000 * 100}%; the combined success-and-latency objective is missed`);
+  assert.equal(answer("106"), `${(300 + 150 + 500 + 50).toLocaleString("en-US")} ms, including queueing and validation`);
+  assert.equal(answer("108"), `B: SAR ${(36 / 150).toFixed(2)} versus A: SAR ${(30 / 100).toFixed(2)}`);
+  assert.equal(answer("113"), `${100 - (70 - 50) * 4} jobs`);
+  assert.equal(answer("143"), `Negative SAR ${Math.abs((130000 - 80000) - (90000 - 20000)).toLocaleString("en-US")}`);
+  assert.equal(answer("144"), "No positive monthly net capacity-value benefit and no demonstrated cash payback");
+  assert.ok(correctExplanation("144").includes("The recurring valued capacity equals operating cost before setup"));
+  assert.equal(answer("149"), `${36 / 80 * 100}% adoption; ${36 / 60 * 100}% success among users`);
+});
+
+test("Mock 3 preserves reviewed-source, legal notification, oversight, and appraisal boundaries", () => {
+  const text = suffix => { const q = kit.questions.find(q => q.id === `m3-${suffix}`); return q.stem + " " + q.options.map(o => o.text + " " + o.explanation).join(" "); };
+  assert.ok(text("122").includes("do not waive otherwise applicable law"));
+  assert.ok(text("124").includes("DM.1"));
+  assert.ok(text("128").includes("Article 16"));
+  for (const phrase of ["not universal raw-payload retention", "not a complete current inventory"]) assert.ok(text("129").includes(phrase), phrase);
+  for (const phrase of ["Article 24", "controller awareness", "Thursday 08:00", "under the stated condition", "Containment and escalation", "separate subject notification without undue delay"]) assert.ok(text("138").includes(phrase), phrase);
+  assert.ok(text("139").includes("ethics roles and legally required privacy roles are also distinct"));
+  assert.ok(text("139").includes("not a statutory exemption or an individual AI Engineer assessment result"));
+  assert.ok(text("140").includes("high-risk pre- and post-conformity assessments"));
+  assert.ok(text("142").includes("not production approval"));
+  assert.ok(text("143").includes("one-year simple undiscounted training example"));
+  assert.ok(text("144").includes("capacity value is not proven cash savings"));
+  assert.ok(text("147").includes("not automatic statutory privacy roles"));
+  assert.ok(text("150").includes("not itself Saudi law"));
 });

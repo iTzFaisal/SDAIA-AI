@@ -73,21 +73,21 @@ async page => {
     ensure((await page.locator("main .notice").textContent()).includes("126 lesson questions"), "Home shows 126 lesson questions");
     ensure(!(await page.locator("main").textContent()).includes("other 0 domains"), "Home avoids obsolete remaining-domain copy");
     ensure((await page.locator("#rail-progress").textContent()).includes("All seven domains are available"), "Rail reports all seven available without implying mastery");
-    ensure((await page.locator("main .notice").textContent()).includes("Mocks 1–2 are available"), "Home advertises both released mocks");
+    ensure((await page.locator("main .notice").textContent()).includes("Mocks 1–3 are available"), "Home advertises all three released mocks");
+    ensure(await page.evaluate(() => STUDY_KIT.questions.length) === 744, "Browser loads all 744 question entries");
     await page.goto(base + "#curriculum");
     ensure(await page.locator(".domain-row.available").count() === 7, "Curriculum marks seven domains available");
     ensure(await page.locator(".domain-row.planned").count() === 0, "No curriculum domain remains planned");
     await page.goto(base + "#practice");
     ensure(await page.getByRole("button", { name: "Start timed paper", exact: true }).count() === 7, "Practice lists seven separate papers");
-    ensure((await page.locator("main").textContent()).includes("Mock 3 remains planned, not available yet"), "Mock 3 remains clearly planned");
+    ensure((await page.locator("main").textContent()).includes("Mocks 1–3 are available"), "Practice advertises all three mocks");
     ensure(await page.getByRole("link", { name: "Open Mock 1", exact: true }).count() === 1, "Practice links the separate full mock");
     ensure(await page.getByRole("link", { name: "Open Mock 2", exact: true }).count() === 1, "Practice also links the second full mock");
+    ensure(await page.getByRole("link", { name: "Open Mock 3", exact: true }).count() === 1, "Practice links the third full mock");
     ensure(!(await page.locator("main").textContent()).includes("remaining 0 domains"), "Practice avoids obsolete remaining-domain copy");
-    for (const id of ["m3"]) {
-      await page.goto(base + `#mock/${id}`);
-      ensure((await page.locator("main .notice").textContent()).includes("Planned, not available yet"), `${id} is unavailable`);
-      ensure(await page.getByRole("button", { name: "Start timed mock", exact: true }).count() === 0, `${id} cannot launch a mock`);
-    }
+    await page.goto(base + "#mock/m4");
+    ensure((await page.locator("main h1").textContent()).includes("not in the kit"), "Unknown mock route has a clear missing-page response");
+    ensure(await page.getByRole("button", { name: "Start timed mock", exact: true }).count() === 0, "Unknown mock cannot launch an attempt");
     await page.goto(base + "#glossary");
     await page.getByRole("searchbox").fill("recall");
     ensure((await page.locator("#glossary-count").textContent()).includes("terms shown"), "Glossary search updates count");
@@ -214,7 +214,8 @@ async page => {
     ensure((await page.locator(".result-score").textContent()).includes("0%"), "Expired unanswered paper scores zero");
 
     const checkMock = ensure;
-    for (const mockId of ["m1", "m2"]) {
+    const mockIds = ["m1", "m2", "m3"];
+    for (const mockId of mockIds) {
     const ensure = (condition, message) => checkMock(condition, `${mockId}: ${message}`);
     await page.goto(base + `#mock/${mockId}`);
     ensure((await page.locator("main .notice").textContent()).includes("practice design choices"), "Mock page qualifies question count and suggested duration");
@@ -246,7 +247,7 @@ async page => {
     ensure(await page.evaluate(key => JSON.parse(localStorage.getItem(key)).active.deadline, key) === mockStart.deadline, "Mock reload preserves absolute deadline");
     await page.getByRole("link", { name: "Save & leave", exact: true }).click();
     await page.waitForURL("**/#practice");
-    await page.goto(base + `#mock/${mockId === "m1" ? "m2" : "m1"}`);
+    await page.goto(base + `#mock/${mockIds[(mockIds.indexOf(mockId) + 1) % mockIds.length]}`);
     await page.evaluate(() => { window.confirm = () => false; });
     await page.getByRole("button", { name: "Start learning mock", exact: true }).click();
     ensure(await page.evaluate(key => JSON.parse(localStorage.getItem(key)).active.deadline, key) === mockStart.deadline, "Declining replacement preserves saved timed mock");
@@ -341,12 +342,12 @@ async page => {
       localStorage.setItem(key, JSON.stringify(state));
     }, key);
     await page.reload();
-    ensure(await page.evaluate(key => JSON.parse(localStorage.getItem(key)).active === null, key), "Mixed Mock 1/2 saved set is rejected in the browser");
-    ensure(await page.evaluate(key => JSON.parse(localStorage.getItem(key)).lastResult.mock === "m2", key), "Rejecting a mixed attempt preserves the valid Mock 2 detailed result");
+    ensure(await page.evaluate(key => JSON.parse(localStorage.getItem(key)).active === null, key), "Mixed Mock 1/3 saved set is rejected in the browser");
+    ensure(await page.evaluate(key => JSON.parse(localStorage.getItem(key)).lastResult.mock === "m3", key), "Rejecting a mixed attempt preserves the valid Mock 3 detailed result");
 
     await page.goto(base + "#downloads");
     const links = await page.locator("main a[href^='notes/']").evaluateAll(nodes => nodes.map(n => n.href));
-    ensure(links.length === 52, "Downloads list all 52 released files");
+    ensure(links.length === 56, "Downloads list all 56 released files");
     for (const url of links) ensure((await page.request.get(url)).ok(), `Download exists: ${url.split("/").pop()}`);
     const downloadable = page.getByRole("link", { name: "Curriculum & study schedule Markdown", exact: false });
     ensure(await downloadable.getAttribute("download") !== null, "Markdown link requests a download rather than navigation");
@@ -371,7 +372,7 @@ async page => {
       ensure(await page.locator(".print-tools").isHidden(), `Domain ${number} print stylesheet removes controls`);
       await page.emulateMedia({ media: "screen" });
     }
-    for (const number of [1, 2]) {
+    for (const number of [1, 2, 3]) {
     await page.goto(base + `notes/mock-${number}-printable-practice-paper.html`);
     ensure(await page.locator(".question").count() === 150, "Printable mock paper contains 150 mixed-domain questions");
     ensure(!(await page.locator("body").textContent()).includes("Correct:"), "Printable mock paper has no answer key");

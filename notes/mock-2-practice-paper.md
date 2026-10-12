@@ -8,7 +8,7 @@ Reviewed: 2026-10-12. Confirmed exam booking: 5 December 2026 (provided by learn
 - Suggested practice time: 180 minutes. This count and timing are unofficial training choices, not verified exam specifications.
 - One best answer and one point per question. Domain weighting comes from question counts, not another score multiplier. Unanswered questions count as incorrect.
 - Write answers separately and do not open the separate key until finished. Downloadable order is fixed and mixed by domain; the website shuffles questions and options.
-- Retakes use this same set, not fresh assessment. The other available mock has its own reserved questions; Mock 3 remains planned. Practice scores do not certify readiness or an official badge level.
+- Retakes use this same set, not fresh assessment. The other available mocks have their own reserved questions. Practice scores do not certify readiness or an official badge level.
 - Saudi legal material is an educational summary of the previously reviewed texts, not legal advice or a current comprehensive compliance inventory. Financial exercises use stated simple undiscounted training assumptions.
 
 Practice allocation, approximating the supplied image weights
