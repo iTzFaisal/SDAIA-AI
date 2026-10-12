@@ -24,13 +24,31 @@ Read the foundation primer and Domains 1–5, especially evaluation slices, RAG,
 
 Responsible AI means designing and operating a system with justified benefits, evidence, and controls for its effects on people. A useful model can still cause harm through exclusion, surveillance, misleading advice, or an inappropriate decision process. Ask who receives the benefit, who bears mistakes, whether people can challenge outcomes, and whether a simpler non-AI process would reduce the risk. High accuracy alone does not answer these questions.
 
-SDAIA's published September 2023 AI Ethics Principles name seven principles: Fairness; Privacy & Security; Humanity; Social & Environmental Benefits; Reliability & Safety; Transparency & Explainability; Accountability & Responsibility. They connect planning, input preparation, building/validation, and deployment/monitoring. Treat them as a framework for concrete responsibilities, not seven words that certify a system. This lesson summarizes that published framework; it does not establish a complete current legal regime or official exam objectives.
+The reviewed May 2025 SDAIA AI Ethics Principles (SDAIA-P114E, version 1) name seven principles: Fairness; Privacy & Security; Humanity; Social & Environmental Benefits; Reliability & Safety; Transparency & Explainability; Accountability & Responsibility. They connect Plan and Design, Prepare Input Data, Build and Validate, and Deploy and Monitor. Treat them as a framework for concrete responsibilities, not seven words that certify a system. Page 9 describes scope covering stakeholders designing, developing, deploying, implementing, using, or being affected by AI within KSA, not only public-sector developers. This lesson summarizes that edition; it does not establish a complete current legal regime or official exam objectives.
+
+### Read the four risk tiers before selecting controls
+
+Page 9 distinguishes little or no risk, limited risk, high risk, and unacceptable risk. For little or no risk, such as the document's spam-filter example, it states no restrictions in this risk classification while recommending ethical compliance; this is not an exemption from otherwise applicable law. Limited-risk systems are subject to the document's ethics principles. High-risk systems affecting basic rights must undergo pre- and post-conformity assessments, with relevant statutory requirements also considered. A conformity assessment checks alignment with the applicable requirements; it is not simply a high accuracy score.
+
+The framework says unacceptable-risk systems threatening safety, livelihood, or rights are not allowed, giving examples involving social profiling, exploitation of children, and distortion of behavior. Do not reclassify such a use as acceptable merely because a manager signs a risk register. Tier selection depends on the actual use and effects, not model size or a vendor's 'safe AI' label. These are the reviewed SDAIA framework's categories, not an imported EU-law classification or a complete statement of Saudi enforcement procedures.
+
+### Turn principle names into distinct checks
+
+Humanity asks whether the system respects fundamental human rights and KSA's cultural values, augments human capabilities, and preserves human choice rather than deceiving or manipulating people. Social & Environmental Benefits asks about effects beyond an individual prediction, including society, ecosystems, sustainability, resource use, and energy consumption. A model that saves staff time but increases exclusion or total energy demand needs an assessment of those effects, not an unsupported claim of social benefit.
+
+Reliability means intended consistency of behavior and results; safety concerns avoiding harm or danger. A consistently wrong or harmful system is not safe merely because it is predictable. The controls call for stress-test data, testing under extreme or unexpected conditions, stakeholder sign-off at critical decisions, and continuous monitoring of both technical robustness and outward harm. Plan these checks before release and repeat them as the use case changes.
 
 ### Bias can enter before and after training
 
 A recruiting model may learn past hiring preferences rather than future job performance. Missing regions, inconsistent labels, inaccessible application forms, or historical exclusion can shape the dataset. A feature such as school or location may act as a proxy for a group even after an explicit demographic field is removed. Deployment can introduce new harm if a useful ranking is turned into automatic rejection without review.
 
 Statistical bias in estimation is not identical to social unfairness. Fairness concerns justified treatment and consequences in context. Check collection, label meaning, population coverage, metrics, threshold decisions, and the human workflow. A biased label is not repaired simply by collecting more copies of it. Evaluate relevant intersections and accessibility needs where lawful and appropriate; protect sensitive audit information rather than putting it into unrestricted dashboards.
+
+### Set fairness thresholds early and justify sensitive inputs
+
+The fairness controls on pages 13–15 begin with technical and non-technical stakeholders identifying affected and vulnerable groups, harms, benefits, metrics, and allowed thresholds during Plan and Design. Choose measures according to the algorithm, the decision's effects, and the costs of correct and incorrect predictions. During Build and Validate, assess the selected champion model against those thresholds and document fairness/performance tradeoffs and any failed assessment. During Deploy and Monitor, investigate deviations and whether the model needs renewal. The PDF does not supply one universal numerical fairness threshold.
+
+For model inputs, page 14 says to exclude identified sensitive attributes and analyze/exclude their proxies; where exclusion is not possible because of the system's accuracy or objective, justify their use. This is not a claim that dropping one column guarantees fairness, nor permission to collect sensitive data without a valid basis. Keep prediction-feature choices distinct from lawful, protected audit information used to measure group outcomes. Document necessity and tradeoffs with the appropriate owners; the ethics justification does not replace privacy-law review.
 
 ### Different rates answer different fairness questions
 
@@ -62,10 +80,13 @@ Equal selection did not establish equal error behavior or fairness. Before chang
 
 - How can label choice create unfairness before model training?
 - Why must an audit report group counts as well as rates?
+- What distinguishes high risk from unacceptable risk in the reviewed framework?
+- When should fairness metrics and thresholds be chosen, and what happens if production crosses them?
+- How do humanity, social/environmental benefits, reliability, and safety ask different questions?
 
 ### Learning references
 
-- SDAIA — AI Ethics Principles (September 2023): https://dgp.sdaia.gov.sa/wps/wcm/connect/4c56ed1c-1b82-447d-ac29-638f5f99c12e/ai-principles-EN.pdf?MOD=AJPERES
+- SDAIA — AI Ethics Principles (May 2025, SDAIA-P114E, version 1): https://sdaia.gov.sa/en/SDAIA/about/Documents/ai-principles.pdf
 - NIST — AI Risk Management Framework and Playbook: https://airc.nist.gov/airmf-resources/playbook/
 - Google ML Crash Course — Accuracy, recall, precision, and related metrics: https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall
 
@@ -95,6 +116,12 @@ Human-in-the-loop review means a person participates before a defined action, wh
 
 Automation bias is overreliance on a system's suggestion because it looks authoritative. Design interfaces that distinguish facts, predictions, uncertainty, and missing evidence. Evaluate the human-plus-AI process against an appropriate baseline, including disagreement and errors. A confidence score alone is not a reliable escalation trigger if it is uncalibrated or blind to unfamiliar cases. Require review for consequential actions and defined out-of-scope cases, not only when the model admits uncertainty.
 
+### Apply the framework's explicit oversight and disclosure controls
+
+Page 23 calls for human oversight and final determination for automated decisions whose impact is irreversible, difficult to reverse, or involves life-and-death decisions. It also says AI systems should not be used for social scoring or mass surveillance. A routine approval click is not enough for such a consequential decision. Establish who can halt the process, what evidence they see, and a tested fallback for unexpected behavior.
+
+The transparency controls on pages 24–25 require explanations matched to context, consequences, stakeholder authorization, privacy, and sensitivity. Third-party procurement needs AI Ethics due diligence and accessible, traceable documentation before sign-off. Document output/performance measures and failures, and test the interface for confusion, confirmation bias, and cognitive fatigue. Annexure C DM.1 asks that chatbot users know they are interacting with a non-human correspondent; BV.10 asks about simulated social interaction and attachment, not a system actually possessing feelings. Disclosure, usable explanations, feedback, and redress are complementary safeguards.
+
 ### Make correction and challenge practical
 
 A person affected by an incorrect record needs a reachable process that can investigate and correct the appropriate source. Explain what the AI did and what the human or business process decided without inventing certainty. Record the challenge, the version and evidence involved, the responsible reviewer, and the outcome under justified privacy and retention rules. An appeal button that routes to the same unchecked model does not create independent reconsideration.
@@ -122,7 +149,7 @@ Reduce scope or intake, add justified review capacity and margin, and define a s
 
 ### Learning references
 
-- SDAIA — AI Ethics Principles (September 2023): https://dgp.sdaia.gov.sa/wps/wcm/connect/4c56ed1c-1b82-447d-ac29-638f5f99c12e/ai-principles-EN.pdf?MOD=AJPERES
+- SDAIA — AI Ethics Principles (May 2025, SDAIA-P114E, version 1): https://sdaia.gov.sa/en/SDAIA/about/Documents/ai-principles.pdf
 - NIST — AI Risk Management Framework and Playbook: https://airc.nist.gov/airmf-resources/playbook/
 - NIST AI RMF — Generative AI Profile (600-1): https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence
 - OWASP LLM Top 10 — LLM06:2025 Excessive Agency: https://genai.owasp.org/llmrisk/llm062025-excessive-agency/
@@ -152,6 +179,12 @@ PDPL Articles 10–14 connect purpose, minimum necessary collection, privacy inf
 Pseudonymization replaces identifiers with codes while additional information can reconnect them. Keep the mapping separately protected, but treat the data as personal where identification remains possible. Anonymization requires removing direct and indirect identification so people cannot be reidentified; Implementing Regulation Article 9 requires evaluating effectiveness and reidentification risk. A hash of an easy-to-guess identifier is not automatically anonymous. Encryption protects readable content from unauthorized access but authorized decryption still reveals the personal data.
 
 PDPL Article 4 sets rights to be informed, access data, obtain a readable copy, seek correction/completion/update, and seek destruction subject to the law's conditions. Implementing Regulation Article 3 generally requires executing rights requests within 30 days without delay; a justified additional period of at most 30 days is conditional and requires advance notice and reasons. Verify request identity proportionately and protect other people's information. Do not promise unconditional instant erasure or expose someone else's records while answering an access request.
+
+### Classify data, then choose and test protection methods
+
+The May 2025 ethics controls on pages 16–18 require privacy/security by design, data classification, appropriate read/write/update authorization, confidentiality, integrity, availability, and testing whether combined data reveals sensitive information or breaks anonymity. Revisit privacy impact and risk assessments after deployment. Internal approval of profiling under the framework is not by itself a PDPL lawful basis and does not override its unacceptable-risk restrictions.
+
+Annexure A pages 38–39 gives examples: de-identification removes identifying information; masking hides or replaces values; tokenization substitutes tokens and may retain a link; pseudonymization can remain reconnectable; encryption protects content using keys. None of those labels alone proves effective anonymization. Test indirect identification and combined-data disclosure. Data loss prevention (DLP) detects or blocks unauthorized leakage; data governance assigns handling policies and owners; data minimization limits collection to what the stated purpose needs. These controls complement, rather than replace, purpose, lawful basis, rights, and retention review.
 
 ### Retention and transfers need their own review
 
@@ -183,7 +216,7 @@ Replacing each customer name with a stable code while retaining a mapping is pse
 - SDAIA Data Governance Platform — Personal Data Protection Law: https://dgp.sdaia.gov.sa/wps/portal/pdp/knowledgecenter/details/PDPL
 - SDAIA — PDPL Implementing Regulation: https://dgp.sdaia.gov.sa/wps/portal/pdp/knowledgecenter/details/PDPL2
 - SDAIA — Regulation on Personal Data Transfer Outside the Kingdom: https://dgp.sdaia.gov.sa/wps/portal/pdp/knowledgecenter/details/RegulationonPersonalDataTransferOutsidetheKingdom
-- SDAIA — AI Ethics Principles (September 2023): https://dgp.sdaia.gov.sa/wps/wcm/connect/4c56ed1c-1b82-447d-ac29-638f5f99c12e/ai-principles-EN.pdf?MOD=AJPERES
+- SDAIA — AI Ethics Principles (May 2025, SDAIA-P114E, version 1): https://sdaia.gov.sa/en/SDAIA/about/Documents/ai-principles.pdf
 
 ## Lesson 4: Threat-model the system & secure its supply chain
 
@@ -311,9 +344,59 @@ In an illustrative permitted test set, 6 of 80 attempts cause a defined unauthor
 
 ### Governance makes ownership and stopping rules explicit
 
-Governance is the structure for deciding who may approve, operate, change, assess, and stop an AI system. Name a system owner, relevant domain decision-makers, data/privacy owners, security responders, operators, and assessors. SDAIA's September 2023 framework describes adopting-entity roles including Head of Entity/CDO, compliance leadership, Responsible AI Officer, and AI System Assessor. These ethics roles are not automatically identical to a legally required data protection officer; PDPL rules define their own conditions and duties.
+Governance is the structure for deciding who may approve, operate, change, assess, and stop an AI system. Name a system owner, relevant domain decision-makers, data/privacy owners, security responders, operators, and assessors. SDAIA's May 2025 framework describes adopting-entity roles including Head of Entity/CDO, compliance leadership, Responsible AI Officer, and AI System Assessor. These ethics roles are not automatically identical to a legally required data protection officer; PDPL rules define their own conditions and duties.
 
 NIST AI RMF 1.0 organizes work into Govern, Map, Measure, and Manage. Govern establishes policies and accountability; Map understands context and harms; Measure evaluates evidence and controls; Manage prioritizes and responds to risks. Its Playbook is voluntary adaptable guidance, not Saudi law or a checklist that must be completed verbatim. Use these functions to organize thinking while separately identifying applicable Saudi legal, regulatory, contractual, and sector requirements.
+
+### Know who approves, coordinates, implements, and assesses
+
+Pages 28–31 distinguish national and adopting-entity responsibilities. SDAIA develops and updates principles and supporting guidance, advises entities, and measures/monitors compliance with sector-regulator support. An AI System Developer builds the system; an AI System Owner applies or uses it; an AI System Assessor audits it. These are functional responsibilities, not automatic substitutes for controller/processor classifications under the PDPL.
+
+Adopting-entity roles in the reviewed framework (pages 29–31)
+
+| Role | Main responsibility |
+| --- | --- |
+| Head of Entity / Chief Data Officer (CDO) | Approve and oversee the AI Ethics Plan, designate roles, approve the annual report, resolve/delegate issues, and escalate to SDAIA when needed. |
+| Chief Compliance Officer / Compliance Officer (CCO/CO) | Strategic lead reporting to the CDO: oversee/review the plan and KPIs, ensure national-regulation alignment, and obtain third-party contractual guarantees. |
+| Responsible AI Officer (RAIO) | Operational lead: develop the plan, priorities, targets and KPIs with leadership; coordinate data governance/protection; maintain procedures and employee awareness. |
+| AI System Assessor | Review stakeholder communication/feedback, processes, documentation and KPIs; publish audit reports covering development, deployment, and third-party procurement. |
+
+### Use all four lifecycle stages as evidence gates
+
+Page 11 gives four equally important stages, repeated as the system evolves. Plan and Design defines the problem, data-driven framing, feasibility, and KPIs. Prepare Input Data gathers, assesses, cleanses, validates, and transforms data into features. Build and Validate trains, tests, tunes, validates performance, and evaluates risk. Deploy and Monitor deploys, versions, periodically monitors performance, and revisits design when reviews indicate a need.
+
+The accountability controls add signed-off datasets before model development, documented data-quality checks, named responsibility for features/hyperparameters/metrics, and model approval after successful validation and user acceptance testing before production. Deployment needs periodic performance reports and predefined data/performance alerts, each assigned to a stakeholder. A new provider, dataset, tool, or purpose can require earlier stages to be revisited; approval does not freeze the risk forever.
+
+### Choose the annex tool for the evidence you need
+
+Annexure A describes ten tools, and Annexure B page 40 marks their lifecycle use. The table below follows those marks, not a rule that a blank cell forbids using a tool elsewhere. For example, the main fairness controls still require production monitoring even though the annex marks Fairness Assessment only in Build and Validate. These tools complement model/system cards and privacy assessments; they are not certificates of safe or lawful deployment.
+
+A Fairness Position Statement publicly explains the chosen fairness criteria and rationale in non-technical language. Fairness Assessment compares group behavior, systematic over/underestimation, and data representation. Ethical Impact Assessment considers direct and indirect effects on people and communities and informs whether to deploy. Safety Self-Assessment logs and reviews accuracy, reliability, security, and robustness throughout the lifecycle. Privacy and Security Standards supply relevant controls; Data Protection Methods reduce data exposure. Listing an annex's example standard or software tool does not make it mandatory or prove compliance.
+
+Architecture for Trustworthy AI uses sense–plan–act: sense the relevant environment, consider only plans consistent with requirements, and restrict actions to compliant behaviors. Algorithm Assessment examines how algorithms influence decisions and the needed human oversight; Algorithm Auditing systematically and continuously checks behavior and ethical compliance. An AI Methods Explanation Report explains behavior and outcomes and justifies explanation/performance tradeoffs through cost-benefit analysis, rather than supplying a fluent model-written story.
+
+Annexure B lifecycle mapping (page 40)
+
+| Tool | Marked stages |
+| --- | --- |
+| Fairness Position Statement | Plan and Design |
+| Ethical Impact Assessment | Plan and Design; Deploy and Monitor |
+| Privacy and Security Standards | All four stages |
+| Architecture for Trustworthy AI | Plan and Design |
+| Algorithm Assessment | Build and Validate; Deploy and Monitor |
+| Fairness Assessment | Build and Validate |
+| AI Methods Explanation Report | Build and Validate; Deploy and Monitor |
+| Algorithm Auditing | Build and Validate; Deploy and Monitor |
+| Safety Self-Assessment | All four stages |
+| Data Protection Methods | All four stages |
+
+### Use checklist evidence without confusing badges or obligations
+
+Annexure C pages 41–48 organizes checks as PD (Plan and Design), PID (Prepare Input Data), BV (Build and Validate), and DM (Deploy and Monitor). A useful review records the check, evidence/version, owner, gap, corrective action, and reassessment date. Examples include human oversight (PD.1), sensitive-feature proxy analysis (PID.10), tested fallback under unexpected/adversarial conditions (BV.1), stakeholder approval after user acceptance testing (BV.11), non-human chatbot disclosure (DM.1), deployed fairness monitoring (DM.9), and redress plus information about it (DM.17–18). Refer to the source for the complete checklist; these examples do not replace it.
+
+The checklist's 'Binding for Third-party' column distinguishes items: PD.1 and BV.11 say Yes, while fairness-KPI definition PD.12 and interpretability examination BV.7 say No. No is not permission for the adopting entity to ignore the corresponding principle or applicable law. For procurement, link applicable checks to evidence, responsibilities, and contractual guarantees rather than assuming a vendor handles everything.
+
+Pages 31–32 describe Optional Registration, possible compliance follow-up for registered entities, optional reports, and motivational badges for ethics adoption/progress. Registration being optional does not make PDPL or applicable statutory duties optional. These entity/product ethics badges are not the AI Engineer exam's Assistant, Associate, or Expert awards, and this PDF supplies no numerical exam cutoffs. A checklist or claimed ethics badge is not a complete legal compliance guarantee.
 
 ### An assessment must change a decision when necessary
 
@@ -351,10 +434,13 @@ The team disables the export path, preserves minimized restricted evidence, coor
 
 - What evidence would make an impact assessment change a launch decision?
 - Why must controller awareness, affected-subject communication, and service recovery be tracked separately?
+- Which role approves the ethics plan, which develops it operationally, and which audits it?
+- How do Annexure B's tool marks differ from the ongoing controls in the main principles?
+- Why does optional ethics registration not make privacy-law duties optional?
 
 ### Learning references
 
-- SDAIA — AI Ethics Principles (September 2023): https://dgp.sdaia.gov.sa/wps/wcm/connect/4c56ed1c-1b82-447d-ac29-638f5f99c12e/ai-principles-EN.pdf?MOD=AJPERES
+- SDAIA — AI Ethics Principles (May 2025, SDAIA-P114E, version 1): https://sdaia.gov.sa/en/SDAIA/about/Documents/ai-principles.pdf
 - NIST — AI Risk Management Framework and Playbook: https://airc.nist.gov/airmf-resources/playbook/
 - SDAIA Data Governance Platform — Personal Data Protection Law: https://dgp.sdaia.gov.sa/wps/portal/pdp/knowledgecenter/details/PDPL
 - SDAIA — PDPL Implementing Regulation: https://dgp.sdaia.gov.sa/wps/portal/pdp/knowledgecenter/details/PDPL2
@@ -362,11 +448,14 @@ The team disables the export path, preserves minimized restricted evidence, coor
 
 ## Domain 6 revision sheet
 
-- **Ethics:** SDAIA's published framework names fairness, privacy/security, humanity, social/environmental benefits, reliability/safety, transparency/explainability, and accountability/responsibility.
+- **Ethics:** SDAIA May 2025, SDAIA-P114E version 1: fairness, privacy/security, humanity, social/environmental benefits, reliability/safety, transparency/explainability, and accountability/responsibility.
+- **Risk tiers:** Little or no risk: ethical compliance recommended; limited: ethics principles apply; high: pre- and post-conformity assessments plus statutory review; unacceptable: not allowed in the framework.
+- **Lifecycle:** Plan and Design → Prepare Input Data → Build and Validate → Deploy and Monitor; all four matter and repeat as the system changes.
 - **Fairness:** Inspect population, labels, proxies, error costs, counts, uncertainty, and the complete decision workflow; one parity metric is not proof.
 - **Denominators:** Selection = selected/all assessed; recall = TP/all actual positives; false-positive rate = FP/all actual negatives, by stated group.
 - **Explanations:** Audience-appropriate transparency and faithful evidence matter; generated rationales and feature importance do not prove causes.
 - **Oversight:** Reviewers need expertise, source evidence, authority, time, capacity, and a practical challenge route.
+- **Consequential decisions:** The framework calls for human oversight and final determination for irreversible, hard-to-reverse, or life-and-death decisions; it rejects social scoring and mass surveillance.
 - **Privacy roles:** Controller chooses purpose/method; processor acts on its behalf. Outsourcing does not erase controller responsibility.
 - **Purpose and basis:** Identify necessary processing and a valid basis before collection or secondary use; consent is not blanket permission.
 - **Identifiability:** Pseudonymization and encryption do not make data anonymous; consider indirect identification, linkage, and derived representations.
@@ -380,6 +469,9 @@ The team disables the export path, preserves minimized restricted evidence, coor
 - **Tools and output:** Enforce narrow user/resource/destination permissions outside the model; bind approval to exact arguments and render outputs safely.
 - **Security tests:** Measure actual forbidden outcomes and legitimate-task utility in authorized synthetic tests. Zero tested successes is not immunity.
 - **Governance:** Assign owners and stopping rules; assess impacts and residual risk, document evidence, and reassess changes. Management cannot waive law.
+- **Ethics roles:** Head/CDO approves; CCO/CO leads strategically; RAIO develops and implements operationally; Assessor reviews and audits. These are not automatically PDPL privacy roles.
+- **Annex tools:** Match the statement, impact assessment, architecture, assessments, explanation report, audits, safety checks, standards, and data protection to evidence needs; production fairness monitoring remains necessary.
+- **Registration and badges:** Ethics registration/reports are optional in the described mechanism; statutory duties are separate. Ethics adoption badges are not AI Engineer exam awards.
 - **Notification:** Saudi Implementing Regulation Article 24 has conditional authority notification within 72 hours from controller awareness and separate subject notification without undue delay; preserve other duties.
 - **Incident response:** Contain and escalate promptly, preserve proportionate protected evidence, assess notification in parallel, verify recovery, and assign corrective work.
 
@@ -720,7 +812,7 @@ D. A higher average accuracy cancels the obligation
 
 - **A. Every location must cause a hiring decision:** Association with a group does not establish a causal relationship.
 - **B. Removing one field proves all outcomes are fair:** Other features and historical labels can still carry unfair influence.
-- **C. Proxy features can preserve group-related influence — correct:** Location can reflect a group characteristic even without its explicit field.
+- **C. Proxy features can preserve group-related influence — correct:** Location can reflect a group characteristic even without its explicit field. The May 2025 fairness controls call for proxy analysis and exclusion, or justified use where exclusion is not possible; removing one field does not prove fairness.
 - **D. Fairness can only be checked on training accuracy:** Fairness needs representative outcomes, slices, and workflow evidence.
 
 #### Check 2: Group A has 24 correctly selected of 30 eligible people; Group B has 15 of 30. What are their recalls and gap?
@@ -739,7 +831,7 @@ D. A higher average accuracy cancels the obligation
 - **A. Use the seven principle names as a safety badge:** Naming principles supplies no implementation evidence or official certification.
 - **B. Assign all responsibility to the model:** People and organizations need identifiable responsibility and intervention mechanisms.
 - **C. Stop monitoring after a high overall score:** Lifecycle accountability continues through deployment and changes.
-- **D. Name owners, document evidence, and define intervention and review duties — correct:** Concrete responsibilities and traceable decisions put accountability into practice.
+- **D. Name owners, document evidence, and define intervention and review duties — correct:** Concrete responsibilities and traceable decisions put accountability into practice. The framework distinguishes Head/CDO approval, CCO/CO strategic leadership, RAIO operational work, and Assessor review/audit.
 
 ### Explain decisions & make oversight meaningful
 
@@ -765,7 +857,7 @@ D. A higher average accuracy cancels the obligation
 
 **Correct answer: A.**
 
-- **A. A qualified reviewer with source evidence, time, authority to refuse, and an escalation route — correct:** These conditions make oversight capable of changing an unsafe outcome.
+- **A. A qualified reviewer with source evidence, time, authority to refuse, and an escalation route — correct:** These conditions make oversight capable of changing an unsafe outcome. Page 23 specifically calls for human oversight and final determination for irreversible, difficult-to-reverse, or life-and-death automated decisions.
 - **B. A required approval click with no evidence view:** A click can become a rubber stamp without meaningful investigation.
 - **C. A reviewer allowed only to repeat the model's wording:** Oversight requires independent judgment and ability to intervene.
 - **D. Review only when an unvalidated confidence score is low:** An unvalidated score can miss confident errors and out-of-scope cases.
@@ -881,7 +973,7 @@ D. A higher average accuracy cancels the obligation
 
 **Correct answer: A.**
 
-- **A. Management acceptance cannot waive legal obligations; redesign or stop and reassess — correct:** Risk acceptance is limited to permitted residual risk and cannot authorize a legal violation.
+- **A. Management acceptance cannot waive legal obligations; redesign or stop and reassess — correct:** Risk acceptance is limited to permitted residual risk and cannot authorize a legal violation. The SDAIA framework also says unacceptable-risk uses are not allowed; a manager's signature is not a way to relabel them.
 - **B. The manager's signature automatically makes the processing lawful:** A signature cannot replace compliance with applicable requirements.
 - **C. Keep the assessment unchanged and hide it from owners:** Assessment findings need transparent owned actions and evidence of mitigation.
 - **D. A higher average accuracy cancels the obligation:** Performance does not override legal requirements or the identified harm.
@@ -962,8 +1054,8 @@ D. A higher average accuracy cancels the obligation
   Reviewed 12 October 2026: public/private/hybrid cloud, service models, and shared responsibilities. Vendor educational material, not provider-specific setup or a claim that cloud capacity is unlimited.
 - **IBM Think — What is disaster recovery?** (Learning reference): https://www.ibm.com/think/topics/disaster-recovery
   Reviewed 12 October 2026: dependency mapping, recovery time/point objectives, failover, readiness, and exercises. Objectives are business choices; this reference is not Saudi law or an official exam specification.
-- **SDAIA — AI Ethics Principles (September 2023)** (Official ethics framework): https://dgp.sdaia.gov.sa/wps/wcm/connect/4c56ed1c-1b82-447d-ac29-638f5f99c12e/ai-principles-EN.pdf?MOD=AJPERES
-  English PDF reviewed 12 October 2026: seven principles, lifecycle controls, risk categories, and adopting-entity roles. This published framework is not the PDPL, an exam syllabus, or proof of a project's legal compliance; check applicable current sector requirements.
+- **SDAIA — AI Ethics Principles (May 2025, SDAIA-P114E, version 1)** (Official ethics framework): https://sdaia.gov.sa/en/SDAIA/about/Documents/ai-principles.pdf
+  Learner-supplied English PDF ai-principles.pdf reviewed 12 October 2026; page 50 identifies May 2025, SDAIA-P114E, version 1, Regulatory Documents, General. Replaces this kit's September 2023 citation. Pages 9–11 cover scope/risk/lifecycle, 12–28 principles and controls, 28–32 roles/optional registration, and 33–48 tools/checklists. The linked official publication is a further-reading location, not an assertion of a byte-identical download. The framework is not the PDPL, an exam syllabus, or proof of project compliance; verify applicable current requirements.
 - **SDAIA Data Governance Platform — Personal Data Protection Law** (Official Saudi legal text): https://dgp.sdaia.gov.sa/wps/portal/pdp/knowledgecenter/details/PDPL
   Arabic official text reviewed 12 October 2026. Lessons provide English instructional summaries of Articles 1–14, 17–22, 29–31, not an authoritative translation or legal advice. Scope, exceptions, and additional applicable rules need qualified review.
 - **SDAIA — PDPL Implementing Regulation** (Official Saudi legal text): https://dgp.sdaia.gov.sa/wps/portal/pdp/knowledgecenter/details/PDPL2

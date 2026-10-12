@@ -53,6 +53,14 @@ async page => {
     ensure((await page.locator("main .notice").first().textContent()).includes("not legal advice"), "Domain 6 states legal interpretation boundaries");
     ensure(await page.locator('main .lesson-list a[href^="#lesson/d6-"]').count() === 6, "Domain 6 overview lists six lessons");
     ensure((await page.locator(".release-label").textContent()).includes("Domains 1–6"), "Release label includes six available domains");
+    await page.goto(base + "#lesson/d6-l1");
+    ensure((await page.locator("main").textContent()).includes("pre- and post-conformity assessments"), "Domain 6 renders May 2025 risk-tier controls");
+    await page.goto(base + "#lesson/d6-l6");
+    ensure(await page.getByRole("rowheader", { name: "Responsible AI Officer (RAIO)", exact: true }).count() === 1, "Domain 6 renders the adopting-entity role table");
+    ensure(await page.getByRole("rowheader", { name: "Fairness Assessment", exact: true }).count() === 1, "Domain 6 renders the visual annex tool mapping");
+    ensure((await page.locator("main").textContent()).includes("not the AI Engineer exam's"), "Ethics adoption badges remain separate from exam awards");
+    await page.goto(base + "#sources");
+    ensure(await page.locator('main a[href="https://sdaia.gov.sa/en/SDAIA/about/Documents/ai-principles.pdf"]').count() === 1, "Sources link the May 2025 ethics publication");
     for (const domain of ["d7"]) {
       await page.goto(base + `#domain/${domain}`);
       ensure((await page.locator("main").textContent()).includes("outline only"), `${domain} remains clearly planned`);

@@ -261,11 +261,55 @@ test("Domain 6 retains explicit ethics, privacy, and conditional notification bo
   assert.ok(governance.includes("cannot waive legal obligations"));
   assert.ok(governance.includes("not automatically identical to a legally required data protection officer"));
   assert.ok(governance.includes("voluntary adaptable guidance, not Saudi law"));
-  for (const id of ["sa-pdpl", "sa-regulations", "sa-transfer", "sa-ethics"]) {
+  for (const id of ["sa-pdpl", "sa-regulations", "sa-transfer"]) {
     const source = kit.sources.find(s => s.id === id);
     assert.equal(new URL(source.url).hostname, "dgp.sdaia.gov.sa");
     assert.ok(source.note.includes("12 October 2026"));
   }
+});
+test("Domain 6 reflects the May 2025 ethics edition, controls, roles, and visual annex mapping", async () => {
+  const lesson = id => kit.lessons.find(l => l.id === id);
+  const text = id => lesson(id).sections.flatMap(s => s.paragraphs).join(" ");
+  const source = kit.sources.find(s => s.id === "sa-ethics");
+  assert.equal(new URL(source.url).hostname, "sdaia.gov.sa");
+  assert.equal(new URL(source.url).pathname, "/en/SDAIA/about/Documents/ai-principles.pdf");
+  for (const phrase of ["May 2025", "SDAIA-P114E", "version 1"]) assert.ok(source.title.includes(phrase));
+  assert.ok(source.note.includes("Learner-supplied") && source.note.includes("12 October 2026"));
+  const ethics = text("d6-l1");
+  for (const phrase of ["little or no risk", "limited risk", "high risk", "unacceptable risk", "pre- and post-conformity assessments", "metrics, and allowed thresholds during Plan and Design", "does not supply one universal numerical fairness threshold"]) assert.ok(ethics.includes(phrase), phrase);
+  const oversight = text("d6-l2");
+  for (const phrase of ["human oversight and final determination", "social scoring or mass surveillance", "DM.1", "BV.10", "Third-party procurement"]) assert.ok(oversight.includes(phrase), phrase);
+  assert.ok(text("d6-l3").includes("does not override its unacceptable-risk restrictions"));
+  const governance = text("d6-l6");
+  for (const phrase of ["sense–plan–act", "signed-off datasets", "user acceptance testing", "'Binding for Third-party'", "not permission for the adopting entity", "PD.12", "BV.7", "DM.17–18", "Optional Registration", "not the AI Engineer exam's", "still require production monitoring"]) assert.ok(governance.includes(phrase), phrase);
+  const tables = lesson("d6-l6").sections.map(s => s.table).filter(Boolean);
+  const roles = tables.find(t => t.caption.startsWith("Adopting-entity roles"));
+  assert.deepEqual(roles.rows.map(r => r[0]), ["Head of Entity / Chief Data Officer (CDO)", "Chief Compliance Officer / Compliance Officer (CCO/CO)", "Responsible AI Officer (RAIO)", "AI System Assessor"]);
+  const mapping = tables.find(t => t.caption === "Annexure B lifecycle mapping (page 40)");
+  assert.deepEqual(mapping.rows, [
+    ["Fairness Position Statement", "Plan and Design"],
+    ["Ethical Impact Assessment", "Plan and Design; Deploy and Monitor"],
+    ["Privacy and Security Standards", "All four stages"],
+    ["Architecture for Trustworthy AI", "Plan and Design"],
+    ["Algorithm Assessment", "Build and Validate; Deploy and Monitor"],
+    ["Fairness Assessment", "Build and Validate"],
+    ["AI Methods Explanation Report", "Build and Validate; Deploy and Monitor"],
+    ["Algorithm Auditing", "Build and Validate; Deploy and Monitor"],
+    ["Safety Self-Assessment", "All four stages"],
+    ["Data Protection Methods", "All four stages"]
+  ]);
+  const read = name => readFile(new URL(`../${name}`, import.meta.url), "utf8");
+  for (const file of ["notes/domain-6-study-notes.md", "notes/domain-6-printable-workbook.html"]) {
+    const output = await read(file);
+    assert.ok(output.includes(source.title), file);
+    assert.ok(output.includes("Annexure B lifecycle mapping (page 40)"), file);
+    assert.ok(output.includes("Responsible AI Officer (RAIO)"), file);
+    assert.ok(output.includes("unacceptable risk"), file);
+    assert.ok(!output.includes("AI Ethics Principles (September 2023)"), file);
+  }
+  const facts = await read("notes/sources-and-exam-facts.md");
+  assert.ok(facts.includes("SDAIA May 2025 ethics framework (SDAIA-P114E, version 1)"));
+  assert.ok(!facts.includes("September 2023 ethics framework"));
 });
 test("release copy and classic offline script wiring include Domain 6 without presenting future domains as available", async () => {
   const read = name => readFile(new URL(`../${name}`, import.meta.url), "utf8");

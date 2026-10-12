@@ -1,5 +1,14 @@
 # Validation
 
+## Domain 6 supplied-PDF comparison — 12 October 2026
+
+- Compared existing Domain 6 with the learner-supplied May 2025 `ai-principles.pdf` (SDAIA-P114E, version 1), including the visible page-40 tool-mapping dots and checklist Yes/No cells. Replaced the older September 2023 source citation and filled scope, risk-tier, lifecycle, principle-control, role, tool and checklist gaps. Page-referenced findings and interpretation cautions are in `docs/domain-6-ethics-review.md`. This was not a complete comparison between the 2023 and 2025 source editions or verification of all later instruments.
+- `npm run build`: all 38 downloads regenerated. `npm test`: all 14 tests passed, including edition provenance, exact ten-tool mapping, role table, explicit framework restrictions, third-party-column boundaries and generated-output checks. The original legal/notification-boundary tests still pass.
+- Attached Chrome smoke suite: 346 checks passed with no JavaScript page errors. Added checks cover risk-tier teaching, role/tool tables, ethics-versus-exam badge distinction and the official source link. All six revised lesson routes remain within a 390px mobile viewport; all six papers, saved progress, absolute deadlines and 38 downloads still pass. An initial new assertion incorrectly requested a `cell` for a table row heading; correcting the test to the existing semantic `rowheader` made the full rerun pass without an application change. Prior kit progress was restored by the suite.
+- The new ten-row annex table was also visually reviewed in a mobile viewport and fits without page overflow. No application JavaScript, CSS, runtime dependencies, asset loading or storage format changed.
+- Direct comparison with `HEAD` verified all 30 Domain 1–5 lessons and 210 earlier questions unchanged. All 252 question stems, option text, answers, IDs and pool assignments remain unchanged; selected Domain 6 explanations and recall prompts were expanded. Original PDPL, transfer, retention and conditional-notification sections are retained. Earlier workbook changes are shared-reference regeneration, not changes to their teaching content.
+- Verification used local HTTP, not a fresh `file://` or published-site browser run. The supplied PDF was left untouched and was not added to deployment. The comparison initially stopped with local changes; publication was subsequently requested explicitly by the user. The temporary test server was stopped after verification; Chrome remains attached.
+
 ## Domain 6 expansion — 12 October 2026
 
 - `npm run build`: 38 downloadable documents generated from shared content. Domain 6 adds six lessons, 18 lesson checks, a separate 24-question paper/key, Markdown notes, and three printable HTML equivalents. Existing download URLs and prerequisite links remain stable; Domain 7 and all full weighted mocks remain planned.

@@ -14,8 +14,8 @@ Topic: Recognize harm & evaluate fairness. Practice difficulty: Foundation (not 
 
 - **A. They matter only after a public complaint:** The framework connects ethical controls to the entire system lifecycle.
 - **B. Fairness alone replaces privacy and safety:** The principles address multiple distinct interacting concerns.
-- **C. Listing them certifies official exam readiness:** They are an ethics framework, not badge thresholds or a readiness guarantee.
-- **D. They guide concrete controls from planning through deployment and monitoring — correct:** Lifecycle decisions, owners, and evidence operationalize the published principles.
+- **C. Listing them certifies official exam readiness:** They are an ethics framework, not exam badge thresholds or a readiness guarantee. Its optional-registration motivational badges concern entity/product ethics adoption, not AI Engineer awards.
+- **D. They guide concrete controls from planning through deployment and monitoring — correct:** The May 2025 framework names Plan and Design, Prepare Input Data, Build and Validate, and Deploy and Monitor. Lifecycle decisions, owners, and evidence operationalize its principles.
 
 ## 2. A model is trained to predict past loan approval, and historical approvals excluded qualified applicants from one region. What should be investigated first?
 

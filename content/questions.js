@@ -1271,7 +1271,7 @@
     q("d6-l1-q1", "d6-l1", "quiz", "Foundation", "A hiring model removes a demographic field but retains a strongly related location field. Which concern remains?", 2, [
       ["Every location must cause a hiring decision", "Association with a group does not establish a causal relationship."],
       ["Removing one field proves all outcomes are fair", "Other features and historical labels can still carry unfair influence."],
-      ["Proxy features can preserve group-related influence", "Location can reflect a group characteristic even without its explicit field."],
+      ["Proxy features can preserve group-related influence", "Location can reflect a group characteristic even without its explicit field. The May 2025 fairness controls call for proxy analysis and exclusion, or justified use where exclusion is not possible; removing one field does not prove fairness."],
       ["Fairness can only be checked on training accuracy", "Fairness needs representative outcomes, slices, and workflow evidence."]
     ]),
     q("d6-l1-q2", "d6-l1", "quiz", "Applied", "Group A has 24 correctly selected of 30 eligible people; Group B has 15 of 30. What are their recalls and gap?", 0, [
@@ -1284,7 +1284,7 @@
       ["Use the seven principle names as a safety badge", "Naming principles supplies no implementation evidence or official certification."],
       ["Assign all responsibility to the model", "People and organizations need identifiable responsibility and intervention mechanisms."],
       ["Stop monitoring after a high overall score", "Lifecycle accountability continues through deployment and changes."],
-      ["Name owners, document evidence, and define intervention and review duties", "Concrete responsibilities and traceable decisions put accountability into practice."]
+      ["Name owners, document evidence, and define intervention and review duties", "Concrete responsibilities and traceable decisions put accountability into practice. The framework distinguishes Head/CDO approval, CCO/CO strategic leadership, RAIO operational work, and Assessor review/audit."]
     ]),
     q("d6-l2-q1", "d6-l2", "quiz", "Foundation", "An assistant gives a fluent explanation of its eligibility recommendation. What should establish confidence in that explanation?", 1, [
       ["Its length and polished tone", "Persuasive language does not establish fidelity to the actual decision evidence."],
@@ -1299,7 +1299,7 @@
       ["Unreviewed decisions can be labeled human-approved", "A queue does not establish that the required review occurred."]
     ]),
     q("d6-l2-q3", "d6-l2", "quiz", "Applied", "Which oversight design is strongest for a consequential recommendation?", 0, [
-      ["A qualified reviewer with source evidence, time, authority to refuse, and an escalation route", "These conditions make oversight capable of changing an unsafe outcome."],
+      ["A qualified reviewer with source evidence, time, authority to refuse, and an escalation route", "These conditions make oversight capable of changing an unsafe outcome. Page 23 specifically calls for human oversight and final determination for irreversible, difficult-to-reverse, or life-and-death automated decisions."],
       ["A required approval click with no evidence view", "A click can become a rubber stamp without meaningful investigation."],
       ["A reviewer allowed only to repeat the model's wording", "Oversight requires independent judgment and ability to intervene."],
       ["Review only when an unvalidated confidence score is low", "An unvalidated score can miss confident errors and out-of-scope cases."]
@@ -1371,7 +1371,7 @@
       ["No notification is needed if software was rolled back", "Rollback does not erase a disclosure or an applicable notification duty."]
     ]),
     q("d6-l6-q3", "d6-l6", "quiz", "Applied", "An impact assessment identifies harm that violates applicable obligations, but a manager accepts the risk. What is the sound conclusion?", 0, [
-      ["Management acceptance cannot waive legal obligations; redesign or stop and reassess", "Risk acceptance is limited to permitted residual risk and cannot authorize a legal violation."],
+      ["Management acceptance cannot waive legal obligations; redesign or stop and reassess", "Risk acceptance is limited to permitted residual risk and cannot authorize a legal violation. The SDAIA framework also says unacceptable-risk uses are not allowed; a manager's signature is not a way to relabel them."],
       ["The manager's signature automatically makes the processing lawful", "A signature cannot replace compliance with applicable requirements."],
       ["Keep the assessment unchanged and hide it from owners", "Assessment findings need transparent owned actions and evidence of mitigation."],
       ["A higher average accuracy cancels the obligation", "Performance does not override legal requirements or the identified harm."]
@@ -1380,8 +1380,8 @@
     q("d6-e01", "d6-l1", "exam", "Foundation", "Which statement best connects SDAIA's published ethics principles to AI development?", 3, [
       ["They matter only after a public complaint", "The framework connects ethical controls to the entire system lifecycle."],
       ["Fairness alone replaces privacy and safety", "The principles address multiple distinct interacting concerns."],
-      ["Listing them certifies official exam readiness", "They are an ethics framework, not badge thresholds or a readiness guarantee."],
-      ["They guide concrete controls from planning through deployment and monitoring", "Lifecycle decisions, owners, and evidence operationalize the published principles."]
+      ["Listing them certifies official exam readiness", "They are an ethics framework, not exam badge thresholds or a readiness guarantee. Its optional-registration motivational badges concern entity/product ethics adoption, not AI Engineer awards."],
+      ["They guide concrete controls from planning through deployment and monitoring", "The May 2025 framework names Plan and Design, Prepare Input Data, Build and Validate, and Deploy and Monitor. Lifecycle decisions, owners, and evidence operationalize its principles."]
     ]),
     q("d6-e02", "d6-l1", "exam", "Applied", "A model is trained to predict past loan approval, and historical approvals excluded qualified applicants from one region. What should be investigated first?", 1, [
       ["Whether deeper layers can copy approval history more accurately", "Better reproduction of a biased decision label may preserve the original harm."],
