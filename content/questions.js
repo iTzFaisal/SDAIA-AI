@@ -1520,6 +1520,258 @@
       ["Article 24's authority rule is conditional, subject notification is separately without undue delay, and other duties may apply", "Operational outages, conditional breach notifications, and subject communication must not be collapsed into one clock."],
       ["A two-hour RTO cancels every legal notification requirement", "Service recovery objectives cannot waive applicable legal reporting duties."],
       ["Wait exactly 72 hours before involving privacy owners", "The outer authority limit is not a waiting period; containment and internal escalation should be prompt."]
+    ]),
+    q("d7-l1-q1", "d7-l1", "quiz", "Foundation", "A sponsor requests an AI chatbot for a confusing application process. What should discovery establish first?", 2, [
+      ["Which model has the most parameters", "Model size does not identify what users need or why the current process fails."],
+      ["A promise that every request will become automated", "Discovery has not established either the need or whether automation is appropriate."],
+      ["What users are trying to accomplish and where the current journey breaks", "Research turns a proposed solution into an evidence-based problem that alternatives can address."],
+      ["The final chatbot color scheme", "Visual choices do not establish the underlying problem or feasibility."]
+    ]),
+    q("d7-l1-q2", "d7-l1", "quiz", "Applied", "A model performs well on authorized historical examples, but no team can review its high-impact outputs in time. Which feasibility issue remains?", 0, [
+      ["Operational feasibility of the proposed oversight workflow", "Useful historical performance does not supply reviewers, capacity, or timely intervention."],
+      ["No issue; technical performance passes every feasibility gate", "Technical, operational, economic, and legal gates establish different claims."],
+      ["Only the spelling of the model's name", "The actual blocker is the unsupported review process, not a label."],
+      ["A guarantee that replacing reviewers with a prompt is lawful", "A prompt does not provide real oversight or establish legal permission."]
+    ]),
+    q("d7-l1-q3", "d7-l1", "quiz", "Applied", "A pilot is meant to decide whether reviewed drafts save staff time. Which design is most useful?", 3, [
+      ["Show only three easy drafts and measure applause", "Selected demonstrations and audience enthusiasm do not measure realistic net time."],
+      ["Count generated words without tracking review or rework", "Output volume omits the workload that could erase the benefit."],
+      ["Allow every draft to reach customers immediately", "Unbounded live effects are unnecessary and bypass the proposed oversight."],
+      ["Compare representative cases with the current process, including review/rework and predefined stop rules", "This tests the decision-changing assumption under bounded realistic conditions."]
+    ]),
+    q("d7-l2-q1", "d7-l2", "quiz", "Foundation", "A team says an assistant released 80 staff-hours last month. Which claim follows without additional financial evidence?", 1, [
+      ["Payroll definitely fell by the value of 80 hours", "Time released does not show an actual payroll or cash change."],
+      ["The team may have more useful capacity, but cash savings are not yet established", "Released time can improve throughput or quality while payroll remains unchanged."],
+      ["The project must have a positive lifetime ROI", "ROI needs full costs, benefits, and a defined horizon, not one time figure."],
+      ["Every reviewer should immediately be removed", "The time estimate does not justify removing required oversight or staff."]
+    ]),
+    q("d7-l2-q2", "d7-l2", "quiz", "Applied", "Using this kit's simple first-year ROI convention, benefits are SAR 90,000, setup is SAR 10,000, and operation is SAR 40,000. What is ROI?", 2, [
+      ["180%", "90,000/50,000 is the benefit-to-cost percentage, not net benefit divided by cost."],
+      ["125%", "This uses only operating cost and omits the stated setup cost."],
+      ["80%", "Costs are 50,000 and net benefit is 40,000, so 40,000/50,000 × 100 = 80%."],
+      ["40%", "Net benefit must be divided by the stated costs, not an invented 100,000 denominator."]
+    ]),
+    q("d7-l2-q3", "d7-l2", "quiz", "Applied", "A candidate has positive estimated ROI at high adoption but negative ROI at low adoption. What should the business case do?", 0, [
+      ["Show both scenarios, the assumptions, and a plan to measure adoption and realized benefit", "Sensitivity reveals whether an uncertain input can reverse the decision and directs evidence gathering."],
+      ["Publish only the positive scenario as a guarantee", "Hiding plausible unfavorable assumptions misrepresents uncertainty."],
+      ["Treat token price as the entire cost", "Review, integration, support, and other lifecycle costs can remain substantial."],
+      ["Ignore applicable privacy rules because the central estimate is profitable", "Financial forecasts cannot waive legal or safety gates."]
+    ]),
+    q("d7-l3-q1", "d7-l3", "quiz", "Foundation", "A service completion rate rises from 50% to 60%. How should the change be described?", 3, [
+      ["A 10% relative increase and 20 percentage points", "This reverses the units: the absolute rate gap is 10 points."],
+      ["A guaranteed causal effect of AI", "The rate change alone does not exclude staffing, seasonality, or case-mix changes."],
+      ["A 60-percentage-point increase", "60% is the final level, not the difference from the baseline."],
+      ["10 percentage points; a 20% relative increase", "The gap is 60 − 50 = 10 points, and 10/50 × 100 = 20%."]
+    ]),
+    q("d7-l3-q2", "d7-l3", "quiz", "Applied", "Of 100 eligible requests, an assistant answers 40 and 30 of those answers pass review. Which report uses honest denominators?", 1, [
+      ["75% of all eligible requests succeeded", "75% describes passing among the 40 answers, not among all 100 eligible requests."],
+      ["40% answer coverage; 75% of answers pass; 30% of eligible requests receive a passing answer", "The three rates use 40/100, 30/40, and 30/100 respectively and keep their scopes clear."],
+      ["30% coverage and 40% answer correctness", "This swaps counts and denominators rather than measuring the stated outcomes."],
+      ["100% coverage because unanswered cases are ignored", "Removing eligible unanswered cases hides the actual coverage gap."]
+    ]),
+    q("d7-l3-q3", "d7-l3", "quiz", "Applied", "A sponsor needs a launch recommendation from a small pilot. Which brief is most responsible?", 2, [
+      ["Only the highest accuracy number with no case counts", "An isolated maximum hides scope, uncertainty, and failures needed for a decision."],
+      ["Every private transcript copied into the presentation", "Sponsors can often use aggregate evidence and restricted sanitized links without unnecessary disclosure."],
+      ["Evidence with counts and limits, alternatives, a bounded recommendation, owner, and next decision date", "This connects useful evidence to an action without pretending narrow results guarantee broad success."],
+      ["A vendor benchmark described as our measured production result", "External evidence from a different setting must not be misrepresented as local measurement."]
+    ]),
+    q("d7-l4-q1", "d7-l4", "quiz", "Foundation", "In a simple RACI matrix, what does Informed normally mean?", 0, [
+      ["Receives relevant updates; not automatically the approving authority", "Receiving information is distinct from owning a decision or approving it."],
+      ["Must approve every release by law", "RACI is a collaboration convention, not a universal legal approval chart."],
+      ["Does all implementation work", "Doing the work is the Responsible function in this convention."],
+      ["May waive privacy obligations", "No collaboration label grants authority to waive applicable law."]
+    ]),
+    q("d7-l4-q2", "d7-l4", "quiz", "Applied", "Operations receives a model file but cannot access quality alerts or disable an unsafe tool. What is the handoff status?", 3, [
+      ["Complete because a file was sent", "Delivery of an artifact does not establish usable operational ownership."],
+      ["Complete if the model has many parameters", "Model size does not provide alert access or intervention authority."],
+      ["Complete if nobody replies within one hour", "Silence is not explicit acceptance of unsupported responsibilities."],
+      ["Incomplete until owners verify access, intervention, runbooks, and accepted responsibilities", "The receiving team must be able to detect and manage failures, not just possess weights."]
+    ]),
+    q("d7-l4-q3", "d7-l4", "quiz", "Applied", "A reviewer discovers missing rural cases in an evaluation. Which response best supports collaboration?", 1, [
+      ["Dismiss the finding because the reviewer is junior", "Seniority does not determine whether an evidence gap is real."],
+      ["Record the coverage gap, discuss its decision impact, and assign appropriate evidence work", "Constructive review focuses on the claim and an owned action rather than blame."],
+      ["Take a vote on whether rural cases exist", "Evidence about population coverage is not established by majority preference."],
+      ["Remove the finding from the handoff to reduce disagreement", "Concealing a material gap undermines safe decisions and operational understanding."]
+    ]),
+    q("d7-l5-q1", "d7-l5", "quiz", "Foundation", "A pilot has a limited useful scope. Which safeguard may be omitted solely because it is called a minimum viable product?", 2, [
+      ["Required authorization checks", "A small scope does not remove required access boundaries."],
+      ["Necessary oversight for its consequential actions", "Oversight requirements depend on risks and rules, not a product-stage label."],
+      ["None of the safeguards required for that scope", "Limiting functionality is compatible with retaining the safeguards needed for permitted use."],
+      ["A tested safe fallback needed by its workflow", "Necessary failure handling cannot be dropped merely to preserve the MVP label."]
+    ]),
+    q("d7-l5-q2", "d7-l5", "quiz", "Applied", "All 120 eligible staff attend training; 36 use the service regularly. With regular use as the adoption definition, what is adoption?", 0, [
+      ["30%", "Regular-use adoption is 36/120 × 100 = 30%, not the training attendance rate."],
+      ["100%", "Attendance establishes exposure to training, not regular use."],
+      ["36%", "36 is the user count; the eligible denominator is 120 rather than 100."],
+      ["Guaranteed positive ROI", "Use alone does not establish benefits after costs or the quality of outcomes."]
+    ]),
+    q("d7-l5-q3", "d7-l5", "quiz", "Applied", "A sponsor adds automatic refunds to a read-only policy assistant. What is the best next step?", 3, [
+      ["Enable refunds because the interface looks the same", "Financial authority and side effects change even if the screen barely changes."],
+      ["Keep the original approval and add a longer prompt", "Old read-only evidence and model instructions do not approve new transactional permissions."],
+      ["Ignore capacity, duplicate actions, and error costs", "These dependencies and consequences are central to safe action capability."],
+      ["Review changed authority, risks, contracts, evidence, costs, and owners before enabling it", "Material scope changes require appropriate reassessment and approval rather than silent expansion."]
+    ]),
+    q("d7-l6-q1", "d7-l6", "quiz", "Foundation", "An engineer receives a supplier incentive linked to recommending that supplier. What is the responsible response?", 1, [
+      ["Hide it if the supplier is popular", "Popularity does not remove a real or perceived conflict of interest."],
+      ["Disclose the conflict and arrange appropriate independent review or recusal", "Disclosure makes the issue visible; managing it protects independent judgment."],
+      ["Assume disclosure automatically resolves every conflict", "The decision process may still need review or removal from the conflicted role."],
+      ["Delete competing evaluations", "Removing evidence to favor the supplier compounds the integrity problem."]
+    ]),
+    q("d7-l6-q2", "d7-l6", "quiz", "Applied", "A draft unexpectedly includes another department's private information. How should an engineer escalate?", 2, [
+      ["Publish the raw conversation on a public forum", "Unnecessary public disclosure can spread the very harm being reported."],
+      ["Wait until every recipient and cause is known", "Material suspected harm requires prompt escalation, with uncertainty stated rather than hidden."],
+      ["Use approved containment and restricted minimum evidence to alert security/privacy owners promptly", "This enables an authorized response while limiting further disclosure and preserving useful facts."],
+      ["Treat a generic model apology as complete recovery", "An apology neither contains the access failure nor verifies its correction."]
+    ]),
+    q("d7-l6-q3", "d7-l6", "quiz", "Applied", "A practitioner passes a familiar quiz but lacks expertise for a project-specific legal assurance. What should they do?", 0, [
+      ["State the competence limit and seek qualified review before making the assurance", "Practice scores do not certify legal competence or validate a specific project's compliance."],
+      ["Sign the assurance because retake scores are high", "Question familiarity is not the missing project expertise or authoritative evidence."],
+      ["Ask a language model to declare compliance and use that as approval", "Generated certainty cannot replace qualified interpretation and project evidence."],
+      ["Hide the gap to avoid delaying the deadline", "Concealing competence limits undermines informed decisions and professional integrity."]
+    ]),
+    q("d7-e01", "d7-l1", "exam", "Foundation", "Residents repeatedly abandon a permit form. Which statement is the strongest problem-first framing?", 1, [
+      ["We need the largest available language model", "This prescribes a technical solution without establishing the cause of abandonment."],
+      ["Help residents submit a valid permit application by identifying the steps causing abandonment", "It names an affected population, desired outcome, and obstacle that research can investigate."],
+      ["Every resident needs a chatbot regardless of evidence", "A solution assumption is not a verified need shared by every user."],
+      ["Maximize the number of generated paragraphs", "Output volume does not measure whether residents complete valid applications."]
+    ]),
+    q("d7-e02", "d7-l1", "exam", "Applied", "A stable policy gives an explicit fee for each permit type. Authorized data is sparse. What is the most defensible initial comparison?", 3, [
+      ["Train a large model because rules are never useful", "Fixed explicit requirements are a strong reason to consider a deterministic baseline."],
+      ["Assume more synthetic examples prove real-world generalization", "Synthetic volume does not establish representative evidence about actual users and cases."],
+      ["Choose AI before defining fee errors or maintenance needs", "Error costs and changing-policy maintenance matter for every alternative."],
+      ["Compare an explicit rule or lookup with the current process before earning ML complexity", "A simple alternative may directly meet the need; complexity must demonstrate added value."]
+    ]),
+    q("d7-e03", "d7-l1", "exam", "Applied", "A proposed assistant has excellent quality and low cost, but its required secondary use of personal data has not been approved or justified. What should happen?", 0, [
+      ["Hold that processing while qualified owners establish a permitted purpose, basis, and controls", "Technical and economic evidence do not pass the separate legal and privacy feasibility gate."],
+      ["Proceed because positive ROI authorizes the purpose", "A financial calculation cannot create legal permission for processing."],
+      ["Use encryption and assume all secondary uses are allowed", "Encryption reduces exposure but does not establish purpose or legal basis."],
+      ["Let the vendor's marketing label determine controller duties", "Actual purposes, uses, and applicable rules determine duties, not a supplier label."]
+    ]),
+    q("d7-e04", "d7-l1", "exam", "Stretch", "A bounded pilot with trained volunteers succeeds. The sponsor proposes immediate release to every branch with no support changes. Which conclusion is best?", 2, [
+      ["Pilot success proves all branches are covered", "Different users, cases, data, and support conditions can invalidate that generalization."],
+      ["The pilot must be discarded because volunteers participated", "The evidence can be useful within its scope without proving the broad release."],
+      ["Use the pilot as scoped evidence, then assess other populations, support, risks, and release gates", "A pilot narrows uncertainty but does not automatically authorize wider production use."],
+      ["Remove fallback to make adoption appear higher", "Forced use and missing fallback can increase harm without demonstrating benefit."]
+    ]),
+    q("d7-e05", "d7-l2", "exam", "Foundation", "A team measures daily generated-answer count as its only success metric for customer support. What is the main problem?", 2, [
+      ["Counts can never be useful", "Counts are useful with scope and outcomes; they simply cannot establish success alone."],
+      ["Any high count guarantees customer satisfaction", "High activity can coexist with wrong answers, repeated contacts, and unresolved needs."],
+      ["Activity is not verified resolution; outcomes, denominators, cost, and harm guardrails are needed", "Success should connect to the user's completed task rather than output production alone."],
+      ["Replacing count with parameter size solves the issue", "Model size is even further from the desired customer outcome."]
+    ]),
+    q("d7-e06", "d7-l2", "exam", "Applied", "A workflow saves a net 4 minutes on each of 900 monthly cases after review/rework. At SAR 50/hour of capacity value, what benefit is estimated?", 0, [
+      ["60 hours and SAR 3,000/month of capacity value, not proven cash savings", "900 × 4/60 = 60 hours; 60 × 50 = 3,000. Monetized capacity does not show payroll reduction."],
+      ["3,600 hours and SAR 180,000 of guaranteed cash savings", "3,600 is minutes, and the benefit type is capacity value rather than established cash."],
+      ["15 hours because case volume must be divided by 60 first and minutes ignored", "The per-case net minutes must multiply the case count before conversion to hours."],
+      ["SAR 3,000 of net profit regardless of project costs", "This is gross capacity benefit; costs are still needed to calculate net benefit."]
+    ]),
+    q("d7-e07", "d7-l2", "exam", "Applied", "Setup costs SAR 18,000. Constant monthly incremental cash benefit is SAR 5,000 and operating cost is SAR 2,000 after launch. Under the stated simple convention, what is payback?", 3, [
+      ["3.6 months", "18,000/5,000 omits the monthly operating cost, so it is not net-benefit payback."],
+      ["9 months", "Dividing by operating cost uses the wrong quantity; net monthly benefit is 3,000."],
+      ["Immediate because monthly benefits exceed operating costs", "Positive ongoing net benefit still needs time to recover setup spending."],
+      ["6 months after launch under these constant assumptions", "Recurring net benefit is 5,000 − 2,000 = 3,000; 18,000/3,000 = 6 months."]
+    ]),
+    q("d7-e08", "d7-l2", "exam", "Stretch", "A monthly service has SAR 8,000 fixed incremental cost and SAR 4 net contribution per completed task after all variable costs. What is monthly break-even volume?", 1, [
+      ["32,000 tasks", "Multiplying fixed cost by contribution does not produce the required volume."],
+      ["2,000 completed tasks/month", "8,000/4 = 2,000; contribution is already net of variable costs for the same monthly period."],
+      ["2,000 tasks/year", "This changes the period even though the fixed cost is explicitly monthly."],
+      ["No finite volume even with positive contribution", "With the stated positive contribution and constant assumptions, a finite break-even exists."]
+    ]),
+    q("d7-e09", "d7-l3", "exam", "Foundation", "Which distinction is correct when presenting an AI pilot's results?", 3, [
+      ["A model confidence score is automatically the probability that the business case will succeed", "Model scoring and uncertainty about business value concern different claims."],
+      ["A vendor benchmark is our measured result if the model name matches", "Local populations, workflows, versions, and evaluation methods can differ."],
+      ["A forecast becomes measured evidence once a sponsor approves it", "Approval does not change an assumption-based estimate into an observed outcome."],
+      ["Measured pilot outcomes, forecasts, and unknown deployment conditions should be labeled separately", "Keeping evidence types distinct prevents unsupported guarantees and guides the next decision."]
+    ]),
+    q("d7-e10", "d7-l3", "exam", "Applied", "Among 300 eligible requests, 180 receive answers and 144 answers pass review. Which rates describe this result?", 2, [
+      ["80% coverage and 60% correctness among answers", "Coverage uses 180/300, while answer correctness uses 144/180; these are reversed."],
+      ["80% success across all eligible requests", "80% is correctness among answers; only 144 of 300 eligible requests received passing answers."],
+      ["60% coverage; 80% of answers pass; 48% of eligible requests receive a passing answer", "180/300 = 60%, 144/180 = 80%, and 144/300 = 48%, each with its stated denominator."],
+      ["100% coverage if unanswered cases are removed", "The eligible cohort includes unanswered requests and must not disappear from coverage."]
+    ]),
+    q("d7-e11", "d7-l3", "exam", "Applied", "Correct completion rises from 40% to 50% after several staffing and software changes. What is the defensible summary?", 1, [
+      ["AI caused a 10% relative improvement", "The relative change is 25%, and the before/after comparison cannot isolate AI's effect."],
+      ["A 10-percentage-point rise, or 25% relative increase; AI causation is not established", "50 − 40 = 10 points and 10/40 = 25%; other changes are potential explanations."],
+      ["A 25-percentage-point rise with guaranteed future performance", "The point change is 10, and the historical comparison does not guarantee future outcomes."],
+      ["No improvement can be reported unless every cause is known", "The observed change can be described honestly without claiming a specific cause."]
+    ]),
+    q("d7-e12", "d7-l3", "exam", "Stretch", "Overall pilot quality improves, but a small unrepresentative sample contains a serious harmful failure. How should a sponsor brief handle it?", 0, [
+      ["Report the improvement and failure with scope limits, investigate harm, and recommend bounded next steps", "A favorable average does not justify hiding serious failures or unsupported generalization."],
+      ["Omit the failure because the average rose", "The failure may affect an essential harm guardrail despite average improvement."],
+      ["Claim the small sample proves zero risk in untested groups", "Limited biased evidence cannot establish safety in populations it does not cover."],
+      ["Include every raw private record to appear transparent", "Transparency should use proportionate protected evidence, not unnecessary disclosure."]
+    ]),
+    q("d7-e13", "d7-l4", "exam", "Foundation", "Who should define whether a case counts as a genuinely resolved support issue?", 0, [
+      ["Domain and service stakeholders with users and evaluators, using a shared documented rubric", "Meaningful outcomes require domain understanding and shared criteria, not a model-only definition."],
+      ["Only the supplier's sales representative", "Commercial expertise does not supply the full local outcome definition or independence."],
+      ["Whichever person owns the largest GPU", "Hardware ownership is unrelated to the validity of the business outcome rubric."],
+      ["Nobody; closed-ticket status is always perfect ground truth", "A closed ticket may not mean the customer's problem was actually solved."]
+    ]),
+    q("d7-e14", "d7-l4", "exam", "Applied", "A simple responsibility matrix names a release decision owner. Privacy approval is separately required for the proposed data use. What follows?", 2, [
+      ["The release owner can waive the privacy approval", "Collaboration accountability does not override a required approval gate."],
+      ["Being consulted automatically makes privacy owners approve", "Consultation supplies input but does not establish affirmative approval."],
+      ["Keep a clear decision owner while preserving and documenting the required privacy gate", "RACI helps coordination without replacing legal or organizational approval responsibilities."],
+      ["Remove the owner so nobody is accountable", "Removing accountability makes the decision less clear rather than resolving the requirement."]
+    ]),
+    q("d7-e15", "d7-l4", "exam", "Applied", "Which handoff package best enables a receiving team to support a retrieval assistant?", 1, [
+      ["Only a chart of training accuracy", "Training accuracy does not provide compatible versions, runtime limits, or recovery procedures."],
+      ["Permitted scope, release/source versions, evidence/gaps, access, alerts, runbook, contacts, and rehearsed acceptance", "This supplies the information and verified capabilities needed for accepted operational ownership."],
+      ["Passwords pasted into an unrestricted presentation", "Credentials must use approved access processes, not unsafe document disclosure."],
+      ["An unowned folder with several contradictory runbooks", "Conflicting unmanaged documents are not a dependable source of operating instructions."]
+    ]),
+    q("d7-e16", "d7-l4", "exam", "Stretch", "A project lead and evaluator disagree about launching with missing delayed outcomes. What is the strongest next action?", 3, [
+      ["Assume missing outcomes are successful to settle the disagreement", "Unknown outcomes are not successes and cannot be fabricated for consensus."],
+      ["Use the project lead's seniority as performance evidence", "Authority can make a permitted decision but cannot manufacture missing evidence."],
+      ["Vote to remove the evaluation finding from the record", "Concealing the gap prevents accountable decision-making and useful later review."],
+      ["Document evidence, impact, options and gates; seek the authorized decision with unresolved limits explicit", "This separates the factual gap from decision authority while preserving necessary release constraints."]
+    ]),
+    q("d7-e17", "d7-l5", "exam", "Foundation", "What is opportunity cost when one of two competing projects uses all available reviewer capacity?", 1, [
+      ["Only the chosen project's cloud invoice", "Opportunity cost concerns the forgone alternative, not just a direct bill."],
+      ["The value of the best alternative forgone by committing that capacity", "Scarce reviewers cannot simultaneously deliver both alternatives; the lost option matters."],
+      ["A guarantee that the chosen project is profitable", "Considering opportunity cost does not establish either project's actual benefits."],
+      ["The number of parameters in both models", "Parameter counts do not measure the value lost by the resource commitment."]
+    ]),
+    q("d7-e18", "d7-l5", "exam", "Applied", "Ten review-days are available. A required safety repair needs three, and two independent permitted improvements each need four. What can the team responsibly commit now?", 0, [
+      ["The required repair and at most one full improvement within the remaining seven days", "After 3 days, 7 remain; two 4-day improvements need 8 and exceed the stated capacity."],
+      ["Both improvements by skipping the required repair", "Optional value scoring cannot justify bypassing the required safety work."],
+      ["All three tasks within ten days without changing scope or capacity", "3 + 4 + 4 = 11 days, so that commitment contradicts the stated constraint."],
+      ["Nothing, because prioritization cannot ever use estimates", "Estimates can support an honest bounded commitment while retaining their uncertainty."]
+    ]),
+    q("d7-e19", "d7-l5", "exam", "Applied", "A drafting service sees low regular use despite high training attendance. What should change management investigate?", 3, [
+      ["Only whether staff can be forced to accept every draft", "Forced uncritical use can worsen harm and does not establish appropriate adoption."],
+      ["How to remove nonusers from the eligible denominator", "Changing the denominator to hide low use misrepresents adoption."],
+      ["Whether calling the prototype production changes outcomes", "A label does not fix integration friction, support, or unmet needs."],
+      ["Workflow friction, accessibility, net review burden, user needs, and actual completed outcomes", "Low uptake can reveal product or workflow problems that training attendance alone misses."]
+    ]),
+    q("d7-e20", "d7-l5", "exam", "Stretch", "An organization plans to retire a policy assistant that several teams depend on. Which plan is most responsible?", 2, [
+      ["Delete the interface immediately and assume all data obligations disappear", "Removing a UI neither supports dependent users nor removes retained copies or legal duties."],
+      ["Keep an unsupported service forever regardless of risk", "Continuing unsafe unsupported operation is not automatically a responsible alternative."],
+      ["Map dependencies, communicate migration, provide a workable alternative, and manage access/data/support through transition", "Careful retirement protects dependent workflows while preserving applicable obligations."],
+      ["Inform only the original developer after shutdown", "Affected users, operators, and integration owners need timely transition information."]
+    ]),
+    q("d7-e21", "d7-l6", "exam", "Foundation", "A manager asks an evaluator to remove difficult eligible cases without disclosure so a release chart improves. What is the best response?", 2, [
+      ["Comply because deadlines authorize favorable evidence", "A deadline does not justify misleading cohort selection or falsification."],
+      ["Count the excluded cases as correct without reviewing them", "Unknown or excluded outcomes cannot honestly become successes."],
+      ["Preserve honest cohort definitions, document the concern, and escalate through appropriate owners if needed", "Integrity requires accurate reporting and a usable response to pressure that would mislead decision-makers."],
+      ["Publish confidential customer cases publicly to punish the manager", "Unnecessary disclosure and retaliation add harm instead of enabling an appropriate protected escalation."]
+    ]),
+    q("d7-e22", "d7-l6", "exam", "Applied", "An engineer wants to reuse a publicly downloadable model and dataset in a commercial proposal. What must they check?", 1, [
+      ["Only whether downloads are fast", "Download speed provides no evidence about permission, licensing, or fitness."],
+      ["Licenses, permissions, provenance, attribution, and suitability for the intended use", "Public access alone does not establish reuse rights or technical and ethical suitability."],
+      ["Whether renaming files removes all license conditions", "Renaming artifacts does not erase applicable terms or origin."],
+      ["Nothing if a colleague already downloaded them", "Possession by someone else does not establish authorized use for the proposal."]
+    ]),
+    q("d7-e23", "d7-l6", "exam", "Applied", "A security concern is reported vaguely as 'the AI may be unsafe.' Which addition most improves the escalation?", 0, [
+      ["Observed behavior and versions, affected scope, protected evidence, containment, uncertainty, owner, and requested action", "Concrete proportionate facts and a decision request help authorized responders act promptly."],
+      ["Every secret in a public chat so more people can help", "Broad uncontrolled disclosure can expose assets and worsen the incident."],
+      ["A claim of confirmed poisoning despite no cause evidence", "Hypotheses should be identified as uncertain rather than presented as established facts."],
+      ["A demand to wait until every forensic detail is complete", "Potential material harm can require prompt escalation while investigation continues."]
+    ]),
+    q("d7-e24", "d7-l6", "exam", "Stretch", "A post-incident review ends with 'staff will learn more about AI.' What makes the corrective work verifiable?", 3, [
+      ["Blame one individual and skip workflow analysis", "Contributing factors can include incentives, access design, tests, and unclear ownership."],
+      ["Count opening a training link as proof the incident cannot recur", "Attendance or link access does not verify improved capability or corrected controls."],
+      ["Retake the identical quiz until everyone memorizes the answers", "Familiar-question improvement cannot establish new-case performance or system fixes."],
+      ["Specify corrective action, owner, due date, and fresh tests of the actual failure boundary", "Verification must show the control and process improved, with accountable follow-through rather than vague intent."]
     ])
   ];
 })();

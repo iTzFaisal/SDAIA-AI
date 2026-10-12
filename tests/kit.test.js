@@ -13,13 +13,13 @@ test("seven exact blueprint weights total 100; release availability is honest", 
   assert.equal(kit.domains.length, 7);
   assert.deepEqual(kit.domains.map(d => d.weight), [17.3, 16.7, 14, 18, 12.6, 14.7, 6.7]);
   assert.equal(Math.round(kit.domains.reduce((sum, d) => sum + d.weight, 0) * 10), 1000);
-  assert.deepEqual(kit.domains.filter(d => d.status === "available").map(d => d.id), ["d1", "d2", "d3", "d4", "d5", "d6"]);
-  assert.ok(kit.domains.slice(6).every(d => d.status === "planned"));
+  assert.deepEqual(kit.domains.filter(d => d.status === "available").map(d => d.id), ["d1", "d2", "d3", "d4", "d5", "d6", "d7"]);
+  assert.equal(kit.domains.filter(d => d.status === "planned").length, 0);
   assert.equal(kit.examDate, "2026-12-05");
 });
-test("all thirty-six lessons have objectives, substantial content, references, and separate question coverage", () => {
-  assert.equal(kit.lessons.length, 36);
-  assert.equal(new Set(kit.lessons.map(l => l.id)).size, 36);
+test("all forty-two lessons have objectives, substantial content, references, and separate question coverage", () => {
+  assert.equal(kit.lessons.length, 42);
+  assert.equal(new Set(kit.lessons.map(l => l.id)).size, 42);
   for (const d of kit.domains.filter(d => d.status === "available")) {
     assert.equal(kit.lessons.filter(l => l.domain === d.id).length, 6);
     assert.ok(kit.revisions[d.id].length >= 12);
@@ -36,11 +36,11 @@ test("all thirty-six lessons have objectives, substantial content, references, a
     assert.equal(kit.questions.filter(q => q.lesson === l.id && q.pool === "exam").length, 4);
   }
 });
-test("252 unique original question entries have valid answers and explanations for every option", () => {
-  assert.equal(kit.questions.length, 252);
-  assert.equal(new Set(kit.questions.map(q => q.id)).size, 252);
-  assert.equal(new Set(kit.questions.map(q => q.stem)).size, 252);
-  for (const domain of ["d1", "d2", "d3", "d4", "d5", "d6"]) {
+test("294 unique original question entries have valid answers and explanations for every option", () => {
+  assert.equal(kit.questions.length, 294);
+  assert.equal(new Set(kit.questions.map(q => q.id)).size, 294);
+  assert.equal(new Set(kit.questions.map(q => q.stem)).size, 294);
+  for (const domain of ["d1", "d2", "d3", "d4", "d5", "d6", "d7"]) {
     assert.equal(kit.questions.filter(q => q.domain === domain && q.pool === "quiz").length, 18);
     assert.equal(core.paperQuestions(kit.questions, domain).length, 24);
   }
@@ -63,11 +63,11 @@ test("grading uses original option indexes, not shuffled display letters", () =>
   const questions = core.prepare(kit.questions, () => 0);
   const answers = Object.fromEntries(questions.map(q => [q.id, q.answer]));
   const result = core.score(questions, answers);
-  assert.equal(result.correct, 252);
+  assert.equal(result.correct, 294);
   assert.equal(result.percent, 100);
-  assert.equal(result.answered, 252);
-  assert.equal(Object.keys(result.byLesson).length, 36);
-  assert.equal(Object.values(result.byDifficulty).reduce((sum, b) => sum + b.total, 0), 252);
+  assert.equal(result.answered, 294);
+  assert.equal(Object.keys(result.byLesson).length, 42);
+  assert.equal(Object.values(result.byDifficulty).reduce((sum, b) => sum + b.total, 0), 294);
 });
 test("unanswered and invalid responses count as incorrect", () => {
   const q = kit.questions.slice(0, 3);
@@ -151,7 +151,18 @@ test("papers remain domain-isolated and legacy Domain 1 attempts still resume", 
     assert.equal(core.validAttempt(mixedD6, kit.questions), false);
   }
   assert.equal(core.validAttempt({ ...d6, domain: "d5" }, kit.questions), false);
-  assert.deepEqual(core.paperQuestions(kit.questions, "d7"), []);
+  const d7 = { ...attempt("d7"), domain: "d7" };
+  assert.ok(core.validAttempt(d7, kit.questions));
+  assert.ok(core.paperQuestions(kit.questions, "d7").every(q => q.domain === "d7" && q.pool === "exam"));
+  for (const previous of [legacy, d2, d3, d4, d5, d6]) {
+    const mixedD7 = structuredClone(d7);
+    mixedD7.questions[0] = previous.questions[0];
+    assert.equal(core.validAttempt(mixedD7, kit.questions), false);
+    delete mixedD7.domain;
+    assert.equal(core.validAttempt(mixedD7, kit.questions), false);
+  }
+  assert.equal(core.validAttempt({ ...d7, domain: "d6" }, kit.questions), false);
+  assert.deepEqual(core.paperQuestions(kit.questions, "d8"), []);
   assert.deepEqual(core.paperQuestions(kit.questions, undefined), []);
   assert.equal(core.validAttempt({ ...d2, domain: "d1" }, kit.questions), false);
   const mixed = structuredClone(d2);
@@ -206,6 +217,19 @@ test("question calculations and denominators match worked cases", () => {
   assert.equal(answerText("d6-e07"), `Capacity ${4 * (60 / 2)}/hour; backlog grows ${160 - 4 * (60 / 2)}/hour before other overhead`);
   assert.equal(answerText("d6-l6-q2"), `${72 - 54} hours; containment and escalation must not wait`);
   assert.equal(answerText("d6-e23"), `${72 - 60} hours; other communication and response duties remain separate`);
+  assert.equal(answerText("d7-l2-q2"), `${(90000 - (10000 + 40000)) / (10000 + 40000) * 100}%`);
+  assert.equal(answerText("d7-l3-q1"), `${60 - 50} percentage points; a ${(60 - 50) / 50 * 100}% relative increase`);
+  assert.equal(answerText("d7-l3-q2"), `${40 / 100 * 100}% answer coverage; ${30 / 40 * 100}% of answers pass; ${30 / 100 * 100}% of eligible requests receive a passing answer`);
+  assert.equal(answerText("d7-l5-q2"), `${36 / 120 * 100}%`);
+  assert.equal(answerText("d7-e06"), `${900 * 4 / 60} hours and SAR ${(900 * 4 / 60 * 50).toLocaleString("en-US")}/month of capacity value, not proven cash savings`);
+  assert.equal(answerText("d7-e07"), `${18000 / (5000 - 2000)} months after launch under these constant assumptions`);
+  assert.equal(answerText("d7-e08"), `${(8000 / 4).toLocaleString("en-US")} completed tasks/month`);
+  assert.equal(answerText("d7-e10"), `${180 / 300 * 100}% coverage; ${144 / 180 * 100}% of answers pass; ${144 / 300 * 100}% of eligible requests receive a passing answer`);
+  assert.equal(answerText("d7-e11"), `A ${50 - 40}-percentage-point rise, or ${(50 - 40) / 40 * 100}% relative increase; AI causation is not established`);
+  assert.equal(100 * 60, 2000 * 3);
+  assert.equal((72000 - (12000 + 12 * 2000)) / (12000 + 12 * 2000) * 100, 100);
+  assert.equal(12000 / (6000 - 2000), 3);
+  assert.equal((12 * 3000 - (12000 + 12 * 2000)) / (12000 + 12 * 2000), 0);
 });
 test("generated documents exist and the reserved practice paper contains no answer key", async () => {
   for (const name of ["curriculum.md", "domain-1-study-notes.md", "domain-1-practice-paper.md", "domain-1-answer-key.md", "sources-and-exam-facts.md", "printable-workbook.html", "printable-practice-paper.html", "printable-answer-key.html"]) {
@@ -311,19 +335,41 @@ test("Domain 6 reflects the May 2025 ethics edition, controls, roles, and visual
   assert.ok(facts.includes("SDAIA May 2025 ethics framework (SDAIA-P114E, version 1)"));
   assert.ok(!facts.includes("September 2023 ethics framework"));
 });
-test("release copy and classic offline script wiring include Domain 6 without presenting future domains as available", async () => {
+test("Domain 7 keeps business evidence, financial assumptions, collaboration, and professional boundaries explicit", async () => {
+  const text = id => kit.lessons.find(l => l.id === id).sections.flatMap(s => s.paragraphs).join(" ");
+  assert.ok(text("d7-l1").includes("Neither is automatically production approval"));
+  const value = text("d7-l2");
+  for (const phrase of ["simple undiscounted ROI", "same horizon", "ratio is undefined", "no finite payback", "capacity-value ROI, not proof of cash savings", "not a universal method", "SAR 36,000; simple ROI = 100%", "giving 0% ROI"]) assert.ok(value.includes(phrase), phrase);
+  assert.ok(text("d7-l3").includes("does not by itself prove AI caused the improvement"));
+  assert.ok(text("d7-l4").includes("RACI convention is a collaboration aid, not Saudi law"));
+  assert.ok(text("d7-l4").includes("explicitly accept the responsibilities"));
+  assert.ok(text("d7-l5").includes("high score cannot override a gate"));
+  assert.ok(text("d7-l6").includes("not Saudi law or a legal exemption"));
+  const source = kit.sources.find(s => s.id === "professional-ethics");
+  assert.equal(new URL(source.url).hostname, "www.acm.org");
+  for (const id of ["user-needs", "service-success", "benefits", "team-roles"]) {
+    const reference = kit.sources.find(s => s.id === id);
+    assert.equal(new URL(reference.url).hostname, "www.gov.uk");
+    assert.ok(reference.note.includes("12 October 2026"));
+  }
+  const facts = await readFile(new URL("../notes/sources-and-exam-facts.md", import.meta.url), "utf8");
+  assert.ok(facts.includes("Released staff time is not automatically cash saved"));
+  assert.ok(facts.includes("not Saudi law or compulsory Saudi team-role definitions"));
+});
+test("release copy and classic offline script wiring include all seven domains while mocks remain planned", async () => {
   const read = name => readFile(new URL(`../${name}`, import.meta.url), "utf8");
   const index = await read("index.html");
   assert.deepEqual([...index.matchAll(/<script defer src="([^"]+)"><\/script>/g)].map(m => m[1]), ["content/kit.js", "content/questions.js", "assets/core.js", "assets/app.js"]);
-  assert.ok(index.includes('href="#domain/d6"') && index.includes("Available: Domains 1–6"));
+  assert.ok(index.includes('href="#domain/d7"') && index.includes("Available: Domains 1–7"));
   for (const file of ["content/kit.js", "content/questions.js", "assets/core.js", "assets/app.js"]) {
     assert.ok(!/^\s*import\b|\bimport\s*\(|\bfetch\s*\(/m.test(await read(file)), file);
   }
   const curriculum = await read("notes/curriculum.md");
-  assert.ok(curriculum.includes("36 lessons") && curriculum.includes("108 lesson questions"));
-  assert.ok(curriculum.includes("Domain 7 and all full weighted mocks are planned"));
+  assert.ok(curriculum.includes("42 lessons") && curriculum.includes("126 lesson questions"));
+  assert.ok(curriculum.includes("All full weighted mocks are planned."));
+  assert.ok(!curriculum.includes("Domain 7 and all full weighted mocks are planned"));
   const sources = await read("notes/sources-and-exam-facts.md");
-  for (const id of ["http", "schema", "retries", "testing", "agency", "review", "ml-rules", "ml-monitoring", "release", "canary", "slo", "observability", "incidents", "storage", "compute", "quantization", "distillation", "overload", "balancing", "integrity", "placement", "recovery", "sa-ethics", "sa-pdpl", "sa-regulations", "sa-transfer", "ai-rmf", "injection", "supply-chain", "poisoning", "output-security"]) {
+  for (const id of ["http", "schema", "retries", "testing", "agency", "review", "ml-rules", "ml-monitoring", "release", "canary", "slo", "observability", "incidents", "storage", "compute", "quantization", "distillation", "overload", "balancing", "integrity", "placement", "recovery", "sa-ethics", "sa-pdpl", "sa-regulations", "sa-transfer", "ai-rmf", "injection", "supply-chain", "poisoning", "output-security", "user-needs", "service-success", "benefits", "team-roles", "professional-ethics"]) {
     assert.ok(sources.includes(kit.sources.find(s => s.id === id).url));
   }
 });

@@ -6,7 +6,7 @@ Reviewed: 2026-10-12. Confirmed exam booking: 5 December 2026 (provided by learn
 
 ## Release status
 
-Available: the foundation primer, 36 lessons across Domains 1, 2, 3, 4, 5, 6, 108 lesson questions, and a separate 24-question paper for each available domain. Domain 7 and all full weighted mocks are planned. Detailed topic lists are inferred curriculum choices, not a verified official syllabus.
+Available: the foundation primer, 42 lessons across Domains 1, 2, 3, 4, 5, 6, 7, 126 lesson questions, and a separate 24-question paper for each available domain. All full weighted mocks are planned. Detailed topic lists are inferred curriculum choices, not a verified official syllabus.
 
 ## Learning path
 
@@ -145,7 +145,7 @@ Build justified trust and control risks throughout the lifecycle.
 
 ### Domain 7: Business, Professional Practice & Collaboration (6.7%)
 
-Status: Outline only; planned.
+Status: Lessons and paper available.
 
 Connect technical choices to real needs and responsible teamwork.
 
@@ -201,7 +201,7 @@ Target: 10–14 hours.
 
 ### 16–22 Nov: Responsible AI & business
 
-Study Domain 6: fairness, oversight, privacy and Saudi PDPL context, threat boundaries, prompt injection, and governance. Complete its separate paper and repair missed decisions. Reserve part of the week for Domain 7's planned stakeholder communication and business-value lessons; split the hours rather than rushing both domains.
+Study Domain 6: fairness, oversight, privacy and Saudi PDPL context, threat boundaries, prompt injection, and governance. Study Domain 7: problem discovery, business measures, cost/benefit assumptions, uncertainty, collaboration, change, and professional integrity. Split the hours across both domains, take their separate papers, and repair weak decisions during revision rather than rushing.
 
 Target: 10–14 hours.
 
@@ -319,3 +319,13 @@ Target: 10–14 hours.
   Reviewed 12 October 2026: data manipulation, backdoors, lineage, controlled ingestion, and adversarial testing. No universal robustness or guaranteed detection claim is adopted.
 - **OWASP — LLM05:2025 Improper Output Handling** (Security learning reference): https://genai.owasp.org/llmrisk/llm052025-improper-output-handling/
   Reviewed 12 October 2026: untrusted generated output, context-appropriate handling, and downstream validation. These are defensive concepts, not programming exercises or Saudi legal requirements.
+- **GOV.UK Service Manual — Learning about users and their needs** (Learning reference): https://www.gov.uk/service-manual/user-research/start-by-learning-user-needs
+  Reviewed 12 October 2026: observed needs versus assumptions, inclusive research, problem-first framing, and continuing validation. UK service-design guidance used conceptually, not Saudi law or official SDAIA objectives.
+- **GOV.UK Service Manual — Measuring the success of your service** (Learning reference): https://www.gov.uk/service-manual/measuring-success/measuring-the-success-of-your-service
+  Reviewed 12 October 2026: end-to-end completion, task time, user research, and multiple evidence sources rather than digital analytics alone. Our KPI targets and examples are illustrative choices.
+- **GOV.UK Service Manual — Measuring the benefits of your service** (Learning reference): https://www.gov.uk/service-manual/measuring-success/measuring-service-benefits
+  Reviewed 12 October 2026: baselines, alternatives, cost/benefit assumptions, optimism bias, sensitivity analysis, and ongoing benefits evaluation. The kit's simple undiscounted ROI/payback convention is an instructional calculation, not a mandated financial method, investment advice, or a full business case.
+- **GOV.UK Service Manual — What each role does in a service team** (Learning reference): https://www.gov.uk/service-manual/the-team/what-each-role-does-in-service-team
+  Reviewed 12 October 2026: multidisciplinary collaboration, product priorities, service ownership, research, analysis, testing, and operations. These support functional examples, not a compulsory Saudi organization chart or statutory-role definition.
+- **ACM — Code of Ethics and Professional Conduct (2018)** (Professional learning reference): https://www.acm.org/code-of-ethics
+  Reviewed 12 October 2026: sections 1.2–1.7, 2.1–2.7, and 3.3–3.6 support harm reduction, honesty, conflicts, attribution, confidentiality, review, competence, learning, and careful change. Lessons are original applications, not a reproduced or modified Code. Professional guidance is not Saudi law, a legal exemption, or the SDAIA exam syllabus.
