@@ -4,15 +4,13 @@
   globalThis.STUDY_KIT = {
     version: 1,
     title: "SDAIA AI Engineer Badge",
-    examDate: "2026-12-05",
     reviewed: "2026-10-12",
     disclaimer: "Independent, unofficial preparation. Not affiliated with or endorsed by SDAIA. Questions are original practice material, not actual examination questions. Topic breakdowns and practice timings are our design choices, not official exam specifications.",
     facts: [
       "Your supplied SDAIA image lists seven domains with weights totaling 100%.",
       "The official Athka X page describes an in-person examination at an approved testing center.",
       "Assistant, Associate, or Expert is awarded according to examination performance, considering the overall score and thresholds at each question level.",
-      "Question count, examination duration, numerical score thresholds, and a detailed objective-by-objective syllabus were not verified in the public sources reviewed.",
-      "Your 5 December 2026 booking is user-confirmed. The public listing displayed Ended on 11 October; it does not override your booking."
+      "Question count, examination duration, numerical score thresholds, and a detailed objective-by-objective syllabus were not verified in the public sources reviewed."
     ],
     sources: [
       { id: "image", title: "User-supplied SDAIA AI Engineer Badge image", url: "AI Engineer Badge.png", type: "Domain names and weights", note: "Supplied locally by the learner; not independently retrieved from SDAIA." },

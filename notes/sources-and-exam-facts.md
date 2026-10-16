@@ -2,7 +2,7 @@
 
 > Independent, unofficial preparation. Not affiliated with or endorsed by SDAIA. Questions are original practice material, not actual examination questions. Topic breakdowns and practice timings are our design choices, not official exam specifications.
 
-Reviewed: 2026-10-12. Confirmed exam booking: 5 December 2026 (provided by learner).
+Reviewed: 2026-10-12.
 
 ## Confirmed or supplied information
 
@@ -10,7 +10,6 @@ Reviewed: 2026-10-12. Confirmed exam booking: 5 December 2026 (provided by learn
 - The official Athka X page describes an in-person examination at an approved testing center.
 - Assistant, Associate, or Expert is awarded according to examination performance, considering the overall score and thresholds at each question level.
 - Question count, examination duration, numerical score thresholds, and a detailed objective-by-objective syllabus were not verified in the public sources reviewed.
-- Your 5 December 2026 booking is user-confirmed. The public listing displayed Ended on 11 October; it does not override your booking.
 
 ## References
 

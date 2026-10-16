@@ -1,6 +1,6 @@
 # SDAIA AI Engineer Badge
 
-Independent English, concept-focused preparation to help learners prepare to pass the **SDAIA AI Engineer Badge exam**, with the learner's **confirmed 5 December 2026 booking**.
+Independent English, concept-focused preparation to help learners prepare to pass the **SDAIA AI Engineer Badge exam**.
 
 ## Open it
 

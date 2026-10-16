@@ -2,7 +2,7 @@
 
 > Independent, unofficial preparation. Not affiliated with or endorsed by SDAIA. Questions are original practice material, not actual examination questions. Topic breakdowns and practice timings are our design choices, not official exam specifications.
 
-Reviewed: 2026-10-12. Confirmed exam booking: 5 December 2026 (provided by learner).
+Reviewed: 2026-10-12.
 
 - 150 original questions across all seven domains, separate from lesson quizzes and domain papers. Study all domains first.
 - Suggested practice time: 180 minutes. This count and timing are unofficial training choices, not verified exam specifications.

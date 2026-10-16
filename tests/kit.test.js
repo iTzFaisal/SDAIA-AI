@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFile, access } from "node:fs/promises";
+import { readFile, readdir, access } from "node:fs/promises";
 import "../content/kit.js";
 import "../content/questions.js";
 import "../content/mocks.js";
@@ -16,7 +16,16 @@ test("seven exact blueprint weights total 100; release availability is honest", 
   assert.equal(Math.round(kit.domains.reduce((sum, d) => sum + d.weight, 0) * 10), 1000);
   assert.deepEqual(kit.domains.filter(d => d.status === "available").map(d => d.id), ["d1", "d2", "d3", "d4", "d5", "d6", "d7"]);
   assert.equal(kit.domains.filter(d => d.status === "planned").length, 0);
-  assert.equal(kit.examDate, "2026-12-05");
+});
+test("shared content, site, and downloads do not publish a personal exam booking", async () => {
+  assert.equal(Object.hasOwn(kit, "examDate"), false);
+  assert.doesNotMatch(kit.facts.join(" "), /booking/i);
+  const notes = await readdir(new URL("../notes/", import.meta.url));
+  const paths = ["index.html", "README.md", "assets/app.js", ...notes.filter(name => /\.(md|html)$/.test(name)).map(name => `notes/${name}`)];
+  for (const path of paths) {
+    const text = await readFile(new URL(`../${path}`, import.meta.url), "utf8");
+    assert.doesNotMatch(text, /exam booking|your confirmed exam|exam on \d|your route to \d/i, path);
+  }
 });
 test("all forty-two lessons have objectives, substantial content, references, and separate question coverage", () => {
   assert.equal(kit.lessons.length, 42);

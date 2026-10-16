@@ -2,7 +2,7 @@
 
 > Independent, unofficial preparation. Not affiliated with or endorsed by SDAIA. Questions are original practice material, not actual examination questions. Topic breakdowns and practice timings are our design choices, not official exam specifications.
 
-Reviewed: 2026-10-12. Confirmed exam booking: 5 December 2026 (provided by learner).
+Reviewed: 2026-10-12.
 
 Use after the separate paper. Letters refer to its fixed order, not shuffled website letters. The lesson links below identify the existing teaching and reviewed references behind each question.
 
