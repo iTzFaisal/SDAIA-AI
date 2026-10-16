@@ -382,13 +382,13 @@ test("site name and homepage identify independent SDAIA AI Engineer Badge prepar
 test("release copy and classic offline script wiring include all seven domains and Mocks 1–3", async () => {
   const read = name => readFile(new URL(`../${name}`, import.meta.url), "utf8");
   const index = await read("index.html");
-  assert.deepEqual([...index.matchAll(/<script defer src="([^"]+)"><\/script>/g)].map(m => m[1]), ["content/kit.js", "content/questions.js", "content/mocks.js", "assets/core.js", "assets/app.js"]);
+  assert.deepEqual([...index.matchAll(/<script defer src="([^"]+)"><\/script>/g)].map(m => m[1]), ["assets/theme.js", "content/kit.js", "content/questions.js", "content/mocks.js", "assets/core.js", "assets/app.js"]);
   assert.ok(index.includes('href="#domain/d7"'));
   assert.ok(!index.includes('class="release-label"'));
   assert.ok(index.includes('href="#mock/m1"') && index.includes("Mock 1"));
   assert.ok(index.includes('href="#mock/m2"') && index.includes("Mock 2"));
   assert.ok(index.includes('href="#mock/m3"'));
-  for (const file of ["content/kit.js", "content/questions.js", "content/mocks.js", "assets/core.js", "assets/app.js"]) {
+  for (const file of ["assets/theme.js", "content/kit.js", "content/questions.js", "content/mocks.js", "assets/core.js", "assets/app.js"]) {
     assert.ok(!/^\s*import\b|\bimport\s*\(|\bfetch\s*\(/m.test(await read(file)), file);
   }
   const curriculum = await read("notes/curriculum.md");

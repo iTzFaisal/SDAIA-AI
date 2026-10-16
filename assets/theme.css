@@ -1,0 +1,51 @@
+:root{color-scheme:light}
+.topbar{flex-wrap:wrap;gap:12px 24px}
+.theme-toggle{width:44px;height:44px;padding:0;color:var(--teal)}
+.theme-toggle svg{flex-shrink:0}
+.theme-toggle svg[hidden]{display:none}
+
+/* Screen-only colors keep printed lessons on white paper in either theme. */
+@media screen{
+  input,select{background:var(--paper);color:var(--ink)}
+  :root[data-theme=dark]{
+    color-scheme:dark;
+    --paper:#192b3a;
+    --desk:#101e2a;
+    --ink:#e1edf4;
+    --teal:#65d0d5;
+    --gold:#e4b86d;
+    --muted:#afc2d0;
+    --line:#3b5264;
+    --soft:#1d4049;
+    --red:#ff9fa7;
+    --green:#88d4ad;
+  }
+  :root[data-theme=dark] a{color:#8bdde1}
+  :root[data-theme=dark] .rail{background:#102e43}
+  :root[data-theme=dark] .brand{color:white}
+  :root[data-theme=dark] .rail nav a{color:#e0ecf3}
+  :root[data-theme=dark] .topbar{background:#152634}
+  :root[data-theme=dark] :is(.panel,.lesson-list li,details,table,.search,.question-panel,.download-list a,.empty,.skip-link){background:var(--paper)}
+  :root[data-theme=dark] :is(.search,.empty){border-color:var(--line)}
+  :root[data-theme=dark] :is(.timer,.result-score,.social-links a){color:var(--ink)}
+  :root[data-theme=dark] .timer.urgent{color:var(--red)}
+  :root[data-theme=dark] .social-links a:hover{color:var(--teal)}
+  :root[data-theme=dark] :is(button:not(.primary):hover,.button:not(.primary):hover,.option:hover){background:#243e50}
+  :root[data-theme=dark] .primary{background:#087e83;border-color:#65d0d5;color:white}
+  :root[data-theme=dark] .primary:hover{background:#08676b}
+  :root[data-theme=dark] .inline-link{color:#8bdde1;background:none}
+  :root[data-theme=dark] :is(.worked,.feedback){background:#172f3a}
+  :root[data-theme=dark] .takeaway{border:1px solid var(--line)}
+  :root[data-theme=dark] .notice{background:#352e20}
+  :root[data-theme=dark] #storage-warning{background:#49351b}
+  :root[data-theme=dark] .release-label{background:#493b20;color:#f2d99c}
+  :root[data-theme=dark] .pill{background:#2b4255;color:#d5e5ef}
+  :root[data-theme=dark] .pill.available{background:#204338;color:#a5e4c7}
+  :root[data-theme=dark] .pill.planned{background:#3b3930;color:#ded3b9}
+  :root[data-theme=dark] .pill.completed{background:var(--soft);color:#9ee3e5}
+  :root[data-theme=dark] :is(th,.weight-track){background:#263e50}
+  :root[data-theme=dark] .option.selected{background:var(--soft)}
+  :root[data-theme=dark] .option.correct{background:#203d33}
+  :root[data-theme=dark] .option.incorrect{background:#442c34}
+  :root[data-theme=dark] .question-map button.answered{background:#204338;border-color:#6caa91}
+}
