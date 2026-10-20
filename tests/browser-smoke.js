@@ -8,7 +8,7 @@ async page => {
   const onError = error => errors.push(error.message);
   const onDialog = dialog => dialog.accept();
   const ensure = (condition, message) => { if (!condition) throw new Error(message); checks.push(message); };
-  const finishLessonQuiz = async lessonId => {
+  const finishLessonQuiz = async (lessonId, missFirst = false) => {
     await page.goto(base + `#lesson/${lessonId}`);
     await page.getByRole("button", { name: "Start lesson quiz", exact: true }).click();
     await page.waitForURL("**/#attempt");
@@ -17,7 +17,8 @@ async page => {
         const a = JSON.parse(localStorage.getItem(key)).active;
         return STUDY_KIT.questions.find(q => q.id === a.questions[a.index].id).answer;
       }, key);
-      await page.locator(`input[name=answer][value="${correct}"]`).check();
+      const selected = missFirst && i === 0 ? (correct + 1) % 4 : correct;
+      await page.locator(`input[name=answer][value="${selected}"]`).check();
       await page.getByRole("button", { name: "Check answer", exact: true }).click();
       if (i < 2) await page.getByRole("button", { name: "Next", exact: true }).click();
     }
@@ -177,6 +178,18 @@ async page => {
     await finishLessonQuiz("d1-l6");
     ensure(await page.getByRole("link", { name: "Go to next domain", exact: true }).getAttribute("href") === "#domain/d2", "Last lesson in a domain links to the next domain");
     ensure(await page.locator("main .actions").last().getByRole("link").count() === 2, "Domain transition results show exactly two navigation actions");
+    await finishLessonQuiz("d1-l2", true);
+    ensure(await page.evaluate(key => {
+      const state = JSON.parse(localStorage.getItem(key));
+      return !state.completed.includes("d1-l2") && !state.quizPassed.includes("d1-l2");
+    }, key), "A lesson quiz below 100% does not mark the lesson complete");
+    await finishLessonQuiz("d1-l2");
+    ensure(await page.evaluate(key => JSON.parse(localStorage.getItem(key)).quizPassed.includes("d1-l2"), key), "A 100% lesson quiz marks the lesson complete");
+    ensure((await page.locator("main .notice").textContent()).includes("lesson is marked complete"), "Perfect quiz results explain the completion");
+    await page.reload();
+    ensure(await page.evaluate(key => JSON.parse(localStorage.getItem(key)).quizPassed.includes("d1-l2"), key), "Quiz-earned completion survives reload");
+    await page.goto(base + "#lesson/d1-l2");
+    ensure(await page.locator(".lesson-meta .pill.completed").textContent() === "Completed", "Perfect quiz completion appears on the lesson");
     await finishLessonQuiz("d7-l6");
     ensure(await page.getByRole("link", { name: "Go to practice", exact: true }).getAttribute("href") === "#practice", "Final curriculum lesson links to practice");
     ensure(await page.getByRole("link", { name: "Review remaining mistakes", exact: true }).getAttribute("href") === "#review", "Final curriculum results retain mistake review");

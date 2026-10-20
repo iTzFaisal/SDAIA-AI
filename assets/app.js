@@ -10,12 +10,14 @@
   const availableDomains = kit.domains.filter(d => d.status === "available");
   const domainById = new Map(kit.domains.map(d => [d.id, d]));
   const lessonsFor = id => kit.lessons.filter(l => l.domain === id);
+  const lessonForQuiz = (attempt, questions) => attempt.kind === "quiz" && questions.length && questions.every(q => q.lesson === questions[0].lesson) ? questions[0].lesson : null;
+  const isLessonComplete = id => state.completed.includes(id) || state.quizPassed.includes(id);
   const availableLabel = `Domains ${availableDomains.map(d => d.number).join(", ")}`;
   const plannedCount = kit.domains.length - availableDomains.length;
   const availableMocks = kit.mocks.filter(m => m.status === "available");
   const mockById = new Map(kit.mocks.map(m => [m.id, m]));
   const mockRelease = "Mocks 1–3 are available, each with its own reserved question set.";
-  let state = { completed: [], bookmarks: [], mistakes: [], history: [], active: null, lastResult: null };
+  let state = { completed: [], quizPassed: [], bookmarks: [], mistakes: [], history: [], active: null, lastResult: null };
   let storageAvailable = true;
   try {
     let raw = null;
@@ -24,6 +26,7 @@
       for (const field of ["completed", "bookmarks"]) {
         state[field] = Array.isArray(raw[field]) ? [...new Set(raw[field].filter(id => lessonById.has(id)))] : [];
       }
+      state.quizPassed = Array.isArray(raw.quizPassed) ? [...new Set(raw.quizPassed.filter(id => lessonById.has(id)))] : [];
       state.mistakes = Array.isArray(raw.mistakes) ? [...new Set(raw.mistakes.filter(id => questionById.has(id)))] : [];
       state.history = Array.isArray(raw.history) ? raw.history.filter(h => h && typeof h.title === "string" && Number.isFinite(h.finished) && Number.isFinite(h.percent) && h.percent >= 0 && h.percent <= 100).slice(-30) : [];
       if (core.validAttempt(raw.active, kit.questions)) state.active = raw.active;
@@ -51,15 +54,17 @@
   const showDate = time => new Date(time).toLocaleDateString("en-GB", { day: "numeric", month: "short" });
   const action = (name, text, data = "", classes = "") => `<button class="${classes}" data-action="${name}" ${data}>${esc(text)}</button>`;
   function updateRail() {
-    document.querySelector("#rail-progress").innerHTML = `<div class="rail-progress">${availableLabel} reading progress<progress value="${state.completed.length}" max="${kit.lessons.length}" aria-label="Completed available lessons"></progress>${state.completed.length} of ${kit.lessons.length} lessons marked complete<br>${plannedCount ? `${plannedCount} other domains are planned.` : "All seven domains are available; Mocks 1–3 are available."}</div>`;
+    const completedCount = kit.lessons.filter(l => isLessonComplete(l.id)).length;
+    document.querySelector("#rail-progress").innerHTML = `<div class="rail-progress">${availableLabel} lesson progress<progress value="${completedCount}" max="${kit.lessons.length}" aria-label="Completed available lessons"></progress>${completedCount} of ${kit.lessons.length} lessons completed<br>${plannedCount ? `${plannedCount} other domains are planned.` : "All seven domains are available; Mocks 1–3 are available."}</div>`;
   }
   function home() {
-    const next = kit.lessons.find(l => !state.completed.includes(l.id));
+    const completedCount = kit.lessons.filter(l => isLessonComplete(l.id)).length;
+    const next = kit.lessons.find(l => !isLessonComplete(l.id));
     const latest = state.history.at(-1);
     return heading("Prepare for the SDAIA AI Engineer Badge.", "Your independent study workbook to help you prepare to pass the SDAIA AI Engineer Badge exam. Start with the essentials, learn one domain at a time, and use fresh questions to find what needs another look.") +
       `<div class="actions">${link("foundation", "Start from zero", "button primary")}${link(next ? `lesson/${next.id}` : "practice", next ? `Continue Domain ${domainById.get(next.domain).number}` : "Choose a domain paper")}${availableMocks.map(m => link(`mock/${m.id}`, `Open ${m.title}`)).join("")}${state.active ? link("attempt", "Resume saved practice") : ""}</div>` +
       `<div class="flow" aria-label="Learning sequence"><span>Understand the idea</span><b aria-hidden="true">›</b><span>Work an example</span><b aria-hidden="true">›</b><span>Check your understanding</span><b aria-hidden="true">›</b><span>Take the separate paper</span></div>` +
-      `<div class="two-col"><section class="panel"><h2 style="margin-top:0">Your next study session</h2><p>${next ? `Read “${esc(next.title)}”, work the example, and take its three-question quiz.` : "All available lessons are marked complete. Use the domain paper and mistake review to check understanding."}</p><p class="muted">Plan for 10–14 hours per week: about 60–90 minutes on most weekdays, with longer practice and revision sessions at the weekend. Reading estimates exclude retrieval practice and revision.</p>${link("curriculum", "See the eight-week plan")}</section><section class="panel"><h2 style="margin-top:0">Your notebook</h2><p class="progress-summary">${state.completed.length}/${kit.lessons.length}<small>Available lessons marked complete, not mastery certified</small></p><p>${state.mistakes.length} questions currently need review.</p><p>${latest ? `Latest practice: ${esc(latest.title)} — ${latest.percent}% (${showDate(latest.finished)}).` : "No practice attempt completed yet."}</p>${link("review", "Review your mistakes")}</section></div>` +
+      `<div class="two-col"><section class="panel"><h2 style="margin-top:0">Your next study session</h2><p>${next ? `Read “${esc(next.title)}”, work the example, and take its three-question quiz.` : "All available lessons are complete. Use the domain paper and mistake review to check understanding."}</p><p class="muted">Plan for 10–14 hours per week: about 60–90 minutes on most weekdays, with longer practice and revision sessions at the weekend. Reading estimates exclude retrieval practice and revision.</p>${link("curriculum", "See the eight-week plan")}</section><section class="panel"><h2 style="margin-top:0">Your notebook</h2><p class="progress-summary">${completedCount}/${kit.lessons.length}<small>Completed by marking read or earning 100% on a lesson quiz; not mastery certified</small></p><p>${state.mistakes.length} questions currently need review.</p><p>${latest ? `Latest practice: ${esc(latest.title)} — ${latest.percent}% (${showDate(latest.finished)}).` : "No practice attempt completed yet."}</p>${link("review", "Review your mistakes")}</section></div>` +
       `<h2>Keep the goal honest</h2><p class="intro">This kit teaches from zero; it cannot certify production experience or promise an Expert badge in eight weeks. Practice difficulty labels are ours, not SDAIA's official question levels. Your official result depends on the real assessment.</p>`;
   }
   function domainRows() {
@@ -79,7 +84,7 @@
     if (d.status !== "available") return heading(d.title) + notice("This domain has an outline only. Its lessons and exam are planned.") + list(d.topics) + link("curriculum", "Back to curriculum");
     const prerequisite = d.prerequisite || (d.number === 2 ? "Read the foundation primer and Domain 1, especially parameters, loss, validation, and leakage." : "");
     return heading(d.title, `${lessonsFor(id).length} lessons. ${d.summary} Work the examples on paper; there are no coding exercises.`) +
-      `<div class="lesson-meta">${pill(`${d.weight}% of the supplied exam blueprint`)}${pill("Original proposed curriculum")}</div>${prerequisite ? notice(`Before you begin: ${prerequisite}`) : ""}<h2>Learning outcomes</h2>${list(d.objectives)}<ol class="lesson-list">${lessonsFor(id).map((l, i) => `<li><div><a href="#lesson/${l.id}">${i + 1}. ${esc(l.title)}</a><small>${l.minutes} min reading estimate · ${questionsFor("quiz", l.id).length} quiz questions</small></div>${state.completed.includes(l.id) ? pill("Read", "completed") : pill("Not marked read")}</li>`).join("")}</ol><h2>Revision sheet</h2>${list(kit.revisions[id].map(([term, text]) => `${term}: ${text}`))}<div class="actions">${link(`practice/${id}`, "Take the separate domain paper", "button primary")}${link("downloads", "Get the notes")}</div>` + notice(`Completing these lessons covers our proposed Domain ${d.number} learning objectives. It does not establish that every possible official Expert-level topic or question has been covered.`);
+      `<div class="lesson-meta">${pill(`${d.weight}% of the supplied exam blueprint`)}${pill("Original proposed curriculum")}</div>${prerequisite ? notice(`Before you begin: ${prerequisite}`) : ""}<h2>Learning outcomes</h2>${list(d.objectives)}<ol class="lesson-list">${lessonsFor(id).map((l, i) => `<li><div><a href="#lesson/${l.id}">${i + 1}. ${esc(l.title)}</a><small>${l.minutes} min reading estimate · ${questionsFor("quiz", l.id).length} quiz questions</small></div>${isLessonComplete(l.id) ? pill("Completed", "completed") : pill("Not completed")}</li>`).join("")}</ol><h2>Revision sheet</h2>${list(kit.revisions[id].map(([term, text]) => `${term}: ${text}`))}<div class="actions">${link(`practice/${id}`, "Take the separate domain paper", "button primary")}${link("downloads", "Get the notes")}</div>` + notice(`Completing these lessons covers our proposed Domain ${d.number} learning objectives. It does not establish that every possible official Expert-level topic or question has been covered.`);
   }
   function lesson(id) {
     const l = lessonById.get(id);
@@ -87,8 +92,9 @@
     const domainLessons = lessonsFor(l.domain);
     const index = domainLessons.indexOf(l);
     const d = domainById.get(l.domain);
-    const completed = state.completed.includes(id);
-    return `<article class="reading"><div class="breadcrumb"><a href="#domain/${d.id}">Domain ${d.number}</a> / Lesson ${index + 1} of ${domainLessons.length}</div>${heading(l.title)}<div class="lesson-meta">${pill(`${l.minutes} min reading estimate`)}${completed ? pill("Marked read", "completed") : ""}</div><div class="actions">${action("bookmark", state.bookmarks.includes(id) ? "Remove bookmark" : "Bookmark lesson", `data-id="${id}"`)}${action("print", "Print lesson")}</div><h2>What you will learn</h2>${list(l.objectives)}<div class="prose">${sections(l.sections)}<div class="takeaway"><strong>The idea to remember</strong>${esc(l.takeaway)}</div></div><h2>Common exam traps</h2>${list(l.traps)}<h2>Close the notes and explain</h2>${list(l.recall)}<h2>Check your understanding</h2><p>Three original learning questions. Answers explain every option; these are separate from the domain paper.</p><div class="actions">${action("quiz", "Start lesson quiz", `data-id="${id}"`, "primary")}${action("complete", completed ? "Mark as not read" : "Mark lesson read", `data-id="${id}"`)}</div><div class="actions">${index ? link(`lesson/${domainLessons[index - 1].id}`, "Previous lesson") : link(`domain/${d.id}`, "Domain overview")}${index < domainLessons.length - 1 ? link(`lesson/${domainLessons[index + 1].id}`, "Next lesson") : link(`practice/${d.id}`, "Domain paper")}</div><details><summary>Learning references</summary>${list(l.sources.map(id => kit.sources.find(s => s.id === id).title))}<a href="#sources">Open source links and verification notes</a></details></article>`;
+    const completed = isLessonComplete(id);
+    const markedRead = state.completed.includes(id);
+    return `<article class="reading"><div class="breadcrumb"><a href="#domain/${d.id}">Domain ${d.number}</a> / Lesson ${index + 1} of ${domainLessons.length}</div>${heading(l.title)}<div class="lesson-meta">${pill(`${l.minutes} min reading estimate`)}${completed ? pill("Completed", "completed") : ""}</div><div class="actions">${action("bookmark", state.bookmarks.includes(id) ? "Remove bookmark" : "Bookmark lesson", `data-id="${id}"`)}${action("print", "Print lesson")}</div><h2>What you will learn</h2>${list(l.objectives)}<div class="prose">${sections(l.sections)}<div class="takeaway"><strong>The idea to remember</strong>${esc(l.takeaway)}</div></div><h2>Common exam traps</h2>${list(l.traps)}<h2>Close the notes and explain</h2>${list(l.recall)}<h2>Check your understanding</h2><p>Three original learning questions. Answers explain every option; these are separate from the domain paper.</p><div class="actions">${action("quiz", "Start lesson quiz", `data-id="${id}"`, "primary")}${action("complete", markedRead ? "Mark as not read" : "Mark lesson read", `data-id="${id}"`)}</div><div class="actions">${index ? link(`lesson/${domainLessons[index - 1].id}`, "Previous lesson") : link(`domain/${d.id}`, "Domain overview")}${index < domainLessons.length - 1 ? link(`lesson/${domainLessons[index + 1].id}`, "Next lesson") : link(`practice/${d.id}`, "Domain paper")}</div><details><summary>Learning references</summary>${list(l.sources.map(id => kit.sources.find(s => s.id === id).title))}<a href="#sources">Open source links and verification notes</a></details></article>`;
   }
   function practice(id) {
     const domains = id ? availableDomains.filter(d => d.id === id) : availableDomains;
@@ -149,6 +155,8 @@
     const a = state.active;
     const questions = reconstruct(a);
     const result = core.score(questions, a.answers);
+    const quizLessonId = lessonForQuiz(a, questions);
+    if (quizLessonId && result.percent === 100 && !state.quizPassed.includes(quizLessonId)) state.quizPassed.push(quizLessonId);
     for (const q of questions) {
       if (a.answers[q.id] === q.answer) state.mistakes = state.mistakes.filter(id => id !== q.id);
       else if (!state.mistakes.includes(q.id)) state.mistakes.push(q.id);
@@ -165,22 +173,25 @@
     if (!a) return heading("No result yet") + link("practice", "Start practicing");
     const questions = reconstruct(a);
     const result = core.score(questions, a.answers);
+    const quizLessonId = lessonForQuiz(a, questions);
+    const perfectQuiz = Boolean(quizLessonId && result.percent === 100);
     const weak = Object.entries(result.byLesson).filter(([, value]) => value.correct < value.total).sort((a, b) => a[1].correct / a[1].total - b[1].correct / b[1].total);
     const resultActions = (() => {
       if (a.kind !== "quiz") return `${link("review", "Review remaining mistakes", "button primary")}${link("practice", "Back to practice")}`;
-      const currentLesson = lessonById.get(questions[0]?.lesson);
-      const domainLessons = currentLesson ? lessonsFor(currentLesson.domain) : [];
-      const lessonIndex = domainLessons.findIndex(item => item.id === currentLesson?.id);
+      const currentLesson = lessonById.get(quizLessonId);
+      if (!currentLesson) return `${link("practice", "Go to practice", "button primary")}${link("review", "Review remaining mistakes")}`;
+      const domainLessons = lessonsFor(currentLesson.domain);
+      const lessonIndex = domainLessons.findIndex(item => item.id === currentLesson.id);
       const nextLesson = domainLessons[lessonIndex + 1];
       if (nextLesson) return `${link(`lesson/${nextLesson.id}`, "Go to next lesson", "button primary")}${link("review", "Review remaining mistakes")}`;
-      const domainIndex = availableDomains.findIndex(item => item.id === currentLesson?.domain);
+      const domainIndex = availableDomains.findIndex(item => item.id === currentLesson.domain);
       const nextDomain = availableDomains[domainIndex + 1];
       return nextDomain
         ? `${link(`domain/${nextDomain.id}`, "Go to next domain", "button primary")}${link("review", "Review remaining mistakes")}`
         : `${link("practice", "Go to practice", "button primary")}${link("review", "Review remaining mistakes")}`;
     })();
     return heading(`${a.title}: results`, `${a.mode === "timed" ? "Timed practice" : "Learning practice"} completed ${showDate(a.finished)}.${a.reason === "expired" ? " The practice time limit expired; saved answers were submitted." : ""}`) +
-      `<section class="panel"><div class="result-score">${result.percent}%<span>${result.correct} / ${result.total} correct</span></div><p>${result.answered} answered; ${result.total - result.answered} unanswered. Unanswered questions count as incorrect.</p><p class="muted">This is a practice score—not an official passing score or Assistant/Associate/Expert classification. Learning-mode scores may reflect answers you checked during the attempt. Retakes can reflect familiarity, not fresh assessment.</p>${a.kind === "mock" ? `<h2>By domain</h2><ul class="plain-list" id="domain-results">${kit.domains.map(d => { const value = result.byDomain[d.id]; return `<li><a href="#domain/${d.id}">Domain ${d.number}: ${esc(d.title)}</a><span>${value.correct}/${value.total}</span></li>`; }).join("")}</ul><p class="muted">One point per question; no additional domain multiplier or official domain passing threshold.</p>` : ""}<div class="result-grid"><div><h3>By lesson</h3><ul class="plain-list">${Object.entries(result.byLesson).map(([id, value]) => `<li><a href="#lesson/${id}">${esc(lessonById.get(id).title)}</a><span>${value.correct}/${value.total}</span></li>`).join("")}</ul></div><div><h3>By practice difficulty</h3><ul class="plain-list">${Object.entries(result.byDifficulty).map(([label, value]) => `<li><span>${esc(label)}</span><span>${value.correct}/${value.total}</span></li>`).join("")}</ul><p class="muted">Our difficulty tags are not SDAIA's verified question levels.</p></div></div></section>` +
+      `<section class="panel"><div class="result-score">${result.percent}%<span>${result.correct} / ${result.total} correct</span></div><p>${result.answered} answered; ${result.total - result.answered} unanswered. Unanswered questions count as incorrect.</p>${perfectQuiz ? '<p class="notice">Perfect score — this lesson is marked complete.</p>' : ""}<p class="muted">This is a practice score—not an official passing score or Assistant/Associate/Expert classification. Learning-mode scores may reflect answers you checked during the attempt. Retakes can reflect familiarity, not fresh assessment.</p>${a.kind === "mock" ? `<h2>By domain</h2><ul class="plain-list" id="domain-results">${kit.domains.map(d => { const value = result.byDomain[d.id]; return `<li><a href="#domain/${d.id}">Domain ${d.number}: ${esc(d.title)}</a><span>${value.correct}/${value.total}</span></li>`; }).join("")}</ul><p class="muted">One point per question; no additional domain multiplier or official domain passing threshold.</p>` : ""}<div class="result-grid"><div><h3>By lesson</h3><ul class="plain-list">${Object.entries(result.byLesson).map(([id, value]) => `<li><a href="#lesson/${id}">${esc(lessonById.get(id).title)}</a><span>${value.correct}/${value.total}</span></li>`).join("")}</ul></div><div><h3>By practice difficulty</h3><ul class="plain-list">${Object.entries(result.byDifficulty).map(([label, value]) => `<li><span>${esc(label)}</span><span>${value.correct}/${value.total}</span></li>`).join("")}</ul><p class="muted">Our difficulty tags are not SDAIA's verified question levels.</p></div></div></section>` +
       `<h2>What to study next</h2>${weak.length ? `<ol>${weak.slice(0, 3).map(([id]) => `<li>Revisit <a href="#lesson/${id}">${esc(lessonById.get(id).title)}</a>, work its example without notes, and explain each missed choice.</li>`).join("")}</ol>` : "<p>All answers were correct. Explain the reasoning without viewing the key; this familiar question set alone cannot prove readiness for unfamiliar exam scenarios.</p>"}<div class="actions">${resultActions}</div><h2>Answer review</h2>${questions.map((q, i) => `<details><summary>${i + 1}. ${a.answers[q.id] === q.answer ? "Correct" : a.answers[q.id] === undefined ? "Unanswered" : "Not correct"} — ${esc(q.stem)}</summary>${feedback(q, a.answers[q.id])}</details>`).join("")}`;
   }
   function review() {
@@ -307,7 +318,7 @@
     }
     if (name === "reset") {
       if (confirm("Reset this kit's lessons, bookmarks, mistake queue, and practice history? This cannot be undone here.")) {
-        state = { completed: [], bookmarks: [], mistakes: [], history: [], active: null, lastResult: null }; save(); render();
+        state = { completed: [], quizPassed: [], bookmarks: [], mistakes: [], history: [], active: null, lastResult: null }; save(); render();
       } return;
     }
     tick();
