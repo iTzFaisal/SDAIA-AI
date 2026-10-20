@@ -8,6 +8,23 @@ async page => {
   const onError = error => errors.push(error.message);
   const onDialog = dialog => dialog.accept();
   const ensure = (condition, message) => { if (!condition) throw new Error(message); checks.push(message); };
+  const finishLessonQuiz = async lessonId => {
+    await page.goto(base + `#lesson/${lessonId}`);
+    await page.getByRole("button", { name: "Start lesson quiz", exact: true }).click();
+    await page.waitForURL("**/#attempt");
+    for (let i = 0; i < 3; i++) {
+      const correct = await page.evaluate(key => {
+        const a = JSON.parse(localStorage.getItem(key)).active;
+        return STUDY_KIT.questions.find(q => q.id === a.questions[a.index].id).answer;
+      }, key);
+      await page.locator(`input[name=answer][value="${correct}"]`).check();
+      await page.getByRole("button", { name: "Check answer", exact: true }).click();
+      if (i < 2) await page.getByRole("button", { name: "Next", exact: true }).click();
+    }
+    await page.evaluate(() => { window.confirm = () => true; });
+    await page.getByRole("button", { name: "Finish & see results", exact: true }).click();
+    await page.waitForURL("**/#results");
+  };
   page.on("pageerror", onError);
   page.on("dialog", onDialog);
   await page.goto(base);
@@ -118,6 +135,9 @@ async page => {
     await page.getByRole("button", { name: "Finish & see results", exact: true }).click();
     await page.waitForURL("**/#results");
     ensure((await page.locator(".result-score").textContent()).includes("67%"), "Quiz grade counts one wrong and two correct");
+    ensure(await page.getByRole("link", { name: "Go to next lesson", exact: true }).getAttribute("href") === "#lesson/d1-l2", "Lesson quiz results link to the next lesson");
+    ensure(await page.getByRole("link", { name: "Review remaining mistakes", exact: true }).getAttribute("href") === "#review", "Lesson quiz results retain mistake review");
+    ensure(await page.locator("main .actions").last().getByRole("link").count() === 2, "Lesson quiz results show exactly two navigation actions");
     await page.goto(base + "#review");
     ensure((await page.locator("main").textContent()).includes("1 question needs another look"), "Mistake queue records incorrect question");
 
@@ -151,7 +171,15 @@ async page => {
     await page.getByRole("button", { name: "Finish & see results", exact: true }).click();
     await page.waitForURL("**/#results");
     ensure((await page.locator(".result-score").textContent()).includes("100%"), `${domain} quiz grades original indexes`);
+    ensure(await page.getByRole("link", { name: "Go to next lesson", exact: true }).getAttribute("href") === `#lesson/${domain}-l6`, `${domain} lesson quiz results link to the next lesson`);
     }
+
+    await finishLessonQuiz("d1-l6");
+    ensure(await page.getByRole("link", { name: "Go to next domain", exact: true }).getAttribute("href") === "#domain/d2", "Last lesson in a domain links to the next domain");
+    ensure(await page.locator("main .actions").last().getByRole("link").count() === 2, "Domain transition results show exactly two navigation actions");
+    await finishLessonQuiz("d7-l6");
+    ensure(await page.getByRole("link", { name: "Go to practice", exact: true }).getAttribute("href") === "#practice", "Final curriculum lesson links to practice");
+    ensure(await page.getByRole("link", { name: "Review remaining mistakes", exact: true }).getAttribute("href") === "#review", "Final curriculum results retain mistake review");
 
     // Simulate a saved pre-expansion attempt: no domain metadata, old IDs and deadline.
     const legacyDeadline = await page.evaluate(key => {
